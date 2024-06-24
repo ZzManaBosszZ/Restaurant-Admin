@@ -7,7 +7,6 @@ function Layout({ children }) {
     return (
         <body className="hold-transition dark-skin sidebar-mini theme-danger fixed sidebar-collapse">
         <div className="wrapper">
-            {/* <Loading /> */}
             <Header />
             <SideBar />
             <div class="content-wrapper">

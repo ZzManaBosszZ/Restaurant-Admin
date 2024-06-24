@@ -13376,7 +13376,8 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
   height: 100vh;
   z-index: 999999;
   overflow: visible;
-  background: #fff url("../../images/preloaders/1.gif") no-repeat center center; }
+  transition: opacity 0.05s;
+  background: #fff url("../images/preloaders/1.gif") no-repeat center center; }
 
 /*sidebar*/
 .main-sidebar {

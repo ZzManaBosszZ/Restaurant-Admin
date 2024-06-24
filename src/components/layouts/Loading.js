@@ -1,28 +1,26 @@
+import { useState, useEffect } from "react";
 function Loading() {
+    const [opacity, setOpacity] = useState(1);
+    const [visible, setVisible] = useState(true);
+
+    useEffect(() => {
+        let timeoutId;
+
+        if (opacity > 0) {
+            timeoutId = setTimeout(() => {
+                setOpacity(opacity - 0.05);
+            }, 60);
+        } else {
+            setVisible(false);
+        }
+
+        return () => clearTimeout(timeoutId);
+    }, [opacity]);
     return (
-        <div id="preloader">
-            <div id="restan-preloader" class="restan-preloader">
-                <div class="animation-preloader">
-                    <div class="spinner"></div>
-                </div>
-                <div class="loader">
-                    <div class="row">
-                        <div class="col-3 loader-section section-left">
-                            <div class="bg"></div>
-                        </div>
-                        <div class="col-3 loader-section section-left">
-                            <div class="bg"></div>
-                        </div>
-                        <div class="col-3 loader-section section-right">
-                            <div class="bg"></div>
-                        </div>
-                        <div class="col-3 loader-section section-right">
-                            <div class="bg"></div>
-                        </div>
-                    </div>
-                </div>
+        visible && (
+            <div id="loader" style={{ opacity }}>
             </div>
-        </div>
+          )
     );
 }
 export default Loading;
