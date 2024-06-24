@@ -6,7 +6,7 @@ function BreadCrumb() {
                     <div class="col-lg-12 col-md-12">
                         <h1>About Us</h1>
                         <ul class="breadcrumb">
-                            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                            <li><a><i class="fas fa-home"></i> Home</a></li>
                             <li>About</li>
                         </ul>
                     </div>

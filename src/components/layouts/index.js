@@ -1,18 +1,24 @@
 import Loading from "./Loading"
-import HeaderTop from "./HeaderTop";
 import Header from "./Header"
 import Footer from "./Footer";
-import Banner from "./Banner";
+import SideBar from "./SideBar";
+import RightSideBar from "./RightSideBar";
 function Layout({ children }) {
     return (
-        <div className="bg-dark">
+        <body className="hold-transition dark-skin sidebar-mini theme-danger fixed sidebar-collapse">
+        <div className="wrapper">
             {/* <Loading /> */}
-            <HeaderTop />
             <Header />
-            <Banner />
-            <div>{children}</div>
+            <SideBar />
+            <div class="content-wrapper">
+                <div class="container-full">
+                    {children}
+                </div>
+            </div>
+            <RightSideBar/>
             <Footer />
         </div>
+        </body>
     );
 }
 
