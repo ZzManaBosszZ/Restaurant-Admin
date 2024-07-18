@@ -3,6 +3,7 @@
   font-family: "Material Design Icons";
   src: url("https://riday-admin-template.multipurposethemes.com/bs4/assets/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.eot?v=2.0.46");
   src: url("https://riday-admin-template.multipurposethemes.com/bs4/assets/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.eot?#iefix&v=2.0.46") format("embedded-opentype"), url("https://riday-admin-template.multipurposethemes.com/bs4/assets/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.woff2?v=2.0.46") format("woff2"), url("https://riday-admin-template.multipurposethemes.com/bs4/assets/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.woff?v=2.0.46") format("woff"), url("https://riday-admin-template.multipurposethemes.com/bs4/assets/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.ttf?v=2.0.46") format("truetype"), url("https://riday-admin-template.multipurposethemes.com/bs4/assets/icons/material-design-iconic-font/fonts/materialdesignicons-webfont.svg?v=2.0.46#materialdesigniconsregular") format("svg");
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/2.0.0/sprites/css-sprite/sprite-action-black.min.css');
   font-weight: normal;
   font-style: normal;
 }

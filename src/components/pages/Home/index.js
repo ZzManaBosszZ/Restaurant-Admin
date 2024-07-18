@@ -5,7 +5,6 @@ function Home() {
 
     return (
         <>
-            <Loading />
             <Layout title="Home Page">
                 <section class="content">
                     <div class="row">
