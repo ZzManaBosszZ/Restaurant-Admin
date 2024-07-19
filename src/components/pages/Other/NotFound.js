@@ -1,28 +1,31 @@
-// import LayoutPages from "../../layouts/LayoutPage";
 
-// function NotFound() {
-//     return ( 
-//         <LayoutPages>
-//             <div class="error-page-area default-padding text-center bg-cover">
-//         <div class="shape-left" style={{background: "url(assets/img/shape/44-left.png)"}}></div>
-//         <div class="shape-right" style={{background: "url(assets/img/shape/44-right.png)"}}></div>
-//         <div class="container">
-//             <div class="error-box">
-//                 <div class="row">
-//                     <div class="col-lg-8 offset-lg-2">
-//                         <h1>404</h1>
-//                         <h2>Sorry Page Was Not Found!</h2>
-//                         <p>
-//                             Household shameless incommode at no objection behaviour. Especially do at he possession insensible sympathize boisterous it. Songs he on an widen me event truth.
-//                         </p>
-//                         <a class="btn mt-20 btn-md btn-theme" href="index.html">Back to home</a>
-//                     </div>
-//                 </div>
-//             </div>
-//         </div>
-//     </div>
-//         </LayoutPages>
-//      );
-// }
+function NotFound() {
+	return (
+		<body class="hold-transition theme-primary bg-img" style={{ backgroundImage: "url(../images/auth-bg/bg-4.jpg)"}}>
+			<section class="error-page h-p100">
+				<div class="container h-p100">
+					<div class="row h-p100 align-items-center justify-content-center text-center">
+						<div class="col-lg-7 col-md-10 col-12">
+							<div class="rounded30 p-50">
+								<img src="../images/auth-bg/404.jpg" class="max-w-200" alt="" />
+								<h1>Page Not Found !</h1>
+								<h3>looks like, page doesn't exist</h3>
+								<div class="my-30"><a href="index.html" class="btn btn-danger">Back to dashboard</a></div>
 
-// export default NotFound;
+								<form class="search-form mx-auto mt-30 w-p75">
+									<div class="input-group rounded5 overflow-h">
+										{/* <input type="text" name="search" class="form-control" placeholder="Search" />
+										<div class="input-group-prepend">
+											<button type="submit" name="submit" class="btn btn-danger btn-sm"><i class="fa fa-search"></i></button>
+										</div> */}
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</body>
+	)
+}
+export default NotFound;
