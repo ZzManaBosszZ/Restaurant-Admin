@@ -179,5 +179,4 @@ function OrderDetail() {
         </Layout>
     )
 }
-
 export default OrderDetail
