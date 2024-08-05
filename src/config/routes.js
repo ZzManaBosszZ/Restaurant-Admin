@@ -4,6 +4,10 @@ const routes = {
     error: "/error",
 
     // Authentication routes
+    profile: "/profile",
+    login: "/login",
+    forgot_password: "/forgot-password",
+    reset_password: "/reset-password/:resetToken",
 
     //Order routes
     order_list: "/order-list",
@@ -17,6 +21,6 @@ const routes = {
     //Food routes
     food_list: "/food-list",
     food_detail: "/food-detail",
-    menu_category: "/menu-category",
+    food_category: "/food-categories",
 };
 export default routes;

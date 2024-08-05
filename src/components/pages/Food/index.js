@@ -1,7 +1,7 @@
 import Layout from "../../layouts";
 import BreadCrumb from "../../layouts/BreadCrumb";
 
-function ProductList() {
+function FoodList() {
     return (
         <Layout>
             <BreadCrumb />
@@ -286,4 +286,4 @@ function ProductList() {
     );
 }
 
-export default ProductList;
+export default FoodList;

@@ -96,7 +96,8 @@ html {
   font-size: 14px; }
 
 body {
-  height: 100%; }
+  height: 100%}
+
   body.layout-boxed {
     height: 100%; }
 
@@ -9754,7 +9755,7 @@ Height property
   max-height: 95% !important; }
 
 .h-p100 {
-  height: 100% !important; }
+  height: 100vh !important; }
 
 .min-h-p100 {
   min-height: 100% !important; }
