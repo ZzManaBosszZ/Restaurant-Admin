@@ -6,158 +6,182 @@ import url from "../../../services/url";
 
 function Login() {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
-    // const [showPassword, setShowPassword] = useState(false);
-    // const [submitting, setSubmitting] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
 
-    // const [formStaff, setFormStaff] = useState({
-    //     email: "",
-    //     password: "",
-    // });
+    const [formStaff, setFormStaff] = useState({
+        email: "",
+        password: "",
+    });
 
-    // const [formErrors, setFormErrors] = useState({
-    //     email: "",
-    //     password: "",
-    // });
+    const [formErrors, setFormErrors] = useState({
+        email: "",
+        password: "",
+    });
 
-    // const handleTogglePassword = () => {
-    //     setShowPassword(!showPassword);
-    // };
+    const handleTogglePassword = () => {
+        setShowPassword(!showPassword);
+    };
 
-    // const handleChange = (e) => {
-    //     const { name, value } = e.target;
-    //     setFormStaff({ ...formStaff, [name]: value });
-    //     setFormErrors({ ...formErrors, [name]: "" });
-    // };
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormStaff({ ...formStaff, [name]: value });
+        setFormErrors({ ...formErrors, [name]: "" });
+    };
 
-    // const validateForm = () => {
-    //     let valid = true;
-    //     const newErrors = {};
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = {};
 
-    //     if (!formStaff.email) {
-    //         newErrors.email = "Please enter your email address.";
-    //         valid = false;
-    //     }
+        if (!formStaff.email) {
+            newErrors.email = "Please enter your email address.";
+            valid = false;
+        }
 
-    //     if (!formStaff.password) {
-    //         newErrors.password = "Please enter your password.";
-    //         valid = false;
-    //     } else if (formStaff.password.length < 6) {
-    //         newErrors.password = "Password must be at least 6 characters.";
-    //         valid = false;
-    //     } else if (formStaff.password.length > 50) {
-    //         newErrors.password = "Password must be less than 50 characters.";
-    //         valid = false;
-    //     }
+        if (!formStaff.password) {
+            newErrors.password = "Please enter your password.";
+            valid = false;
+        } else if (formStaff.password.length < 6) {
+            newErrors.password = "Password must be at least 6 characters.";
+            valid = false;
+        } else if (formStaff.password.length > 50) {
+            newErrors.password = "Password must be less than 50 characters.";
+            valid = false;
+        }
 
-    //     setFormErrors(newErrors);
-    //     return valid;
-    // };
+        setFormErrors(newErrors);
+        return valid;
+    };
 
-    // const handleLogin = async (e) => {
-    //     e.preventDefault();
+    const handleLogin = async (e) => {
+        e.preventDefault();
 
-    //     if (validateForm()) {
-    //         try {
-    //             setSubmitting(true);
-    //             const loginRequest = await api.post(url.AUTH.LOGIN, formStaff);
+        if (validateForm()) {
+            try {
+                setSubmitting(true);
+                const loginRequest = await api.post(url.AUTH.LOGIN, formStaff);
 
-    //             if (loginRequest.status === 200) {
-    //                 const token = loginRequest.data.token;
-    //                 setAccessToken(token);
+                if (loginRequest.status === 200) {
+                    const token = loginRequest.data.token;
+                    setAccessToken(token);
 
-    //                 const decodeToken = getDecodedToken();
-    //                 let accountRole = decodeToken.Role[0].authority;
+                    const decodeToken = getDecodedToken();
+                    let accountRole = decodeToken.Role[0].authority;
 
-    //                 let redirectUrl = "";
-    //                 if (accountRole === "ADMIN" || accountRole === "ADMIN") {
-    //                     redirectUrl = "/";
-    //                 } else if (accountRole === "") {
-    //                     removeAccessToken();
-    //                     setFormErrors({
-    //                         email: "Invalid email or password.",
-    //                         password: "Invalid email or password.",
-    //                     });
-    //                 }
+                    let redirectUrl = "";
+                    if (accountRole === "ADMIN" || accountRole === "USER") {
+                        redirectUrl = "/";
+                    } else if (accountRole === "") {
+                        removeAccessToken();
+                        setFormErrors({
+                            email: "Invalid email or password.",
+                            password: "Invalid email or password.",
+                        });
+                    }
 
-    //                 navigate(redirectUrl);
-    //             } else {
-    //                 setFormErrors({
-    //                     email: "Invalid email or password.",
-    //                     password: "Invalid email or password.",
-    //                 });
-    //             }
-    //         } catch (error) {
-    //             setFormErrors({
-    //                 email: "Invalid email or password.",
-    //                 password: "Invalid email or password.",
-    //             });
-    //         } finally {
-    //             setSubmitting(false);
-    //         }
-    //     }
-    // };
+                    navigate(redirectUrl);
+                } else {
+                    setFormErrors({
+                        email: "Invalid email or password.",
+                        password: "Invalid email or password.",
+                    });
+                }
+            } catch (error) {
+                setFormErrors({
+                    email: "Invalid email or password.",
+                    password: "Invalid email or password.",
+                });
+            } finally {
+                setSubmitting(false);
+            }
+        }
+    };
     return (
-        <body class="hold-transition theme-primary bg-img" style={{ backgroundImage: "url(../images/auth-bg/bg-1.jpg)" }}>
-            <div class="container h-p100">
-                <div class="row align-items-center justify-content-md-center h-p100">
-                    <div class="col-12">
-                        <div class="row justify-content-center no-gutters">
-                            <div class="col-lg-5 col-md-5 col-12">
-                                <div class="bg-white rounded30 shadow-lg">
-                                    <div class="content-top-agile p-20 pb-0">
-                                        <h2 class="text-primary">Let's Get Started</h2>
-                                        <p class="mb-0">Sign in to continue to Restran.</p>
+        <body className="hold-transition theme-primary bg-img" style={{ backgroundImage: "url(../images/auth-bg/bg-1.jpg)" }}>
+            <div className="container h-p100">
+                <div className="row align-items-center justify-content-md-center h-p100">
+                    <div className="col-12">
+                        <div className="row justify-content-center no-gutters">
+                            <div className="col-lg-5 col-md-5 col-12">
+                                <div className="bg-white rounded30 shadow-lg">
+                                    <div className="content-top-agile p-20 pb-0">
+                                        <h2 className="text-primary">Let's Get Started</h2>
+                                        <p className="mb-0">Sign in to continue to Restran.</p>
                                     </div>
-                                    <div class="p-40">
-                                        <form action="" method="post">
-                                            <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text bg-transparent"><i class="ti-user"></i></span>
+                                    <div className="p-40">
+                                        <form>
+                                            <div className="form-group">
+                                                <div className="input-group mb-3">
+                                                    <div className="input-group-prepend">
+                                                        <span className="input-group-text bg-transparent"><i className="ti-user"></i></span>
                                                     </div>
-                                                    <input type="text" class="form-control pl-15 bg-transparent" placeholder="Username" />
+                                                    <input
+                                                        type="email"
+                                                        name="email"
+                                                        className={`form-control pl-15 bg-transparent ${formErrors.email ? "is-invalid" : ""}`}
+                                                        placeholder="Email"
+                                                        value={formStaff.email}
+                                                        onChange={handleChange}
+                                                        autoFocus
+                                                    />
+                                                    {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
                                                 </div>
                                             </div>
-                                            <div class="form-group">
-                                                <div class="input-group mb-3">
-                                                    <div class="input-group-prepend">
-                                                        <span class="input-group-text  bg-transparent"><i class="ti-lock"></i></span>
+                                            <div className="form-group">
+                                                <div className="input-group mb-3">
+                                                    <div className="input-group-prepend">
+                                                        <span className="input-group-text  bg-transparent"><i className="ti-lock"></i></span>
                                                     </div>
-                                                    <input type="password" class="form-control pl-15 bg-transparent" placeholder="Password" />
+                                                    <input
+                                                        type={showPassword ? "text" : "password"}
+                                                        name="password"
+                                                        className={`form-control pl-15 bg-transparent ${formErrors.email ? "is-invalid" : ""}`}
+                                                        placeholder="Password"
+                                                        value={formStaff.password}
+                                                        onChange={handleChange}
+                                                        onClick={handleTogglePassword}
+                                                        autoFocus
+                                                    />
+                                                    {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
+                                                    {!formErrors.password && (
+                                                        <span className="view-password" onClick={handleTogglePassword}>
+                                                            {!showPassword ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
+                                                        </span>
+                                                    )}
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6">
-                                                    <div class="checkbox">
+                                            <div className="row">
+                                                <div className="col-6">
+                                                    <div className="checkbox">
                                                         <input type="checkbox" id="basic_checkbox_1" />
                                                         <label for="basic_checkbox_1">Remember Me</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-6">
-                                                    <div class="fog-pwd text-right">
-                                                        <a href="" class="hover-warning"><i class="ion ion-locked"></i> Forgot pwd?</a><br />
+                                                <div className="col-6">
+                                                    <div className="fog-pwd text-right">
+                                                        <Link to="/forgot-password" className="hover-warning"><i className="icon icon-locked"></i> Forgot pwd?</Link><br />
                                                     </div>
                                                 </div>
 
-                                                <div class="col-12 text-center">
-                                                    <button type="submit" class="btn btn-danger mt-10">SIGN IN</button>
+                                                <div className="col-12 text-center">
+                                                    <button type="submit" value="Login" valueSubmit="Login..." handleEvent={handleLogin} className="btn btn-danger mt-10" submitting={submitting}>SIGN IN</button>
                                                 </div>
                                             </div>
                                         </form>
-                                        <div class="text-center">
-                                            <p class="mt-15 mb-0">Don't have an account? <a href="auth_register.html" class="text-warning ml-5">Sign Up</a></p>
+                                        <div className="text-center">
+                                            <p className="mt-15 mb-0">Don't have an account? <a href="auth_register.html" className="text-warning ml-5">Sign Up</a></p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-center">
-                                    <p class="mt-20 text-white">- Sign With -</p>
-                                    <p class="gap-items-2 mb-20">
-                                        <a class="btn btn-social-icon btn-round btn-facebook" href="#"><i class="fa fa-facebook"></i></a>
-                                        <a class="btn btn-social-icon btn-round btn-twitter" href="#"><i class="fa fa-twitter"></i></a>
-                                        <a class="btn btn-social-icon btn-round btn-instagram" href="#"><i class="fa fa-instagram"></i></a>
+                                <div className="text-center">
+                                    <p className="mt-20 text-white">- Sign With -</p>
+                                    <p className="gap-items-2 mb-20">
+                                        <a className="btn btn-social-icon btn-round btn-facebook" href="#"><i className="fa fa-facebook"></i></a>
+                                        <a className="btn btn-social-icon btn-round btn-twitter" href="#"><i className="fa fa-twitter"></i></a>
+                                        <a className="btn btn-social-icon btn-round btn-instagram" href="#"><i className="fa fa-instagram"></i></a>
                                     </p>
                                 </div>
                             </div>

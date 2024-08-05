@@ -12,6 +12,5 @@ const url = {
         PROFILE: "user/profile",
         UPDATE_PROFILE: "user/update-profile",
     },
-
 };
 export default url;
