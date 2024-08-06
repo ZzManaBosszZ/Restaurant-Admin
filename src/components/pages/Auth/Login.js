@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getDecodedToken, removeAccessToken, setAccessToken } from "../../../utils/auth";
+import config from "../../../config/index";
 import api from "../../../services/api";
 import url from "../../../services/url";
 
@@ -9,9 +10,8 @@ function Login() {
     const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
-    const [submitting, setSubmitting] = useState(false);
 
-    const [formStaff, setFormStaff] = useState({
+    const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
@@ -27,7 +27,7 @@ function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormStaff({ ...formStaff, [name]: value });
+        setFormData({ ...formData, [name]: value });
         setFormErrors({ ...formErrors, [name]: "" });
     };
 
@@ -35,18 +35,18 @@ function Login() {
         let valid = true;
         const newErrors = {};
 
-        if (!formStaff.email) {
+        if (!formData.email) {
             newErrors.email = "Please enter your email address.";
             valid = false;
         }
 
-        if (!formStaff.password) {
+        if (!formData.password) {
             newErrors.password = "Please enter your password.";
             valid = false;
-        } else if (formStaff.password.length < 6) {
+        } else if (formData.password.length < 6) {
             newErrors.password = "Password must be at least 6 characters.";
             valid = false;
-        } else if (formStaff.password.length > 50) {
+        } else if (formData.password.length > 50) {
             newErrors.password = "Password must be less than 50 characters.";
             valid = false;
         }
@@ -60,8 +60,7 @@ function Login() {
 
         if (validateForm()) {
             try {
-                setSubmitting(true);
-                const loginRequest = await api.post(url.AUTH.LOGIN, formStaff);
+                const loginRequest = await api.post(url.AUTH.LOGIN, formData);
 
                 if (loginRequest.status === 200) {
                     const token = loginRequest.data.token;
@@ -93,9 +92,7 @@ function Login() {
                     email: "Invalid email or password.",
                     password: "Invalid email or password.",
                 });
-            } finally {
-                setSubmitting(false);
-            }
+            } 
         }
     };
     return (
@@ -111,7 +108,7 @@ function Login() {
                                         <p className="mb-0">Sign in to continue to Restran.</p>
                                     </div>
                                     <div className="p-40">
-                                        <form>
+                                        <form onSubmit={handleLogin}>
                                             <div className="form-group">
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-prepend">
@@ -122,7 +119,7 @@ function Login() {
                                                         name="email"
                                                         className={`form-control pl-15 bg-transparent ${formErrors.email ? "is-invalid" : ""}`}
                                                         placeholder="Email"
-                                                        value={formStaff.email}
+                                                        value={formData.email}
                                                         onChange={handleChange}
                                                         autoFocus
                                                     />
@@ -137,19 +134,15 @@ function Login() {
                                                     <input
                                                         type={showPassword ? "text" : "password"}
                                                         name="password"
-                                                        className={`form-control pl-15 bg-transparent ${formErrors.email ? "is-invalid" : ""}`}
+                                                        className={`form-control pl-15 bg-transparent ${formErrors.password ? "is-invalid" : ""}`}
                                                         placeholder="Password"
-                                                        value={formStaff.password}
+                                                        value={formData.password}
                                                         onChange={handleChange}
                                                         onClick={handleTogglePassword}
-                                                        autoFocus
+                                                        
                                                     />
                                                     {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
-                                                    {!formErrors.password && (
-                                                        <span className="view-password" onClick={handleTogglePassword}>
-                                                            {!showPassword ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
-                                                        </span>
-                                                    )}
+                                                    
                                                 </div>
                                             </div>
                                             <div className="row">
@@ -162,12 +155,12 @@ function Login() {
 
                                                 <div className="col-6">
                                                     <div className="fog-pwd text-right">
-                                                        <Link to="/forgot-password" className="hover-warning"><i className="icon icon-locked"></i> Forgot pwd?</Link><br />
+                                                        <Link to={config.routes.forgot_password} className="hover-warning"><i className="icon icon-locked"></i> Forgot pwd?</Link><br />
                                                     </div>
                                                 </div>
 
                                                 <div className="col-12 text-center">
-                                                    <button type="submit" value="Login" valueSubmit="Login..." handleEvent={handleLogin} className="btn btn-danger mt-10" submitting={submitting}>SIGN IN</button>
+                                                    <button type="submit" value="Login" valueSubmit="Login..." handleEvent={handleLogin} className="btn btn-danger mt-10">SIGN IN</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -179,9 +172,9 @@ function Login() {
                                 <div className="text-center">
                                     <p className="mt-20 text-white">- Sign With -</p>
                                     <p className="gap-items-2 mb-20">
-                                        <a className="btn btn-social-icon btn-round btn-facebook" href="#"><i className="fa fa-facebook"></i></a>
-                                        <a className="btn btn-social-icon btn-round btn-twitter" href="#"><i className="fa fa-twitter"></i></a>
-                                        <a className="btn btn-social-icon btn-round btn-instagram" href="#"><i className="fa fa-instagram"></i></a>
+                                        <a className="btn btn-social-icon btn-round btn-facebook"><i className="fa fa-facebook"></i></a>
+                                        <a className="btn btn-social-icon btn-round btn-twitter"><i className="fa fa-twitter"></i></a>
+                                        <a className="btn btn-social-icon btn-round btn-instagram"><i className="fa fa-instagram"></i></a>
                                     </p>
                                 </div>
                             </div>

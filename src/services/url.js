@@ -5,7 +5,7 @@ const url = {
 
     // Authentication
     AUTH: {
-        LOGIN: "auth/user/sign-in",
+        LOGIN: "auth/user/signin",
         CHANGE_PASSWORD: "user/change-password",
         FORGOT_PASSWORD: "auth/user/forgot-password",
         RESET_PASSWORD: "auth/user/reset-password",
