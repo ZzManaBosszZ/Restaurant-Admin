@@ -2,11 +2,30 @@ import Layout from "../../../layouts";
 import BreadCrumb from "../../../layouts/BreadCrumb";
 
 function FoodDetail() {
+
+    // const { slug } = useParams();
+
+    // const [courseDetail, setCourseDetail] = useState({});
+
+    // const loadData = useCallback(async () => {
+    //     try {
+    //         const courseDetailRequest = await api.get(url.COURSE_OFFLINE.DETAIL + `/${slug}`, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+    //         setCourseDetail(courseDetailRequest.data.data);
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // }, [slug]);
+
+    // useEffect(() => {
+    //     loadData();
+    // }, [loadData]);
+
+    // const subjects = courseDetail.subjectList || [];
+
     return (
         <Layout>
             <BreadCrumb />
             <section class="content">
-
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="box">

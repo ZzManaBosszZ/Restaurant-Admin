@@ -92,7 +92,7 @@ function Login() {
                     email: "Invalid email or password.",
                     password: "Invalid email or password.",
                 });
-            } 
+            }
         }
     };
     return (
@@ -129,7 +129,9 @@ function Login() {
                                             <div className="form-group">
                                                 <div className="input-group mb-3">
                                                     <div className="input-group-prepend">
-                                                        <span className="input-group-text  bg-transparent"><i className="ti-lock"></i></span>
+                                                        <span className="input-group-text bg-transparent">
+                                                            <i className="ti-lock"></i>
+                                                        </span>
                                                     </div>
                                                     <input
                                                         type={showPassword ? "text" : "password"}
@@ -138,11 +140,13 @@ function Login() {
                                                         placeholder="Password"
                                                         value={formData.password}
                                                         onChange={handleChange}
-                                                        onClick={handleTogglePassword}
-                                                        
                                                     />
+                                                    <div className="input-group-append">
+                                                        <span className="input-group-text bg-transparent view-password" onClick={handleTogglePassword}>
+                                                            {!showPassword ? <i className="fa fa-eye-slash"></i> : <i className="fa fa-eye"></i>}
+                                                        </span>
+                                                    </div>
                                                     {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
-                                                    
                                                 </div>
                                             </div>
                                             <div className="row">

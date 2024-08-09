@@ -1,13 +1,13 @@
 import config from "../config/index";
 
-import Home from "../components/pages/Home";
+import Home from "../components/pages/Dashboard";
 import NotFound from "../components/pages/Other/NotFound";
 import OrderList from "../components/pages/Order";
 import OrderDetail from "../components/pages/Order/OrderDetail";
 import MenuList from "../components/pages/Menu";
 import AddMenu from "../components/pages/Menu/AddMenu";
 import MenuCategory from "../components/pages/Menu/MenuCategories";
-import FoodList from "../components/pages/Food";
+import FoodList from "../components/pages/Food/FoodList";
 import FoodDetail from "../components/pages/Food/FoodDetail/FoodDetail";
 import Login from "../components/pages/Auth/Login";
 import ForgotPassword from "../components/pages/Auth/ForgotPassWord";
