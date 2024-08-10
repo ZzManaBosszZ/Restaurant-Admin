@@ -5,7 +5,7 @@ function MenuList() {
     return (
 
         <Layout>
-            <BreadCrumb />
+            <BreadCrumb title="Menu List" />
             <section class="content">
                 <div class="row">
                     <div class="col-xxxl-3 col-xl-4 col-lg-6 col-12">
@@ -29,10 +29,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -58,10 +55,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -87,10 +81,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -116,10 +107,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -145,10 +133,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -174,10 +159,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -203,10 +185,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -232,10 +211,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -261,10 +237,7 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-info-light btn-xs mb-5"><i class="fa fa-plus-square-o"></i></a>
-                                        <small class="d-block">Duplicate</small>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

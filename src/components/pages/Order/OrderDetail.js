@@ -102,11 +102,12 @@ function OrderDetail() {
                                         <thead>
                                             <tr>
                                                 <th>Item</th>
-                                                {/* <th style={{min-width: "300px"}}>Product info</th>
+                                                <th style={{ minWidth: "300px" }}>Product info</th>
                                                 <th>Price</th>
                                                 <th>Quantity</th>
-                                                <th style={{text-align:"center"}}>Total</th>
-                                                <th style={{text-align:"center"}}>Action</th> */}
+                                                <th style={{ textAlign: "center" }}>Total</th>
+                                                {/* <th style={{ textAlign: "center" }}>Action</th> */}
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -117,11 +118,9 @@ function OrderDetail() {
                                                     <h4>Instant Pot Pad Thai</h4>
                                                 </td>
                                                 <td>$270</td>
-                                                <td width="70">
-                                                    {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
+                                                <td width="100" align="center" class="font-weight-900">1</td>
                                                 <td width="100" align="center" class="font-weight-900">$270</td>
-                                                <td align="center"><a href="javascript:void(0)" class="btn btn-circle btn-primary btn-xs" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                                
                                             </tr>
                                             <tr>
                                                 <td><img src="../images/product/product-2.png" alt="" width="80" /></td>
@@ -134,7 +133,7 @@ function OrderDetail() {
                                                     {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
                                                 </td>
                                                 <td align="center" class="font-weight-900">$270</td>
-                                                <td align="center"><a href="javascript:void(0)" class="btn btn-circle btn-primary btn-xs" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                                
                                             </tr>
                                             <tr>
                                                 <td><img src="../images/product/product-3.png" alt="" width="80" /></td>
@@ -147,7 +146,7 @@ function OrderDetail() {
                                                     {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
                                                 </td>
                                                 <td align="center" class="font-weight-900">$270</td>
-                                                <td align="center"><a href="javascript:void(0)" class="btn btn-circle btn-primary btn-xs" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                                
                                             </tr>
                                             <tr>
                                                 <td><img src="../images/product/product-4.png" alt="" width="80" /></td>
@@ -160,7 +159,7 @@ function OrderDetail() {
                                                     {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
                                                 </td>
                                                 <td align="center" class="font-weight-900">$270</td>
-                                                <td align="center"><a href="javascript:void(0)" class="btn btn-circle btn-primary btn-xs" title="" data-toggle="tooltip" data-original-title="Delete"><i class="ti-trash"></i></a></td>
+                                                
                                             </tr>
                                         </tbody>
                                     </table>
