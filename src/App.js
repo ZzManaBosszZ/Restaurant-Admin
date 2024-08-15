@@ -1,6 +1,6 @@
 import { useLocation, Navigate, BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { publicRoutes, privateRoutes, authenticationRoutes } from "./routes/routes";
+import { privateRoutes, authenticationRoutes } from "./routes/routes";
 import { isLoggedIn, getDecodedToken } from "./utils/auth";
 import Forbidden from "./components/pages/Other/Forbidden";
 
@@ -53,10 +53,6 @@ function App() {
         <div className="App">
             <Router>
             <Routes>
-                {publicRoutes.map((route, index) => {
-                    const Page = route.component;
-                    return <Route key={index} path={route.path} element={<Page />} />;
-                })}
                 {privateRoutes.map((route, index) => {
                     const Page = route.component;
                     return <Route key={index} path={route.path} element={<ProtectedRoute element={<Page />} />} />;

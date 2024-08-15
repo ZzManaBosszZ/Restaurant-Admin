@@ -17,12 +17,12 @@ const useCheckRole = () => {
 
         let redirectUrl = "";
 
-        if (accountRole === "ADMIN" || accountRole === "") {
+        if (accountRole === "USER" || accountRole === "USER") {
             redirectUrl = "/";
-        } else if (accountRole === "") {
-            redirectUrl = "/dashboard-";
-        } else if (accountRole === "") {
-            redirectUrl = "/dashboard-";
+        } else if (accountRole === "USER") {
+            redirectUrl = "/";
+        } else if (accountRole === "USER") {
+            redirectUrl = "/";
         }
 
         navigate(redirectUrl);

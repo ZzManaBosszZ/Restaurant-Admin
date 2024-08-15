@@ -15,61 +15,41 @@ import FoodCreate from "../components/pages/Food/FoodCreate";
 import FoodEdit from "../components/pages/Food/FoodEdit";
 import MenuDetail from "../components/pages/Menu/MenuDetail";
 import ResetPassword from "../components/pages/Auth/ResetPassword";
-const publicRoutes = [
-    // Dashboard routes
-    { path: config.routes.home, component: Home },
-
-    //Blog routes
-    { path: config.routes.home, component: Home },
-    { path: config.routes.error, component: NotFound },
-
-    //Chef routes
-    { path: config.routes.home, component: Home },
-    { path: config.routes.error, component: NotFound },
-
-    //Other pages
-    { path: config.routes.error, component: NotFound },
-
-    //Profile routes
-
-
-    //Order routes
-    { path: config.routes.order_list, component: OrderList },
-    { path: config.routes.order_detail, component: OrderDetail },
-
-    //Menu routes
-    { path: config.routes.menu, component: MenuList },
-    { path: config.routes.add_menu, component: AddMenu },
-    { path: config.routes.menu_detail, component: MenuDetail },
-    { path: config.routes.menu_category, component: MenuCategory },
-
-    //Food routes
-    { path: config.routes.food_list, component: FoodList },
-    { path: config.routes.food_detail, component: FoodDetail },
-    { path: config.routes.food_create, component: FoodCreate },
-    { path: config.routes.food_edit, component: FoodEdit },
-
-
-];
 
 const privateRoutes = [
-    // Home routes
-    { path: config.routes.home, component: Home },
-    { path: config.routes.error, component: NotFound },
+     // Dashboard routes
+     { path: config.routes.home, component: Home, allowedRoles: ["USER"] },
 
-    //Order routes
-    { path: config.routes.order_list, component: OrderList },
-    { path: config.routes.order_detail, component: OrderDetail },
+     //Blog routes
 
-    //Menu routes
-    { path: config.routes.menu, component: MenuList },
-    { path: config.routes.add_menu, component: AddMenu },
-    { path: config.routes.menu_category, component: MenuCategory },
-
-    //Product routes
-    { path: config.routes.food_list, component: FoodList },
-    { path: config.routes.food_detail, component: FoodDetail },
-    { path: config.routes.menu_category, component: MenuCategory },
+     
+     { path: config.routes.error, component: NotFound },
+ 
+     //Chef routes
+     { path: config.routes.home, component: Home },
+     { path: config.routes.error, component: NotFound },
+ 
+     //Other pages
+     { path: config.routes.error, component: NotFound },
+ 
+     //Profile routes
+ 
+ 
+     //Order routes
+     { path: config.routes.order_list, component: OrderList },
+     { path: config.routes.order_detail, component: OrderDetail },
+ 
+     //Menu routes
+     { path: config.routes.menu, component: MenuList },
+     { path: config.routes.add_menu, component: AddMenu },
+     { path: config.routes.menu_detail, component: MenuDetail },
+     { path: config.routes.menu_category, component: MenuCategory },
+ 
+     //Food routes
+     { path: config.routes.food_list, component: FoodList },
+     { path: config.routes.food_detail, component: FoodDetail },
+     { path: config.routes.food_create, component: FoodCreate, allowedRoles: ["USER"]},
+     { path: config.routes.food_edit, component: FoodEdit },
 ];
 
 const authenticationRoutes = [
@@ -79,4 +59,4 @@ const authenticationRoutes = [
     { path: config.routes.reset_password, component: ResetPassword },
 ];
 
-export { publicRoutes, privateRoutes, authenticationRoutes };
+export { privateRoutes, authenticationRoutes };
