@@ -53,23 +53,23 @@ const publicRoutes = [
 ];
 
 const privateRoutes = [
-    // // Home routes
-    // { path: config.routes.home, component: Home },
-    // { path: config.routes.error, component: NotFound },
+    // Home routes
+    { path: config.routes.home, component: Home },
+    { path: config.routes.error, component: NotFound },
 
-    // //Order routes
-    // { path: config.routes.order_list, component: OrderList },
-    // { path: config.routes.order_detail, component: OrderDetail },
+    //Order routes
+    { path: config.routes.order_list, component: OrderList },
+    { path: config.routes.order_detail, component: OrderDetail },
 
-    // //Menu routes
-    // { path: config.routes.menu, component: MenuList },
-    // { path: config.routes.add_menu, component: AddMenu },
-    // { path: config.routes.menu_category, component: MenuCategory },
+    //Menu routes
+    { path: config.routes.menu, component: MenuList },
+    { path: config.routes.add_menu, component: AddMenu },
+    { path: config.routes.menu_category, component: MenuCategory },
 
-    // //Product routes
-    // { path: config.routes.food_list, component: FoodList },
-    // { path: config.routes.food_detail, component: FoodDetail },
-    // { path: config.routes.menu_category, component: MenuCategory },
+    //Product routes
+    { path: config.routes.food_list, component: FoodList },
+    { path: config.routes.food_detail, component: FoodDetail },
+    { path: config.routes.menu_category, component: MenuCategory },
 ];
 
 const authenticationRoutes = [

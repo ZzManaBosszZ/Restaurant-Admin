@@ -12,5 +12,21 @@ const url = {
         PROFILE: "user/profile",
         UPDATE_PROFILE: "user/update-profile",
     },
+
+    FOOD: {
+        LIST: "food",
+        DETAIL: "food/{id}",
+        CREATE: "food",
+        EDIT: "food",
+        DELETE: "food",
+    },
+
+    CATEGORY: {
+        LIST: "any/category",
+        DETAIL: "category",
+        CREATE: "category",
+        EDIT: "category",
+        DELETE: "category",
+    },
 };
 export default url;
