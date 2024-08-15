@@ -4,13 +4,16 @@ import url from "../../../services/url";
 import api from "../../../services/api";
 import ReactSelect from "react-select";
 import { getAccessToken } from "../../../utils/auth";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import config from "../../../config";
+import Swal from "sweetalert2";
 import BreadCrumb from "../../layouts/BreadCrumb";
 
 function FoodCreate() {
 
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
 
     const loadData = async () => {
@@ -157,36 +160,38 @@ function FoodCreate() {
                 const response = await api.post(url.FOOD.CREATE, formData, { headers });
                 
                 if (response && response.data) {
-                    toast.success("Added food successfully", {
-                        position: toast.POSITION.TOP_RIGHT,
-                        autoClose: 3000,
+                    Swal.fire({
+                        text: "Create ArtWork Successffuly.",
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
                     });
-                    // navigate(config.routes.food_list);
+                    setTimeout(() => {
+                        navigate(config.routes.food_list); //chuyển đến trang food-list
+                    }, 3000);
+
                 }
             } catch (error) {
-                if (error.response.status === 400) {
-                    toast.error(error.response.data.message, {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
+                if (error.response.status === 400 && error.response.data.message === "Food already exists") {
+                    Swal.fire({
+                        text: "The name of this Food already exists",
+                        icon: "warning",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
                     });
                 } else {
-                    toast.error("Error! An error occurred. Please try again later!", {
-                        position: "top-right",
-                        autoClose: 3000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "colored",
+                    Swal.fire({
+                        text: "Unable to create Food, please try again",
+                        icon: "warning",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
                     });
+
                 }
+                // console.error("Error creating test:", error);
+                // console.error("Response data:", error.response.data);
+            
+        
             }
         }
     };
