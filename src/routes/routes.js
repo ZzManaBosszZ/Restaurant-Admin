@@ -18,7 +18,7 @@ import ResetPassword from "../components/pages/Auth/ResetPassword";
 
 const privateRoutes = [
      // Dashboard routes
-     { path: config.routes.home, component: Home, allowedRoles: ["USER"] },
+     { path: config.routes.home, component: Home, allowedRoles: ["ADMIN"] },
 
      //Blog routes
 
@@ -48,7 +48,7 @@ const privateRoutes = [
      //Food routes
      { path: config.routes.food_list, component: FoodList },
      { path: config.routes.food_detail, component: FoodDetail },
-     { path: config.routes.food_create, component: FoodCreate, allowedRoles: ["USER"]},
+     { path: config.routes.food_create, component: FoodCreate, allowedRoles: ["ADMIN"]},
      { path: config.routes.food_edit, component: FoodEdit },
 ];
 

@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Layout from "../../layouts";
 import url from "../../../services/url";
@@ -6,13 +5,12 @@ import api from "../../../services/api";
 import ReactSelect from "react-select";
 import { getAccessToken } from "../../../utils/auth";
 import { toast } from "react-toastify";
-import config from "../../../config";
 import BreadCrumb from "../../layouts/BreadCrumb";
 
 function FoodCreate() {
 
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const [categories, setCategories] = useState([]);
 
     const loadData = async () => {
@@ -47,16 +45,18 @@ function FoodCreate() {
         name: "",
         image: null,
         price: 0,
+        quantity: 0,
         description: "",
-        categoryIds: [],
+        categoryId: [],
     });
 
     const [formErrors, setFormErrors] = useState({
         name: "",
         image: null,
         price: 0,
+        quantity: 0,
         description: "",
-        categoryIds: [],
+        categoryId: [],
     });
 
     const handleInputChange = (e) => {
@@ -135,38 +135,59 @@ function FoodCreate() {
             newErrors.description = "Please enter description";
             valid = false;
         }
-        if (formData.categoryIds.length === 0) {
-            newErrors.categoryIds = "Please choose category";
+        if (formData.categoryId.length === 0) {
+            newErrors.categoryId = "Please choose category";
             valid = false;
         }
         setFormErrors(newErrors);
         return valid;
     };
 
-    const handleCreateFood = async (e) => {
+    console.log(getAccessToken());
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!validateForm()) {
-            return;
-        }
-
-        try {
-            console.log(formData);
-            const createRequest = await api.post(url.FOOD.CREATE, formData, {
-                headers: {
-                    "Authorization": `Bearer ${getAccessToken()}`,
+        if (validateForm()) {
+            try {
+                const headers = {
+                    Authorization: `Bearer ${getAccessToken()}`,
                     "Content-Type": "multipart/form-data",
-                },
-            });
-
-            if (createRequest.status === 200) {
-                toast.success("Created successfully!");
-
-                navigate(config.routes.food_list);
+                };
+                const response = await api.post(url.FOOD.CREATE, formData, { headers });
+                
+                if (response && response.data) {
+                    toast.success("Added food successfully", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 3000,
+                    });
+                    // navigate(config.routes.food_list);
+                }
+            } catch (error) {
+                if (error.response.status === 400) {
+                    toast.error(error.response.data.message, {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                } else {
+                    toast.error("Error! An error occurred. Please try again later!", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "colored",
+                    });
+                }
             }
-        } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.message);
         }
     };
 
@@ -178,7 +199,7 @@ function FoodCreate() {
                     <div className="col-12">
                         <div className="box">
                             <div className="box-body">
-                                <form onSubmit={handleCreateFood}>
+                                <form onSubmit={handleSubmit}>
                                     <div className="form-body">
                                         <div className="row">
                                             <div className="col-md-6">
@@ -201,11 +222,11 @@ function FoodCreate() {
                                                     <ReactSelect
                                                         options={categoryOptions}
                                                         placeholder="Please Choose Category"
-                                                        name="categoryIds"
-                                                        className={formErrors.categoryIds ? "is-invalid" : ""}
+                                                        name="categoryId"
+                                                        className={formErrors.categoryId ? "is-invalid" : ""}
                                                         onChange={handleSelectChange}
                                                     />
-                                                    {formErrors.categoryIds && <div className="invalid-feedback d-block">{formErrors.categoryIds}</div>}
+                                                    {formErrors.categoryId && <div className="invalid-feedback d-block">{formErrors.categoryId}</div>}
                                                 </div>
                                             </div>
                                         </div>
@@ -224,6 +245,23 @@ function FoodCreate() {
                                                             onChange={handleInputChange}
                                                         />
                                                         {formErrors.price && <div className="invalid-feedback d-block">{formErrors.price}</div>}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="col-md-6">
+                                                <div className="form-group">
+                                                    <label className="font-weight-700 font-size-16">Quantity</label>
+                                                    <div className="input-group">
+                                                        <div className="input-group-addon"><i className="ti-money"></i></div>
+                                                        <input
+                                                            type="number"
+                                                            name="quantity"
+                                                            className={`form-control ${formErrors.quantity ? "is-invalid" : ""}`}
+                                                            placeholder="10"
+                                                            value={formData.quantity}
+                                                            onChange={handleInputChange}
+                                                        />
+                                                        {formErrors.quantity && <div className="invalid-feedback d-block">{formErrors.quantity}</div>}
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,9 +287,9 @@ function FoodCreate() {
                                                 <h4 class="box-title mt-20">Uploaded Image Preview</h4>
                                                 <div class="product-img text-left">
                                                     <img id="imgPreview" src="" alt="Preview" class="mb-15"></img>
-                                                    <p>Upload Anonther Image</p>
+                                                    <p>Upload Another Image</p>
                                                     <div class="btn btn-info mb-20">
-                                                        <input type="file" name="image" className="upload" onChange={handleChange} accept=".jpg, .png, .etc" />
+                                                        <input type="file" name="image" onChange={handleChange} accept=".jpg, .png, .etc" />
                                                         {formErrors.image && <div className="invalid-feedback">{formErrors.image}</div>}
                                                     </div>
                                                 </div>
@@ -259,7 +297,7 @@ function FoodCreate() {
                                         </div>
                                     </div>
                                     <div className="form-actions mt-10">
-                                        <button type="submit" class="btn btn-primary"> <i class="fa fa-check"></i>Add</button>
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Add</button>
                                         <button type="button" className="btn btn-danger">Cancel</button>
                                     </div>
                                 </form>

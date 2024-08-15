@@ -17,7 +17,7 @@ const useCheckRole = () => {
 
         let redirectUrl = "";
 
-        if (accountRole === "USER" || accountRole === "USER") {
+        if (accountRole === "ADMIN" || accountRole === "USER") {
             redirectUrl = "/";
         } else if (accountRole === "USER") {
             redirectUrl = "/";
