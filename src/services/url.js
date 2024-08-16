@@ -15,7 +15,7 @@ const url = {
 
     FOOD: {
         LIST: "any/food",
-        DETAIL: "food/{id}",
+        DETAIL: "food/{}",
         CREATE: "food",
         EDIT: "food",
         DELETE: "food",

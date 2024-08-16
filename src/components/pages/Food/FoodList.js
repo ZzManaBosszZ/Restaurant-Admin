@@ -168,7 +168,7 @@ function FoodList() {
                                                     <li><Link to={`/food-detail/${item.id}`} className="btn btn-outline ">
                                                         <i className="ti ti-eye f-18"></i>
                                                     </Link></li>
-                                                    <li><Link to={`/food-edit/${item.slug}`} className="btn btn-outline">
+                                                    <li><Link to={`/food-edit/${item.id}`} className="btn btn-outline">
                                                         <i className="ti-pencil-alt"></i>
                                                     </Link></li>
                                                     <li><a class="btn btn-outline" onClick={() => handleDeleteData(item.id)}><i class="ti-trash"></i></a></li>

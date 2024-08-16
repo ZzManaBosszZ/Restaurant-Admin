@@ -24,7 +24,7 @@ const routes = {
     food_list: "/food-list",
     food_detail: "/food-detail",
     food_create: "/food-create",
-    food_edit: "/food-edit",
+    food_edit: "/food-edit/:id",
 
     //Chef routes
 

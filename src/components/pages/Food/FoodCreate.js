@@ -70,13 +70,13 @@ function FoodCreate() {
         }));
     };
 
-    const handleSelectChange = (selectedOption, { name }) => {
-        const value = Array.isArray(selectedOption) ? selectedOption.map((option) => option.value) : selectedOption?.value || null;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
+    // const handleSelectChange = (selectedOption, { name }) => {
+    //     const value = Array.isArray(selectedOption) ? selectedOption.map((option) => option.value) : selectedOption?.value || null;
+    //     setFormData((prevState) => ({
+    //         ...prevState,
+    //         [name]: value,
+    //     }));
+    // };
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -158,7 +158,7 @@ function FoodCreate() {
                     "Content-Type": "multipart/form-data",
                 };
                 const response = await api.post(url.FOOD.CREATE, formData, { headers });
-                
+
                 if (response && response.data) {
                     Swal.fire({
                         text: "Create Food Successfully.",
@@ -190,8 +190,6 @@ function FoodCreate() {
                 }
                 // console.error("Error creating test:", error);
                 // console.error("Response data:", error.response.data);
-            
-        
             }
         }
     };
@@ -224,13 +222,14 @@ function FoodCreate() {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="font-weight-700 font-size-16">Category</label>
-                                                    <ReactSelect
-                                                        options={categoryOptions}
-                                                        placeholder="Please Choose Category"
-                                                        name="categoryId"
-                                                        className={formErrors.categoryId ? "is-invalid" : ""}
-                                                        onChange={handleSelectChange}
-                                                    />
+                                                    <select name="categoryId" className={`form-control ${formErrors.categoryId ? "is-invalid" : ""}`} value={formData.categoryId || ""} onChange={handleChange}>
+                                                        <option value="">Please choose category</option>
+                                                        {categories.map((category) => (
+                                                            <option value={category.id} key={category.id}>
+                                                                {category.name}
+                                                            </option>
+                                                        ))}
+                                                    </select>
                                                     {formErrors.categoryId && <div className="invalid-feedback d-block">{formErrors.categoryId}</div>}
                                                 </div>
                                             </div>
@@ -257,7 +256,7 @@ function FoodCreate() {
                                                 <div className="form-group">
                                                     <label className="font-weight-700 font-size-16">Quantity</label>
                                                     <div className="input-group">
-                                                        <div className="input-group-addon"><i className="ti-money"></i></div>
+                                                        <div className="input-group-addon"><i className="ti-package"></i></div>
                                                         <input
                                                             type="number"
                                                             name="quantity"
