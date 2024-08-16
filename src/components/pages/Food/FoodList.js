@@ -1,287 +1,224 @@
 import Layout from "../../layouts";
 import BreadCrumb from "../../layouts/BreadCrumb";
-
+import { useState, useEffect } from "react";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import config from "../../../config";
 function FoodList() {
+
+
+    const [foods, setFoods] = useState([]);
+
+    //show list data
+    useEffect(() => {
+        const loadFoods = async () => {
+            try {
+                const response = await api.get(url.FOOD.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                setFoods(response.data.data);
+                // console.log(response.data.data);
+            } catch (error) { }
+        };
+        loadFoods();
+    }, []);
+
+    //search, filter
+    const [searchName, setSearchName] = useState("");
+    const [searchDescription, setSearchDescription] = useState("");
+    const [createdDate, setCreatedDate] = useState("");
+    const handleSearchNameChange = (e) => {
+        setSearchName(e.target.value);
+    };
+    const handleSearchDescriptionChange = (e) => {
+        setSearchDescription(e.target.value);
+    };
+    const handleCreatedDateChange = (e) => {
+        setCreatedDate(e.target.value);
+    };
+    const filteredFoods = foods.filter((item) => {
+        const nameMatch = item.name.toLowerCase().includes(searchName.toLowerCase());
+        const descriptionMatch = item.description.toLowerCase().includes(searchDescription.toLowerCase());
+        const createdDateMatch = createdDate ? new Date(item.createdDate) >= new Date(createdDate) : true;
+        return nameMatch && descriptionMatch && createdDateMatch;
+    });
+
+    // delete data
+    const handleDeleteData = async (id) => {
+        const selectedDataIds = [id];
+
+        const isConfirmed = await Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete selected data?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "I'm sure",
+        });
+        if (isConfirmed.isConfirmed) {
+            try {
+                const deleteResponse = await api.delete(url.FOOD.DELETE, {
+                    headers: { Authorization: `Bearer ${getAccessToken()}` },
+                    "Content-Type": "application/json",
+                    data: selectedDataIds,
+                });
+                if (deleteResponse.status === 200) {
+                    setFoods((prevData) => prevData.filter((data) => !selectedDataIds.includes(data.id)));
+                    Swal.fire({
+                        text: "Delete Food Successfully.",
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
+                    });
+                }
+            } catch (error) {
+                if (error.response.status === 400) {
+                    Swal.fire({
+                        text: "This Food can't delete",
+                        icon: "warning",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
+                    });
+                } else {
+                    Swal.fire({
+                        text: "An error occurred while deleting food",
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
+                    });
+                }
+            }
+        }
+    };
+
+    //paginate
+    const [currentPage, setCurrentPage] = useState(1);
+    const contentsPerPage = 3;
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+    };
+    const handlePrevPage = () => {
+        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+    };
+    const handleNextPage = () => {
+        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
+    };
+    const totalPages = Math.ceil(foods.length / contentsPerPage);
+    const indexOfLastContent = currentPage * contentsPerPage;
+    const indexOfFirstContent = indexOfLastContent - contentsPerPage;
+    const currentContents = filteredFoods.slice(indexOfFirstContent, indexOfLastContent);
+
+
     return (
         <Layout>
-            <BreadCrumb />
-            <section class="content">
-
-                <div class="row fx-element-overlay">
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-1.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-1.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <BreadCrumb title="Food List" />
+            <div className="card-header">
+                <div className="row page-titles">
+                    <div className="col-lg-4">
+                        <input
+                            type="text"
+                            className="form-control input-rounded"
+                            placeholder="Search name food . . ."
+                            value={searchName}
+                            onChange={handleSearchNameChange}
+                            style={{ fontSize: '15px', padding: '12px' }}
+                        />
                     </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-2.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-2.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="col-lg-4">
+                        <input
+                            type="text"
+                            className="form-control input-rounded"
+                            placeholder="Search description food . . ."
+                            value={searchDescription}
+                            onChange={handleSearchDescriptionChange}
+                            style={{ fontSize: '15px', padding: '12px' }}
+                        />
                     </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-3.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-3.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div className="col-lg-4">
+                        <input
+                            type="datetime-local"
+                            className="form-control input-rounded"
+                            value={createdDate}
+                            onChange={handleCreatedDateChange}
+                            style={{ fontSize: '15px', padding: '12px' }}
+                        />
                     </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-4.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-4.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-5.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-5.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-6.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-6.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-7.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-7.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-8.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-8.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-9.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-9.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-10.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-10.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-11.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-11.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col-12 col-lg-6 col-xl-4">
-                        <div class="box box-default">
-                            <div class="fx-card-item">
-                                <div class="fx-card-avatar fx-overlay-1"> <img src="../images/product/product-12.png" alt="user" />
-                                    <div class="fx-overlay scrl-up">
-                                        <ul class="fx-info">
-                                            <li><a class="btn btn-outline image-popup-vertical-fit" href="../images/product/product-12.png"><i class="mdi mdi-magnify"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-delete"></i></a></li>
-                                            <li><a class="btn btn-outline" href="javascript:void(0);"><i class="mdi mdi-settings"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="fx-card-content text-left mb-0">
-                                    <div class="product-text">
-                                        <h2 class="pro-price text-blue">$270</h2>
-                                        <h4 class="box-title mb-0">Product Name</h4>
-                                        <small class="text-muted db">Lorem Ipsum Dummy Text</small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
                 </div>
 
+                <div className=" mt-3 px-3">
+                    <div className="d-flex align-items-center justify-content-end gap-3">
+                        <Link to={config.routes.food_create} className="btn btn-primary d-flex align-items-center justify-content-center">
+                            <i className="ti ti-plus"></i> Add New Food
+                        </Link>
+                    </div>
+                </div>
+            </div>
+            <section class="content">
+                <div class="row fx-element-overlay">
+                    {currentContents.map((item, index) => {
+                        return (
+                            <div class="col-12 col-lg-6 col-xl-4">
+                                <div class="box box-default">
+                                    <div class="fx-card-item">
+                                        <div class="fx-card-avatar fx-overlay-1 "> <img src={item.image} alt="user" />
+                                            <div class="fx-overlay">
+                                                <ul class="fx-info">
+                                                    <li><Link to={`/food-detail/${item.id}`} className="btn btn-outline ">
+                                                        <i className="ti ti-eye f-18"></i>
+                                                    </Link></li>
+                                                    <li><Link to={`/food-edit/${item.slug}`} className="btn btn-outline">
+                                                        <i className="ti-pencil-alt"></i>
+                                                    </Link></li>
+                                                    <li><a class="btn btn-outline" onClick={() => handleDeleteData(item.id)}><i class="ti-trash"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="fx-card-content text-left mb-0">
+                                            <div class="product-text">
+                                                <h2 class="pro-price text-blue">${item.price}</h2>
+                                                <h4 class="box-title mb-0">{item.name}</h4>
+                                                <small class="text-muted db">{item.description}</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </section>
+
+            <div className="row">
+                <div className="col-lg-12 d-flex justify-content-center">
+                    {totalPages > 0 && (
+                        <nav>
+                            <ul className="pagination pagination-gutter pagination-primary no-bg">
+                                <li className={`page-item page-indicator ${currentPage === 1 ? "disabled" : ""}`}>
+                                    <button className="page-link" onClick={handlePrevPage}>
+                                        «
+                                    </button>
+                                </li>
+                                {Array.from({ length: totalPages }).map((_, index) => (
+                                    <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
+                                        <button className="page-link" onClick={() => handlePageChange(index + 1)}>
+                                            {index + 1}
+                                        </button>
+                                    </li>
+                                ))}
+                                <li className={`page-item page-indicator ${currentPage === totalPages ? "disabled" : ""}`}>
+                                    <button className="page-link" onClick={handleNextPage}>
+                                        »
+                                    </button>
+                                </li>
+                            </ul>
+                        </nav>
+                    )}
+                </div>
+            </div>
+
+
         </Layout>
     );
 }

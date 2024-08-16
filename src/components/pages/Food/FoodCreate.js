@@ -161,7 +161,7 @@ function FoodCreate() {
                 
                 if (response && response.data) {
                     Swal.fire({
-                        text: "Create ArtWork Successffuly.",
+                        text: "Create Food Successfully.",
                         icon: "success",
                         confirmButtonColor: "#3085d6",
                         confirmButtonText: "Done",
@@ -172,7 +172,7 @@ function FoodCreate() {
 
                 }
             } catch (error) {
-                if (error.response.status === 400 && error.response.data.message === "Food already exists") {
+                if (error.response.data === 400 && error.response.data.message === "Food already exists") {
                     Swal.fire({
                         text: "The name of this Food already exists",
                         icon: "warning",
@@ -181,7 +181,7 @@ function FoodCreate() {
                     });
                 } else {
                     Swal.fire({
-                        text: "Unable to create Food, please try again",
+                        text: "The name of this Food already exists",
                         icon: "warning",
                         confirmButtonColor: "#3085d6",
                         confirmButtonText: "Done",
