@@ -56,7 +56,7 @@ function FoodEdit() {
     const [formData, setFormData] = useState({
         id: foodDetail.id,
         name: "",
-        // image: null,
+        image: null,
         price: 0,
         quantity: 0,
         description: "",
@@ -65,7 +65,7 @@ function FoodEdit() {
 
     const [formErrors, setFormErrors] = useState({
         name: "",
-        // image: null,
+        image: null,
         price: 0,
         quantity: 0,
         description: "",
@@ -152,13 +152,13 @@ function FoodEdit() {
                 setSubmitting(true);
                 const headers = {
                     Authorization: `Bearer ${getAccessToken()}`,
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                 };
                 const createRequest = await api.put(url.FOOD.EDIT, formData, { headers });
 
                 if (createRequest.status === 200) {
                     Swal.fire({
-                        text: "Create Food Successfully.",
+                        text: "Edit Food Successfully.",
                         icon: "success",
                         confirmButtonColor: "#3085d6",
                         confirmButtonText: "Done",
