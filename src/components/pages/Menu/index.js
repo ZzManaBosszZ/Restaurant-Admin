@@ -178,7 +178,6 @@ function MenuList() {
                                         <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
                                         <small class="d-block">Delete</small>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
