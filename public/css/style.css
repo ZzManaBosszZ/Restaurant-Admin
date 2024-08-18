@@ -24265,5 +24265,30 @@ img.away, img.busy, img.offline, img.online {
 .waves-effect .waves-ripple {
   z-index: -1; }
 
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-item {
+    border: 1px solid #ddd;
+    padding: 8px 12px;
+    margin: 0 5px;
+    cursor: pointer;
+    background-color: white;
+    color: #007bff;
+    transition: background-color 0.3s;
+}
+
+.page-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.page-item:hover {
+    background-color: #f1f1f1;
+}
+
 
 /*# sourceMappingURL=style.css.map */

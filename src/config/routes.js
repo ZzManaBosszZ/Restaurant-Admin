@@ -1,3 +1,5 @@
+import { ca } from "date-fns/locale";
+
 const routes = {
     // Home routes
     home: "/",
@@ -8,7 +10,6 @@ const routes = {
     login: "/login",
     forgot_password: "/forgot-password",
     reset_password: "/reset-password/:resetToken",
-    // reset_password: "/reset-password",
 
     //Order routes
     order_list: "/order-list",
@@ -16,17 +17,19 @@ const routes = {
 
     //Menu routes
     menu: "/menu",
-    add_menu: "/add-menu",
+    menu_create: "/add-menu",
     menu_category: "/menu-category",
-    menu_detail: "/menu-detail",
+    menu_detail: "/menu-detail/:id",
 
     //Food routes
     food_list: "/food-list",
-    food_detail: "/food-detail",
+    food_detail: "/food-detail/:id",
     food_create: "/food-create",
     food_edit: "/food-edit/:id",
 
-    //Chef routes
+    //Category routes
+    category_list: "/category-list",
+    category_create: "/category-create",
 
     //Blog routes
 

@@ -95,21 +95,16 @@ function FoodList() {
 
     //paginate
     const [currentPage, setCurrentPage] = useState(1);
-    const contentsPerPage = 3;
-    const handlePageChange = (page) => {
-        setCurrentPage(page);
+    const itemsPerPage = 1; // Number of items per page
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
-    const handlePrevPage = () => {
-        setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
-    };
-    const handleNextPage = () => {
-        setCurrentPage((prevPage) => Math.min(prevPage + 1, totalPages));
-    };
-    const totalPages = Math.ceil(foods.length / contentsPerPage);
-    const indexOfLastContent = currentPage * contentsPerPage;
-    const indexOfFirstContent = indexOfLastContent - contentsPerPage;
-    const currentContents = filteredFoods.slice(indexOfFirstContent, indexOfLastContent);
+    const paginatedCategories = filteredFoods.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage
+    );
 
+    const totalPages = Math.ceil(filteredFoods.length / itemsPerPage);
 
     return (
         <Layout>
@@ -157,7 +152,7 @@ function FoodList() {
             </div>
             <section class="content">
                 <div class="row fx-element-overlay">
-                    {currentContents.map((item, index) => {
+                    {paginatedCategories.map((item, index) => {
                         return (
                             <div class="col-12 col-lg-6 col-xl-4">
                                 <div class="box box-default">
@@ -190,32 +185,17 @@ function FoodList() {
                 </div>
             </section>
 
-            <div className="row">
-                <div className="col-lg-12 d-flex justify-content-center">
-                    {totalPages > 0 && (
-                        <nav>
-                            <ul className="pagination pagination-gutter pagination-primary no-bg">
-                                <li className={`page-item page-indicator ${currentPage === 1 ? "disabled" : ""}`}>
-                                    <button className="page-link" onClick={handlePrevPage}>
-                                        «
-                                    </button>
-                                </li>
-                                {Array.from({ length: totalPages }).map((_, index) => (
-                                    <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
-                                        <button className="page-link" onClick={() => handlePageChange(index + 1)}>
-                                            {index + 1}
-                                        </button>
-                                    </li>
-                                ))}
-                                <li className={`page-item page-indicator ${currentPage === totalPages ? "disabled" : ""}`}>
-                                    <button className="page-link" onClick={handleNextPage}>
-                                        »
-                                    </button>
-                                </li>
-                            </ul>
-                        </nav>
-                    )}
-                </div>
+            {/* Pagination Controls */}
+            <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                    <button
+                        key={index + 1}
+                        className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
+                        onClick={() => handlePageChange(index + 1)}
+                    >
+                        {index + 1}
+                    </button>
+                ))}
             </div>
 
 

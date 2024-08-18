@@ -28,5 +28,13 @@ const url = {
         EDIT: "category",
         DELETE: "category",
     },
+
+    MENU: {
+        LIST: "menus",
+        DETAIL: "menus/{}",
+        CREATE: "menus",
+        EDIT: "menus",
+        DELETE: "menus/{}",
+    },
 };
 export default url;
