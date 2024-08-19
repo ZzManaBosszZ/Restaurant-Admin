@@ -162,8 +162,8 @@ function MenuList() {
                             <div class="box-body text-center">
                                 <div class="menu-item"><img src="../images/food/dish-1.png" class="img-fluid w-p75" alt="" /></div>
                                 <div class="menu-details text-center">
-                                    <h4 class="mt-20 mb-10">Kung Pao Tofu Recipe</h4>
-                                    <p>Food/Noodle</p>
+                                    <h4 class="mt-20 mb-10">{item.name}</h4>
+                                    <p>{item.description}</p>
                                 </div>
                                 <div class="act-btn d-flex justify-content-between">
                                     <div class="text-center mx-5">

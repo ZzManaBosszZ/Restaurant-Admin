@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import api from '../../../services/api';
 import url from '../../../services/url';
 import { getAccessToken } from '../../../utils/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../config';
 
 export default function CategoryCreate() {
@@ -123,7 +123,7 @@ export default function CategoryCreate() {
                                     </div>
                                     <div className="form-actions mt-10">
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Add</button>
-                                        <button type="button" className="btn btn-danger">Cancel</button>
+                                        <Link to={config.routes.category_list}><button type="button" className="btn btn-danger">Cancel</button></Link>
                                     </div>
                                 </form>
                             </div>

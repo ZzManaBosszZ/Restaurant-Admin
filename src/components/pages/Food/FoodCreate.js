@@ -2,14 +2,12 @@ import { useState, useEffect } from "react";
 import Layout from "../../layouts";
 import url from "../../../services/url";
 import api from "../../../services/api";
-import ReactSelect from "react-select";
 import { getAccessToken } from "../../../utils/auth";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import config from "../../../config";
 import Swal from "sweetalert2";
 import BreadCrumb from "../../layouts/BreadCrumb";
-
+import { Link } from "react-router-dom";
 function FoodCreate() {
 
 
@@ -69,14 +67,6 @@ function FoodCreate() {
             [name]: value,
         }));
     };
-
-    // const handleSelectChange = (selectedOption, { name }) => {
-    //     const value = Array.isArray(selectedOption) ? selectedOption.map((option) => option.value) : selectedOption?.value || null;
-    //     setFormData((prevState) => ({
-    //         ...prevState,
-    //         [name]: value,
-    //     }));
-    // };
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -302,7 +292,7 @@ function FoodCreate() {
                                     </div>
                                     <div className="form-actions mt-10">
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Add</button>
-                                        <button type="button" className="btn btn-danger">Cancel</button>
+                                        <Link to={config.routes.food_list}><button type="button" className="btn btn-danger">Cancel</button></Link>
                                     </div>
                                 </form>
                             </div>

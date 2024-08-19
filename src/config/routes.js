@@ -1,5 +1,3 @@
-import { ca } from "date-fns/locale";
-
 const routes = {
     // Home routes
     home: "/",

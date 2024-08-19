@@ -36,5 +36,9 @@ const url = {
         EDIT: "menus",
         DELETE: "menus/{}",
     },
+
+    MENU_FOOD: {
+        CREATE: "menu-food",
+    },
 };
 export default url;
