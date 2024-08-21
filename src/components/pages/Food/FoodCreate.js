@@ -37,11 +37,6 @@ function FoodCreate() {
         loadData();
     }, []);
 
-    const categoryOptions = categories.map((category) => ({
-        value: category.id,
-        label: category.name,
-    }));
-
     const [formData, setFormData] = useState({
         name: "",
         image: null,

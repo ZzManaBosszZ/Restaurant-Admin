@@ -50,7 +50,7 @@ function FoodList() {
 
         const isConfirmed = await Swal.fire({
             title: "Are you sure?",
-            text: "You want to delete selected data?",
+            text: "You want to delete this Food?",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",

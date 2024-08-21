@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import Layout from "../../layouts";
-import url from "../../../services/url";
-import api from "../../../services/api";
-import { getAccessToken } from "../../../utils/auth";
+import Layout from "../../../layouts";
+import url from "../../../../services/url";
+import api from "../../../../services/api";
+import { getAccessToken } from "../../../../utils/auth";
 import { useNavigate } from "react-router-dom";
-import config from "../../../config";
+import config from "../../../../config";
 import Swal from "sweetalert2";
-import BreadCrumb from "../../layouts/BreadCrumb";
+import BreadCrumb from "../../../layouts/BreadCrumb";
 import { Link } from "react-router-dom";
 
 function MenuFoodCreate() {
 
     const navigate = useNavigate();
-    const [menu, setMenu] = useState([]);
+    const [menus, setMenu] = useState([]);
     const [foods, setFoods] = useState([]);
 
     const loadData = async () => {
@@ -40,16 +40,6 @@ function MenuFoodCreate() {
         loadData();
     }, []);
 
-    const foodOptions = foods.map((food) => ({
-        value: food.id,
-        label: food.name,
-    }));
-
-    const menuOptions = menu.map((menu) => ({
-        value: menu.id,
-        label: menu.name,
-    }));
-
     const [formData, setFormData] = useState({
         image: null,
         foodId: [],
@@ -61,14 +51,6 @@ function MenuFoodCreate() {
         foodId: [],
         menuId: [],
     });
-
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    };
 
     const handleChange = (e) => {
         const { name, value, files } = e.target;
@@ -181,7 +163,7 @@ function MenuFoodCreate() {
             }
         }
     };
-    
+
     return (
         <Layout>
             <BreadCrumb title="Menu-Food Create" />
@@ -193,12 +175,12 @@ function MenuFoodCreate() {
                                 <form onSubmit={handleSubmit}>
                                     <div className="form-body">
                                         <div className="row">
-                                        <div className="col-md-6">
+                                            <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="font-weight-700 font-size-16">Menu</label>
                                                     <select name="menuId" className={`form-control ${formErrors.menuId ? "is-invalid" : ""}`} value={formData.menuId || ""} onChange={handleChange}>
                                                         <option value="">Please choose Menu</option>
-                                                        {menuOptions.map((menu) => (
+                                                        {menus.map((menu) => (
                                                             <option value={menu.id} key={menu.id}>
                                                                 {menu.name}
                                                             </option>
@@ -212,7 +194,7 @@ function MenuFoodCreate() {
                                                     <label className="font-weight-700 font-size-16">Food</label>
                                                     <select name="foodId" className={`form-control ${formErrors.foodId ? "is-invalid" : ""}`} value={formData.foodId || ""} onChange={handleChange}>
                                                         <option value="">Please choose Food</option>
-                                                        {foodOptions.map((food) => (
+                                                        {foods.map((food) => (
                                                             <option value={food.id} key={food.id}>
                                                                 {food.name}
                                                             </option>

@@ -16,8 +16,12 @@ const routes = {
     //Menu routes
     menu: "/menu",
     menu_create: "/add-menu",
+    menu_edit: "/menu-edit/:id",
     menu_category: "/menu-category",
     menu_detail: "/menu-detail/:id",
+
+    //Menu_Food routes
+    menu_food_create: "/menu-food",
 
     //Food routes
     food_list: "/food-list",

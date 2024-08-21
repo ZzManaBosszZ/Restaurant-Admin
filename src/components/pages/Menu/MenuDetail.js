@@ -1,8 +1,29 @@
-import React from 'react'
-import Layout from '../../layouts'
-import BreadCrumb from '../../layouts/BreadCrumb'
+import Layout from "../../layouts";
+import BreadCrumb from "../../layouts/BreadCrumb";
+import { useParams } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
 import '../../../css/animated-masonry-gallery.css'
 function MenuDetail() {
+
+	const { id } = useParams();
+	const [menuDetail, setMenuDetail] = useState({});
+
+    const loadData = useCallback(async () => {
+        try {
+            const menuDetailRequest = await api.get(url.MENU.DETAIL.replace("{}", id), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+            setMenuDetail(menuDetailRequest.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
+
   return (
     <Layout>
         <BreadCrumb title="Menu Detail" />

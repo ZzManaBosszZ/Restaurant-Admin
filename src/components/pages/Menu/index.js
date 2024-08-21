@@ -155,37 +155,41 @@ function MenuList() {
 
             <section class="content">
                 <div class="row">
-                {paginatedMenus.map((item, index) => {
+                    {paginatedMenus.map((item, index) => {
                         return (
-                    <div class="col-xxxl-3 col-xl-4 col-lg-6 col-12">
-                        <div class="box food-box">
-                            <div class="box-body text-center">
-                                <div class="menu-item"><img src="../images/food/dish-1.png" class="img-fluid w-p75" alt="" /></div>
-                                <div class="menu-details text-center">
-                                    <h4 class="mt-20 mb-10">{item.name}</h4>
-                                    <p>{item.description}</p>
-                                </div>
-                                <div class="act-btn d-flex justify-content-between">
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-success-light btn-xs mb-5"><i class="fa fa-eye-slash"></i></a>
-                                        <small class="d-block">View</small>
-                                    </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5"><i class="fa fa-edit"></i></a>
-                                        <small class="d-block">Edit</small>
-                                    </div>
-                                    <div class="text-center mx-5">
-                                        <a href="#" class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
-                                        <small class="d-block">Delete</small>
+                            <div class="col-xxxl-3 col-xl-4 col-lg-6 col-12">
+                                <div class="box food-box">
+                                    <div class="box-body text-center">
+                                        <div class="menu-item"><img src={item.image} class="img-fluid w-p75" alt="" /></div>
+                                        <div class="menu-details text-center">
+                                            <h4 class="mt-20 mb-10">{item.name}</h4>
+                                            <p>{item.description}</p>
+                                        </div>
+                                        <div class="act-btn d-flex justify-content-between">
+                                            <div class="text-center mx-5">
+                                                <Link to={`/menu-detail/${item.id}`} className="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5">
+                                                <i class="fa fa-eye-slash"></i>
+                                                </Link>
+                                                <small class="d-block">View</small>
+                                            </div>
+                                            <div class="text-center mx-5">
+                                                <Link to={`/menu-edit/${item.id}`} className="waves-effect waves-circle btn btn-circle btn-danger-light btn-xs mb-5">
+                                                    <i className="fa fa-edit"></i>
+                                                </Link>
+                                                <small className="d-block">Edit</small>
+                                            </div>
+                                            <div class="text-center mx-5">
+                                                <a onClick={() => handleDeleteData(item.id)} class="waves-effect waves-circle btn btn-circle btn-primary-light btn-xs mb-5"><i class="fa fa-trash"></i></a>
+                                                <small class="d-block">Delete</small>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                     );
+                        );
                     })}
                 </div>
-                
+
             </section>
 
             {/* Pagination Controls */}

@@ -17,6 +17,8 @@ import MenuDetail from "../components/pages/Menu/MenuDetail";
 import ResetPassword from "../components/pages/Auth/ResetPassword";
 import CategoryList from "../components/pages/Category";
 import CategoryCreate from "../components/pages/Category/CategoryCreate";
+import MenuEdit from "../components/pages/Menu/MenuEdit";
+import MenuFoodCreate from "../components/pages/Menu/MenuFood/MenuFoodCreate";
 
 const privateRoutes = [
      // Dashboard routes
@@ -44,8 +46,10 @@ const privateRoutes = [
      //Menu routes
      { path: config.routes.menu, component: MenuList },
      { path: config.routes.menu_create, component: AddMenu },
+     {path: config.routes.menu_edit, component: MenuEdit},
      { path: config.routes.menu_detail, component: MenuDetail },
      { path: config.routes.menu_category, component: MenuCategory },
+     { path: config.routes.menu_food_create, component: MenuFoodCreate },
  
      //Food routes
      { path: config.routes.food_list, component: FoodList },

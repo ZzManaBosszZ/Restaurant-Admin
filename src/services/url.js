@@ -34,7 +34,7 @@ const url = {
         DETAIL: "menus/{}",
         CREATE: "menus",
         EDIT: "menus",
-        DELETE: "menus/{}",
+        DELETE: "menus",
     },
 
     MENU_FOOD: {

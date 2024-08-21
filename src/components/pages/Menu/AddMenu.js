@@ -81,7 +81,7 @@ function AddMenu() {
             valid = false;
         }
         if (!formData.image) {
-            newErrors.image = "Please choose image food";
+            newErrors.image = "Please choose image Menu";
             valid = false;
         }
         if (formData.description === "") {
@@ -101,7 +101,7 @@ function AddMenu() {
             try {
                 const headers = {
                     Authorization: `Bearer ${getAccessToken()}`,
-                    // "Content-Type": "multipart/form-data",
+                    "Content-Type": "multipart/form-data",
                 };
                 const response = await api.post(url.MENU.CREATE, formData, { headers });
 
@@ -113,7 +113,7 @@ function AddMenu() {
                         confirmButtonText: "Done",
                     });
                     setTimeout(() => {
-                        navigate(config.routes.menu); //chuyển đến trang food-list
+                        navigate(config.routes.menu); //chuyển đến trang menu-list
                     }, 3000);
 
                 }
@@ -153,12 +153,12 @@ function AddMenu() {
                                         <div className="row">
                                             <div className="col-md-6">
                                                 <div className="form-group">
-                                                    <label className="font-weight-700 font-size-16">Food Name</label>
+                                                    <label className="font-weight-700 font-size-16">Menu Name</label>
                                                     <input
                                                         type="text"
                                                         name="name"
                                                         className={`form-control ${formErrors.name ? "is-invalid" : ""}`}
-                                                        placeholder="Food Name"
+                                                        placeholder="Menu Name"
                                                         value={formData.name}
                                                         onChange={handleInputChange}
                                                         autoFocus />
