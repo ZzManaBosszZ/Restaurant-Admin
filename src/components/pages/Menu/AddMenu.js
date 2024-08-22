@@ -111,11 +111,25 @@ function AddMenu() {
                         icon: "success",
                         confirmButtonColor: "#3085d6",
                         confirmButtonText: "Done",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                text: "Do you want to add food to this menu?",
+                                icon: "question",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                                confirmButtonText: "Yes",
+                                cancelButtonText: "No",
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    navigate(config.routes.menu_food_create); // Điều hướng tới trang thêm food vào menu
+                                } else {
+                                    navigate(config.routes.menu); // Điều hướng về trang danh sách menu
+                                }
+                            });
+                        }
                     });
-                    setTimeout(() => {
-                        navigate(config.routes.menu); //chuyển đến trang menu-list
-                    }, 3000);
-
                 }
             } catch (error) {
                 if (error.response.data === 400 && error.response.data.message === "Menu already exists") {
@@ -166,6 +180,7 @@ function AddMenu() {
                                                 </div>
                                             </div>
                                         </div>
+                                        <br/>
                                         <div className="row">
                                             <div className="col-md-12">
                                                 <div className="form-group">
@@ -181,7 +196,7 @@ function AddMenu() {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <br/>
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <h4 class="box-title mt-20">Uploaded Image Preview</h4>

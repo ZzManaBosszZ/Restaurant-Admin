@@ -167,6 +167,7 @@ function MenuFoodCreate() {
     return (
         <Layout>
             <BreadCrumb title="Menu-Food Create" />
+            <br />
             <section className="content">
                 <div className="row">
                     <div className="col-12">
@@ -204,7 +205,7 @@ function MenuFoodCreate() {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        <br />
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <h4 class="box-title mt-20">Uploaded Image Preview</h4>
@@ -218,10 +219,12 @@ function MenuFoodCreate() {
                                                 </div>
                                             </div>
                                         </div>
+                                        <br />
                                     </div>
+                                    <br />
                                     <div className="form-actions mt-10">
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Add</button>
-                                        <Link to={config.routes.food_list}><button type="button" className="btn btn-danger">Cancel</button></Link>
+                                        <Link to={config.routes.menu}><button type="button" className="btn btn-danger">Cancel</button></Link>
                                     </div>
                                 </form>
                             </div>

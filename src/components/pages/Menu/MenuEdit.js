@@ -224,7 +224,7 @@ function MenuEdit() {
                                             </div>
                                             <div className="form-actions mt-10">
                                                 <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Save</button>
-                                                <Link to={config.routes.food_list}>
+                                                <Link to={config.routes.menu}>
                                                     <button type="button" className="btn btn-danger">
                                                         Cancel
                                                     </button>
