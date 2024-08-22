@@ -7,9 +7,9 @@ import { getAccessToken } from "../../../utils/auth";
 import Swal from "sweetalert2";
 import config from "../../../config";
 import { Link } from "react-router-dom";
-function OrderList() {
+function OrderTable() {
 
-    const [order, setOrder] = useState([]);
+    const [orderTable, setOrderTable] = useState([]);
     const [sortField, setSortField] = useState("id");
     const [sortDirection, setSortDirection] = useState("asc");
 
@@ -18,7 +18,7 @@ function OrderList() {
         const loadMenus = async () => {
             try {
                 const response = await api.get(url.ORDER.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
-                setOrder(response.data.data);
+                setOrderTable(response.data.data);
                 // console.log(response.data.data);
             } catch (error) { }
         };
@@ -27,14 +27,10 @@ function OrderList() {
 
     //search, filter
     const [searchName, setSearchName] = useState("");
-    // const [searchDescription, setSearchDescription] = useState("");
     const [createdDate, setCreatedDate] = useState("");
     const handleSearchNameChange = (e) => {
         setSearchName(e.target.value);
     };
-    // const handleSearchDescriptionChange = (e) => {
-    //     setSearchDescription(e.target.value);
-    // };
     const handleCreatedDateChange = (e) => {
         setCreatedDate(e.target.value);
     };
@@ -44,7 +40,7 @@ function OrderList() {
         setSortField(field);
         setSortDirection(newDirection);
     };
-    const sortedOrders = [...order]
+    const sortedOrderTables = [...orderTable]
         .filter((item) => {
             const nameMatch = item.name.toLowerCase().includes(searchName.toLowerCase());
             const createdDateMatch = createdDate ? new Date(item.createdDate) >= new Date(createdDate) : true;
@@ -63,12 +59,12 @@ function OrderList() {
         setCurrentPage(pageNumber);
     };
 
-    const paginatedOrders = sortedOrders.slice(
+    const paginatedOrderTables = sortedOrderTables.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
 
-    const totalPages = Math.ceil(sortedOrders.length / itemsPerPage);
+    const totalPages = Math.ceil(sortedOrderTables.length / itemsPerPage);
 
     return (
         <Layout>
@@ -118,10 +114,10 @@ function OrderList() {
                                         <thead>
                                             <tr>
                                                 <th onClick={() => handleSort("name")}>Customer Name {sortField === "name" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
-                                                <th onClick={() => handleSort("order_code")}>Order Code {sortField === "order_code" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
-                                                <th onClick={() => handleSort("createdBy")}>Created By {sortField === "createdBy" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
-                                                <th onClick={() => handleSort("total")}>Total {sortField === "total" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
-                                                <th onClick={() => handleSort("createdDate")}>Created Date {sortField === "createdDate" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
+                                                <th onClick={() => handleSort("email")}>Email {sortField === "email" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
+                                                <th onClick={() => handleSort("phone")}>Phone {sortField === "phone" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
+                                                <th onClick={() => handleSort("numberOfPerson")}>Number of Person {sortField === "numberOfPerson" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
+                                                <th onClick={() => handleSort("date")}>Date {sortField === "date" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
                                                 <th onClick={() => handleSort("status")}>Status {sortField === "status" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
                                                 <th>Actions</th>
                                             </tr>
@@ -320,4 +316,4 @@ function OrderList() {
     )
 }
 
-export default OrderList
+export default OrderTable

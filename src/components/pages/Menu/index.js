@@ -135,7 +135,7 @@ function MenuList() {
                     </div>
                     <div className="col-lg-4">
                         <input
-                            type="datetime-local"
+                            type="date" // use type "datetime-local" for date and time
                             className="form-control input-rounded"
                             value={createdDate}
                             onChange={handleCreatedDateChange}

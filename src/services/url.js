@@ -40,5 +40,13 @@ const url = {
     MENU_FOOD: {
         CREATE: "menu-food",
     },
+
+    ORDER: {
+        LIST: "orders",
+        DETAIL: "orders/{}",
+        CREATE: "orders",
+        // EDIT: "menus",
+        // DELETE: "menus",
+    },
 };
 export default url;

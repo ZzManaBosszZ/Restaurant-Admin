@@ -99,7 +99,7 @@ function FoodList() {
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
-    const paginatedCategories = filteredFoods.slice(
+    const paginatedFoods = filteredFoods.slice(
         (currentPage - 1) * itemsPerPage,
         currentPage * itemsPerPage
     );
@@ -133,7 +133,7 @@ function FoodList() {
                     </div>
                     <div className="col-lg-4">
                         <input
-                            type="datetime-local"
+                            type="date" // use type "datetime-local" for date and time
                             className="form-control input-rounded"
                             value={createdDate}
                             onChange={handleCreatedDateChange}
@@ -152,7 +152,7 @@ function FoodList() {
             </div>
             <section class="content">
                 <div class="row fx-element-overlay">
-                    {paginatedCategories.map((item, index) => {
+                    {paginatedFoods.map((item, index) => {
                         return (
                             <div class="col-12 col-lg-6 col-xl-4">
                                 <div class="box box-default">
