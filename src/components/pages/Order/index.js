@@ -13,6 +13,23 @@ function OrderList() {
     const [sortField, setSortField] = useState("id");
     const [sortDirection, setSortDirection] = useState("asc");
 
+    const hashCode = (str) => {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+            hash |= 0; // Convert to 32-bit integer
+        }
+        return Math.abs(hash);
+    };
+
+    // Generate the Order code based on the hashed orderCode
+    const generateOrderCode = (orderCode) => {
+        const hash = hashCode(orderCode);
+        const orderNumber = hash % 1000; // Ensure a 6-digit number
+        return `ODR${orderNumber.toString().padStart(3, '0')}`;
+    };
+
     //show list data
     useEffect(() => {
         const loadMenus = async () => {
@@ -129,19 +146,26 @@ function OrderList() {
                                             return (
                                                 <tbody>
                                                     <tr>
-                                                        <td>Maical Roy</td>
-                                                        <td>#12485791</td>
-                                                        <td>17</td>
-                                                        <td>24-01-2018</td>
-                                                        <td><span class="badge badge-pill badge-success">Paid</span></td>
-                                                        <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                            <i class="ti-marker-alt"></i>
-                                                        </a>
-                                                            <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                                <i class="ti-trash"></i>
-                                                            </a>
+                                                        <td>{item.createdBy}</td>
+                                                        <td>{generateOrderCode(item.orderCode)}</td> {/* Sử dụng mã đơn hàng đã được hash từ orderCode */}
+                                                        <td>{item.total}</td>
+                                                        <td>{new Date(item.createdDate).toLocaleDateString()}</td>
+                                                        <td>
+                                                            <span className={`badge badge-pill ${item.status === 'Paid' ? 'badge-success' : item.status === 'Pending' ? 'badge-warning' : 'badge-secondary'}`}>
+                                                                {item.status}
+                                                            </span>
                                                         </td>
-                                                    </tr>                                                 
+                                                        <td>
+                                                            <Link to={`/order-detail/${item.orderDetails[0].id}`}>
+                                                            <a class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
+                                                                <i class="ti-marker-alt"></i>
+                                                            </a>
+                                                            </Link>
+                                                            {/* <a class="text-danger" data-original-title="Delete" data-toggle="tooltip">
+                                                                <i class="ti-trash"></i>
+                                                            </a> */}
+                                                        </td>
+                                                    </tr>
                                                 </tbody>
                                             );
                                         })}

@@ -11,7 +11,7 @@ const routes = {
 
     //Order routes
     order_list: "/order-list",
-    order_detail: "/order-detail",
+    order_detail: "/order-detail/:id",
 
     //Menu routes
     menu: "/menu",

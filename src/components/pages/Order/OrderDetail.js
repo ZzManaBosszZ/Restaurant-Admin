@@ -1,10 +1,51 @@
-import React from 'react'
-import BreadCrumb from '../../layouts/BreadCrumb'
-import Layout from '../../layouts'
+import Layout from "../../layouts";
+import BreadCrumb from "../../layouts/BreadCrumb";
+import { useParams } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
 function OrderDetail() {
+
+    const { id } = useParams();
+
+    const hashCode = (str) => {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+            hash |= 0; // Convert to 32-bit integer
+        }
+        return Math.abs(hash);
+    };
+
+    // Generate the Order code based on the hashed orderCode
+    const generateOrderCode = (orderCode) => {
+        const hash = hashCode(orderCode);
+        const orderNumber = hash % 1000; // Ensure a 6-digit number
+        return `ODR${orderNumber.toString().padStart(3, '0')}`;
+    };
+
+
+
+    const [orderDetail, setOrderDetail] = useState({});
+
+    const loadData = useCallback(async () => {
+        try {
+            const orderDetailRequest = await api.get(url.ORDER.DETAIL.replace("{}", id), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+            setOrderDetail(orderDetailRequest.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
+
     return (
         <Layout>
-            <BreadCrumb />
+            <BreadCrumb title="Order Detail" />
             <section class="content">
                 <div class="row">
                     <div class="col-xxxl-4 col-12">
@@ -13,7 +54,7 @@ function OrderDetail() {
                                 <div class="d-flex align-items-center">
                                     <img class="mr-10 rounded-circle avatar avatar-xl b-2 border-primary" src="../images/avatar/1.jpg" alt="" />
                                     <div>
-                                        <h4 class="mb-0">Johen doe</h4>
+                                        {/* <h4 class="mb-0">Johen doe- {generateOrderCode(orderDetail.orderId[0].orderCode)}</h4> */}
                                         <span class="font-size-14 text-info">Customer</span>
                                     </div>
                                 </div>
@@ -120,7 +161,7 @@ function OrderDetail() {
                                                 <td>$270</td>
                                                 <td width="100" align="center" class="font-weight-900">1</td>
                                                 <td width="100" align="center" class="font-weight-900">$270</td>
-                                                
+
                                             </tr>
                                             <tr>
                                                 <td><img src="../images/product/product-2.png" alt="" width="80" /></td>
@@ -133,7 +174,7 @@ function OrderDetail() {
                                                     {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
                                                 </td>
                                                 <td align="center" class="font-weight-900">$270</td>
-                                                
+
                                             </tr>
                                             <tr>
                                                 <td><img src="../images/product/product-3.png" alt="" width="80" /></td>
@@ -146,7 +187,7 @@ function OrderDetail() {
                                                     {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
                                                 </td>
                                                 <td align="center" class="font-weight-900">$270</td>
-                                                
+
                                             </tr>
                                             <tr>
                                                 <td><img src="../images/product/product-4.png" alt="" width="80" /></td>
@@ -159,19 +200,14 @@ function OrderDetail() {
                                                     {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
                                                 </td>
                                                 <td align="center" class="font-weight-900">$270</td>
-                                                
+
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
 
                             </div>
-                        </div>
-                        <div class="box">
-                            <div class="box-body">
-                                <div id="chartdiv2" class="h-300"></div>
-                            </div>
-                        </div>
+                        </div>                     
                     </div>
                 </div>
             </section>

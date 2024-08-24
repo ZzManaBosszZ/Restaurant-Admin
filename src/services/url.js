@@ -43,7 +43,7 @@ const url = {
 
     ORDER: {
         LIST: "orders",
-        DETAIL: "orders/{}",
+        DETAIL: "order-details/detail/{}",
         CREATE: "orders",
         // EDIT: "menus",
         // DELETE: "menus",
