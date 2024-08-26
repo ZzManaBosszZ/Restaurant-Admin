@@ -69,13 +69,6 @@ function MenuDetail() {
 		checkMenuFood();
 	}, [checkMenuFood]);
 
-	foodItems.food.forEach((item) => {
-		item.food.forEach((food) => {
-			console.log(food.image); // Truy cập thuộc tính image
-		});
-	});
-
-
 	return (
 		<Layout>
 			<BreadCrumb title="Menu Detail" />
