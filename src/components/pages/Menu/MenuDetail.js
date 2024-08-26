@@ -15,6 +15,7 @@ function MenuDetail() {
 	const [menuCheck, setMenuCheck] = useState({});
 	const [foodItems, setFoodItems] = useState({ food: [] }); // Initialize as an object with a foods array
 
+	//check MenuFood is exist or not
 	const checkMenuFood = useCallback(async () => {
 		try {
 			const menuCheckRequest = await api.get(url.MENU.DETAIL.replace("{}", id), {
@@ -68,6 +69,13 @@ function MenuDetail() {
 		checkMenuFood();
 	}, [checkMenuFood]);
 
+	foodItems.food.forEach((item) => {
+		item.food.forEach((food) => {
+			console.log(food.image); // Truy cập thuộc tính image
+		});
+	});
+
+
 	return (
 		<Layout>
 			<BreadCrumb title="Menu Detail" />
@@ -88,19 +96,18 @@ function MenuDetail() {
 								<h3 className="text-center">{menuCheck.name}</h3>
 								<div id="gallery-content">
 									<div id="gallery-content-center">
-										{foodItems.food.map((item) => {
-											return (
+										{foodItems.food.map((item, index) => (
+											item.food.map((food) => (
+												// eslint-disable-next-line jsx-a11y/anchor-is-valid
 												<a
-													href={item.image}
-													key={item.id}
-													data-toggle="lightbox"
+													key={food.id}
 													data-gallery="multiimages"
-													data-title={item.name}
+													data-title={food.name}
 												>
-													<img src={item.image} alt={item.name} />
+													<img src={food.image} alt={food.name} />
 												</a>
-											);
-										})}
+											))
+										))}
 									</div>
 								</div>
 							</div>
