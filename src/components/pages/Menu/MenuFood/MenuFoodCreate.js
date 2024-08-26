@@ -145,7 +145,7 @@ function MenuFoodCreate() {
                                                         className={`form-control ${formErrors.menuId ? "is-invalid" : ""}`}
                                                         options={menuOptions}
                                                         onChange={handleChange}
-                                                        // value={menuOptions.find(option => option.value === formData.menuId)}
+                                                        value={menuOptions.find(option => option.value === formData.menuId)}
                                                     />
                                                     {formErrors.menuId && <div className="invalid-feedback d-block">{formErrors.menuId}</div>}
                                                 </div>
@@ -159,7 +159,8 @@ function MenuFoodCreate() {
                                                         options={foodOptions}
                                                         onChange={handleChange}
                                                         isMulti
-                                                        value={formData.foodId || []}
+                                                        // value={formData.foodId || []}
+                                                        value={formData.foodId.map(id => foodOptions.find(option => option.value === id.value))}
                                                     />
                                                     {formErrors.foodId && <div className="invalid-feedback d-block">{formErrors.foodId}</div>}
                                                 </div>
