@@ -14,6 +14,9 @@ function MenuDetail() {
 	const navigate = useNavigate();
 	const [menuCheck, setMenuCheck] = useState({});
 	const [foodItems, setFoodItems] = useState({ food: [] }); // Initialize as an object with a foods array
+	const [searchName, setSearchName] = useState('');
+	const [searchPrice, setSearchPrice] = useState('');
+
 
 	//check MenuFood is exist or not
 	const checkMenuFood = useCallback(async () => {
@@ -69,18 +72,71 @@ function MenuDetail() {
 		checkMenuFood();
 	}, [checkMenuFood]);
 
+	const handleImageClick = (food) => {
+		Swal.fire({
+			title: `Name Food: ${food.name}`,
+			text: `Price: $${food.price}`, // or other details you want to show
+			imageUrl: food.image,
+			imageWidth: 400,
+			imageAlt: food.name,
+			customClass: {
+				popup: 'swal-popup'
+			}
+		});
+	};
+
+	const handleNameSearchChange = (event) => {
+		setSearchName(event.target.value);
+	};
+
+	const handlePriceSearchChange = (event) => {
+		setSearchPrice(event.target.value);
+	};
+
+	const filterFoodItems = (food) => {
+		return food.filter(item => {
+			const matchesName = item.name.toLowerCase().includes(searchName.toLowerCase());
+			const matchesPrice = searchPrice ? item.price.toString().includes(searchPrice) : true;
+			return matchesName && matchesPrice;
+		});
+	};
+
+
 	return (
 		<Layout>
 			<BreadCrumb title="Menu Detail" />
+			<div className="card-header">
+                <div className="row page-titles">
+                    <div className="col-lg-6">
+                        <input
+                            type="text"
+                            className="form-control input-rounded"
+                            placeholder="Search Name . . ."
+                            value={searchName}
+                            onChange={handleNameSearchChange}
+                            style={{ fontSize: '15px', padding: '12px' }}
+                        />
+                    </div>
+					<div className="col-lg-6">
+                        <input
+                            type="text"
+                            className="form-control input-rounded"
+                            placeholder="Search Price . . ."
+                            value={searchPrice}
+                            onChange={handlePriceSearchChange}
+                            style={{ fontSize: '15px', padding: '12px' }}
+                        />
+                    </div>
+                </div>
+            </div>
 			<section className="content">
 				{foodItems.food && foodItems.food.length > 0 ? (
 					<div id="gallery">
 						<div className="box bg-transparent no-shadow b-0">
 							<div className="box-body text-center p-0">
 								<div className="btn-group">
-									<button className="btn btn-info" id="filter-all">All</button>
-									<button className="btn btn-info" id="filter-studio">Studio</button>
-									<button className="btn btn-info" id="filter-landscape">Landscapes</button>
+									{/* <button className="btn btn-info" id="filter-all">All</button>
+									<button className="btn btn-info" id="filter-studio">Price</button> */}
 								</div>
 							</div>
 						</div>
@@ -89,13 +145,12 @@ function MenuDetail() {
 								<h3 className="text-center">{menuCheck.name}</h3>
 								<div id="gallery-content">
 									<div id="gallery-content-center">
-										{foodItems.food.map((item, index) => (
-											item.food.map((food) => (
-												// eslint-disable-next-line jsx-a11y/anchor-is-valid
+										{foodItems.food.map((item) => (
+											filterFoodItems(item.food).map((food) => (
 												<a
 													key={food.id}
-													data-gallery="multiimages"
-													data-title={food.name}
+													onClick={() => handleImageClick(food)}
+													style={{ cursor: 'pointer' }}
 												>
 													<img src={food.image} alt={food.name} />
 												</a>
@@ -111,7 +166,8 @@ function MenuDetail() {
 				)}
 			</section>
 		</Layout>
-	)
+	);
+
 }
 
 export default MenuDetail;

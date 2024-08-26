@@ -165,3 +165,28 @@
 	border-radius: 10px;
 	box-shadow: 0 10px 15px -5px rgba(62, 57, 107, .07);
 } */
+
+/* Custom SweetAlert2 theme */
+.swal-popup {
+    background-color: #0c1a32;
+    color: #fff; /* Adjust text color to ensure readability */
+}
+
+.swal-popup .swal2-title {
+    color: #fff;
+}
+
+.swal-popup .swal2-text {
+    color: #fff;
+}
+
+.swal-popup .swal2-confirm {
+    background-color: #1e90ff; /* Thay đổi màu nền nút OK (hoặc nút confirm) */
+    border-color: #1e90ff; /* Thay đổi màu viền nút OK */
+    color: #fff; /* Thay đổi màu chữ của nút OK */
+}
+
+.swal-popup .swal2-confirm:hover {
+    background-color: #187bcd; /* Màu nền khi di chuột qua nút OK */
+    border-color: #187bcd; /* Màu viền khi di chuột qua nút OK */
+}

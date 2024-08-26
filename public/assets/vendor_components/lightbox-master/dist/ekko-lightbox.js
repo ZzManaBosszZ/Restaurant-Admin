@@ -252,7 +252,7 @@ var Lightbox = (function ($) {
 
 				type = type || false;
 
-				// if (!type && this._isImage(src)) type = 'image';
+				if (!type && this._isImage(src)) type = 'image';
 				if (!type && this._getYoutubeId(src)) type = 'youtube';
 				if (!type && this._getVimeoId(src)) type = 'vimeo';
 				if (!type && this._getInstagramId(src)) type = 'instagram';
@@ -262,10 +262,10 @@ var Lightbox = (function ($) {
 				return type;
 			}
 		}, {
-			// key: '_isImage',
-			// value: function _isImage(string) {
-			// 	return string && string.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/i);
-			// }
+			key: '_isImage',
+			value: function _isImage(string) {
+				return string && string.match(/(^data:image\/.*,)|(\.(jp(e|g|eg)|gif|png|bmp|webp|svg)((\?|#).*)?$)/i);
+			}
 		}, {
 			key: '_containerToUse',
 			value: function _containerToUse() {
@@ -519,8 +519,8 @@ var Lightbox = (function ($) {
 				var next = $(this._$galleryItems.get(startIndex), false);
 				if (typeof next == 'undefined') return;
 
-				// var src = next.attr('data-remote') || next.attr('href');
-				// if (next.attr('data-type') === 'image' || this._isImage(src)) this._preloadImage(src, false);
+				var src = next.attr('data-remote') || next.attr('href');
+				if (next.attr('data-type') === 'image' || this._isImage(src)) this._preloadImage(src, false);
 
 				if (numberOfTimes > 0) return this._preloadImageByIndex(startIndex + 1, numberOfTimes - 1);
 			}
