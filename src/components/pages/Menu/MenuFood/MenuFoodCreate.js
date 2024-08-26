@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
 import Layout from "../../../layouts";
 import url from "../../../../services/url";
 import api from "../../../../services/api";
@@ -10,7 +11,6 @@ import BreadCrumb from "../../../layouts/BreadCrumb";
 import { Link } from "react-router-dom";
 
 function MenuFoodCreate() {
-
     const navigate = useNavigate();
     const [menus, setMenu] = useState([]);
     const [foods, setFoods] = useState([]);
@@ -41,48 +41,30 @@ function MenuFoodCreate() {
     }, []);
 
     const [formData, setFormData] = useState({
-        image: null,
         foodId: [],
         menuId: [],
     });
 
     const [formErrors, setFormErrors] = useState({
-        image: null,
         foodId: [],
         menuId: [],
     });
 
-    const handleChange = (e) => {
-        const { name, value, files } = e.target;
-        let newValue = value;
-
-        if (name === "image" && files.length > 0) {
-            const reader = new FileReader();
-            reader.onload = () => {
-                // Set the preview image's src to the result from the FileReader
-                document.getElementById("imgPreview").src = reader.result;
-
-                // Update the form's state with the selected image file (or its URL)
-                setFormData((prevForm) => ({
-                    ...prevForm,
-                    image: files[0], // Store the actual file in the form state
-                }));
-
-                // Clear any errors related to the image input
-                setFormErrors((prevErrors) => ({
-                    ...prevErrors,
-                    [name]: "",
-                }));
-            };
-            reader.readAsDataURL(files[0]);
-        } else {
+    const handleChange = (selectedOptions, actionMeta) => {
+        const { name } = actionMeta;
+        if (name === "foodId") {
             setFormData((prevForm) => ({
                 ...prevForm,
-                [name]: newValue,
+                foodId: selectedOptions || [], // Update selected food items
             }));
             setFormErrors((prevErrors) => ({
                 ...prevErrors,
-                [name]: "",
+                foodId: "",
+            }));
+        } else {
+            setFormData((prevForm) => ({
+                ...prevForm,
+                [name]: selectedOptions.value,
             }));
         }
     };
@@ -90,16 +72,6 @@ function MenuFoodCreate() {
     const validateForm = () => {
         let valid = true;
         const newErrors = {};
-        if (!formData.name) {
-            newErrors.name = "Please enter name.";
-            valid = false;
-        } else if (formData.name.length < 3) {
-            newErrors.name = "Name must be at least 3 characters.";
-            valid = false;
-        } else if (formData.name.length > 255) {
-            newErrors.name = "Name must be less than 255 characters.";
-            valid = false;
-        }
         if (!formData.image) {
             newErrors.image = "Please choose Image food";
             valid = false;
@@ -108,15 +80,13 @@ function MenuFoodCreate() {
             newErrors.foodId = "Please choose Food";
             valid = false;
         }
-        if (formData.menuId.length === 0) {
+        if (formData.foodId.length === 0) {
             newErrors.menuId = "Please choose Menu";
             valid = false;
         }
         setFormErrors(newErrors);
         return valid;
     };
-
-    console.log(getAccessToken());
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -137,32 +107,23 @@ function MenuFoodCreate() {
                         confirmButtonText: "Done",
                     });
                     setTimeout(() => {
-                        navigate(config.routes.food_list); //chuyển đến trang food-list
+                        navigate(config.routes.menu); // Navigate to the food list page
                     }, 3000);
-
                 }
             } catch (error) {
-                if (error.response.data === 400 && error.response.data.message === "Create Menu Food error") {
-                    Swal.fire({
-                        text: "Create Menu Food error",
-                        icon: "warning",
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Done",
-                    });
-                } else {
-                    Swal.fire({
-                        text: "Create Menu Food error",
-                        icon: "warning",
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Done",
-                    });
-
-                }
-                // console.error("Error creating test:", error);
-                // console.error("Response data:", error.response.data);
+                Swal.fire({
+                    text: "Create Menu Food error",
+                    icon: "warning",
+                    confirmButtonColor: "#3085d6",
+                    confirmButtonText: "Done",
+                });
             }
         }
     };
+
+    // Convert menu and food data for React Select
+    const menuOptions = menus.map(menu => ({ value: menu.id, label: menu.name }));
+    const foodOptions = foods.map(food => ({ value: food.id, label: food.name, image: food.image }));
 
     return (
         <Layout>
@@ -179,59 +140,63 @@ function MenuFoodCreate() {
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="font-weight-700 font-size-16">Menu</label>
-                                                    <select name="menuId" className={`form-control ${formErrors.menuId ? "is-invalid" : ""}`} value={formData.menuId || ""} onChange={handleChange}>
-                                                        <option value="">Please choose Menu</option>
-                                                        {menus.map((menu) => (
-                                                            <option value={menu.id} key={menu.id}>
-                                                                {menu.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                    <Select
+                                                        name="menuId"
+                                                        className={`form-control ${formErrors.menuId ? "is-invalid" : ""}`}
+                                                        options={menuOptions}
+                                                        onChange={handleChange}
+                                                        // value={menuOptions.find(option => option.value === formData.menuId)}
+                                                    />
                                                     {formErrors.menuId && <div className="invalid-feedback d-block">{formErrors.menuId}</div>}
                                                 </div>
                                             </div>
                                             <div className="col-md-6">
                                                 <div className="form-group">
                                                     <label className="font-weight-700 font-size-16">Food</label>
-                                                    <select name="foodId" className={`form-control ${formErrors.foodId ? "is-invalid" : ""}`} value={formData.foodId || ""} onChange={handleChange}>
-                                                        <option value="">Please choose Food</option>
-                                                        {foods.map((food) => (
-                                                            <option value={food.id} key={food.id}>
-                                                                {food.name}
-                                                            </option>
-                                                        ))}
-                                                    </select>
+                                                    <Select
+                                                        name="foodId"
+                                                        className={`form-control ${formErrors.foodId ? "is-invalid" : ""}`}
+                                                        options={foodOptions}
+                                                        onChange={handleChange}
+                                                        isMulti
+                                                        value={formData.foodId || []}
+                                                    />
                                                     {formErrors.foodId && <div className="invalid-feedback d-block">{formErrors.foodId}</div>}
                                                 </div>
                                             </div>
                                         </div>
                                         <br />
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <h4 class="box-title mt-20">Uploaded Image Preview</h4>
-                                                <div class="product-img text-left">
-                                                    <img id="imgPreview" src="" alt="Preview" class="mb-15"></img>
-                                                    <p>Upload Another Image</p>
-                                                    <div class="btn btn-info mb-20">
-                                                        <input type="file" name="image" onChange={handleChange} accept=".jpg, .png, .etc" />
-                                                        {formErrors.image && <div className="invalid-feedback">{formErrors.image}</div>}
+                                        <div className="row">
+                                            <div className="col-md-12">
+                                                <h4 className="box-title mt-20">Image Foods Preview</h4>
+                                                <div className="product-img text-left">
+                                                    <div className="selected-food-images d-flex flex-wrap">
+                                                        {formData.foodId.map(food => (
+                                                            <div key={food.value} className="food-image-container" style={{ marginRight: "20px", textAlign: "center" }}>
+                                                                <img
+                                                                    src={food.image} // Assuming `food.image` contains the URL of the image
+                                                                    alt={food.label}
+                                                                    className="food-image"
+                                                                    style={{ width: "200px", height: "200px", objectFit: "cover" }} // Increased size for the images
+                                                                />
+                                                                <p>{food.label}</p>
+                                                            </div>
+                                                        ))}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <br />
-                                    </div>
-                                    <br />
-                                    <div className="form-actions mt-10">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Add</button>
-                                        <Link to={config.routes.menu}><button type="button" className="btn btn-danger">Cancel</button></Link>
+                                        <div className="form-actions mt-10">
+                                            <button type="submit" className="btn btn-primary"><i className="fa fa-check"></i>Add</button>
+                                            <Link to={config.routes.menu}><button type="button" className="btn btn-danger">Cancel</button></Link>
+                                        </div>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </section>
         </Layout>
     );
