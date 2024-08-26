@@ -42,12 +42,12 @@ function MenuFoodCreate() {
 
     const [formData, setFormData] = useState({
         foodId: [],
-        menuId: [],
+        menuId: null,
     });
 
     const [formErrors, setFormErrors] = useState({
-        foodId: [],
-        menuId: [],
+        foodId: "",
+        menuId: "",
     });
 
     const handleChange = (selectedOptions, actionMeta) => {
@@ -61,10 +61,14 @@ function MenuFoodCreate() {
                 ...prevErrors,
                 foodId: "",
             }));
-        } else {
+        } else if (name === "menuId") {
             setFormData((prevForm) => ({
                 ...prevForm,
-                [name]: selectedOptions.value,
+                menuId: selectedOptions ? selectedOptions.value : null,
+            }));
+            setFormErrors((prevErrors) => ({
+                ...prevErrors,
+                menuId: "",
             }));
         }
     };
@@ -72,16 +76,12 @@ function MenuFoodCreate() {
     const validateForm = () => {
         let valid = true;
         const newErrors = {};
-        if (!formData.image) {
-            newErrors.image = "Please choose Image food";
+        if (!formData.menuId) {
+            newErrors.menuId = "Please choose a Menu";
             valid = false;
         }
         if (formData.foodId.length === 0) {
             newErrors.foodId = "Please choose Food";
-            valid = false;
-        }
-        if (formData.foodId.length === 0) {
-            newErrors.menuId = "Please choose Menu";
             valid = false;
         }
         setFormErrors(newErrors);
@@ -95,9 +95,16 @@ function MenuFoodCreate() {
             try {
                 const headers = {
                     Authorization: `Bearer ${getAccessToken()}`,
-                    "Content-Type": "multipart/form-data",
+                    "Content-Type": "application/json", // Make sure content-type matches your data format
                 };
-                const response = await api.post(url.MENU_FOOD.CREATE, formData, { headers });
+
+                // Transform form data to match backend expectations
+                const transformedData = {
+                    ...formData,
+                    foodId: formData.foodId.map(food => food.value), // Assuming backend expects an array of Long values
+                };
+
+                const response = await api.post(url.MENU_FOOD.CREATE, transformedData, { headers });
 
                 if (response && response.data) {
                     Swal.fire({
@@ -107,7 +114,7 @@ function MenuFoodCreate() {
                         confirmButtonText: "Done",
                     });
                     setTimeout(() => {
-                        navigate(config.routes.menu); // Navigate to the food list page
+                        navigate(config.routes.menu); // Navigate to the menu list page
                     }, 3000);
                 }
             } catch (error) {
@@ -120,6 +127,7 @@ function MenuFoodCreate() {
             }
         }
     };
+
 
     // Convert menu and food data for React Select
     const menuOptions = menus.map(menu => ({ value: menu.id, label: menu.name }));
@@ -159,7 +167,6 @@ function MenuFoodCreate() {
                                                         options={foodOptions}
                                                         onChange={handleChange}
                                                         isMulti
-                                                        // value={formData.foodId || []}
                                                         value={formData.foodId.map(id => foodOptions.find(option => option.value === id.value))}
                                                     />
                                                     {formErrors.foodId && <div className="invalid-feedback d-block">{formErrors.foodId}</div>}

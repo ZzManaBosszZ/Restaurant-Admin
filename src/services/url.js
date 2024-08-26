@@ -39,6 +39,7 @@ const url = {
 
     MENU_FOOD: {
         CREATE: "menu-food",
+        DETAIL: "menu-food/{}",
     },
 
     ORDER: {
