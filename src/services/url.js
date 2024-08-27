@@ -49,5 +49,13 @@ const url = {
         // EDIT: "menus",
         // DELETE: "menus",
     },
+
+    ORDER_TABLE: {
+        LIST: "any/ordertables",
+        DETAIL: "any/ordertables/{}",
+        // CREATE: "ordertables",
+        // EDIT: "menus",
+        // DELETE: "menus",
+    },
 };
 export default url;

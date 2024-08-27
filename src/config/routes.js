@@ -13,6 +13,10 @@ const routes = {
     order_list: "/order-list",
     order_detail: "/order-detail/:id",
 
+    //Order Table routes
+    order_table_list: "/ordertable-list",
+    order_table_detail: "/ordertable-detail/:id",
+
     //Menu routes
     menu: "/menu",
     menu_create: "/add-menu",

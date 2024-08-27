@@ -1,177 +1,131 @@
-import React from 'react'
-import BreadCrumb from '../../layouts/BreadCrumb'
-import Layout from '../../layouts'
+import Layout from "../../layouts";
+import BreadCrumb from "../../layouts/BreadCrumb";
+import { useParams } from "react-router-dom";
+import { useCallback, useEffect, useState } from "react";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
 function OrderTableDetail() {
+
+    const { id } = useParams();
+
+    const hashCode = (str) => {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = (hash << 5) - hash + char;
+            hash |= 0; // Convert to 32-bit integer
+        }
+        return Math.abs(hash);
+    };
+
+    // Generate the Order code based on the hashed orderCode
+    const generateOrderCode = (orderCode) => {
+        const hash = hashCode(orderCode);
+        const orderNumber = hash % 1000; // Ensure a 6-digit number
+        return `ODR${orderNumber.toString().padStart(3, '0')}`;
+    };
+
+
+
+    const [orderTableDetail, setOrderTableDetail] = useState({});
+
+    const loadData = useCallback(async () => {
+        try {
+            const orderDetailRequest = await api.get(url.ORDER_TABLE.DETAIL.replace("{}", id), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+            setOrderTableDetail(orderDetailRequest.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [id]);
+
+    useEffect(() => {
+        loadData();
+    }, [loadData]);
     return (
         <Layout>
-            <BreadCrumb />
-            <section class="content">
-                <div class="row">
-                    <div class="col-xxxl-4 col-12">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="d-flex align-items-center">
-                                    <img class="mr-10 rounded-circle avatar avatar-xl b-2 border-primary" src="../images/avatar/1.jpg" alt="" />
-                                    <div>
-                                        <h4 class="mb-0">Johen doe</h4>
-                                        <span class="font-size-14 text-info">Customer</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="box-body border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <i class="fa fa-phone mr-10 font-size-24"></i>
-                                    <h4 class="mb-0">+1 123 456 7890</h4>
-                                </div>
-                            </div>
-                            <div class="box-body border-bottom">
-                                <div class="d-flex align-items-center">
-                                    <i class="fa fa-map-marker mr-10 font-size-24"></i>
-                                    <h4 class="mb-0 text-black">1623 E Updahl Ct, Harrison, ID, 83833</h4>
-                                </div>
-                            </div>
-                            <div class="box-body">
-                                <h4 class="mb-10">Order Nots</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xxxl-12 col-lg-6 col-12">
-                                <div class="box">
-                                    <div class="box-header no-border">
-                                        <h4 class="box-title">Delivery Person</h4>
-                                    </div>
-                                    <div class="box-body text-center">
-                                        <div class="text-center">
-                                            <img src="../images/avatar/3.jpg" class="mb-20 avatar avatar-xxl b-2 border-primary" alt="" />
-                                            <div>
-                                                <h4 class="mb-10 font-weight-500">Boone Doe</h4>
-                                                <span class="fs-14 font-w400">Join since April 21, 2019</span>
-                                            </div>
-                                        </div>
-                                        <div class="user-social-acount mt-20">
-                                            <a href="javascript:void(0);" class="btn btn-circle btn-primary-light"><i class="fa fa-phone"></i></a>
-                                            <a href="javascript:void(0);" class="btn btn-circle btn-primary-light"><i class="fa fa-map-marker"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xxxl-12 col-lg-6 col-12">
-                                <div class="box">
-                                    <div class="box-header no-border">
-                                        <h4 class="box-title">
-                                            Customer Favourite
-                                        </h4>
-                                    </div>
-                                    <div class="box-body text-center">
-                                        <div class="bar mx-auto" data-peity='{ "fill": ["#2196f3", "#3da643", "#FDAC42"], "height": 150, "width": 320, "padding":0.2 }'>52,38,24</div>
-                                        <div class="d-flex justify-content-center mt-30">
-                                            <div class="d-flex text-left">
-                                                <i class="fa fa-circle text-info mr-5"></i>
-                                                <h4 class="font-weight-600">25% <br /><small class="text-fade">Pizza</small></h4>
-                                            </div>
-                                            <div class="d-flex text-left mx-50">
-                                                <i class="fa fa-circle text-danger mr-5"></i>
-                                                <h4 class="font-weight-600">15% <br /><small class="text-fade">Juice </small></h4>
-                                            </div>
-                                            <div class="d-flex text-left">
-                                                <i class="fa fa-circle text-primary mr-5"></i>
-                                                <h4 class="font-weight-600">21% <br /><small class="text-fade">Dessert </small></h4>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <BreadCrumb title="Order Table Detail"/>
+            <section class="invoice printableArea">
+                <div class="row invoice-info">
+                    <div class="col-md-6 invoice-col">
+                        <strong>From</strong>
+                        <address>
+                            <strong class="text-blue font-size-24">RESTRAN</strong><br />
+                            <strong class="d-inline">So 8 Ton That Thuyet</strong><br />
+                            <strong>Phone: +(84) 369825896 &nbsp;&nbsp;&nbsp;&nbsp; Email: restran@gmail.com</strong>
+                        </address>
+                    </div>
+                    <div class="col-md-6 invoice-col text-right">
+                        <strong>To</strong>
+                        <address>
+                            <strong class="text-blue font-size-24">Doe Shina</strong><br />
+                            124 Lorem Ipsum, Suite 478, Dummuy, USA 123456<br />
+                            <strong>Phone: +(84) {orderTableDetail.phone} &nbsp;&nbsp;&nbsp;&nbsp; Email: {orderTableDetail.email}</strong>
+                        </address>
+                    </div>
+                    <div class="col-sm-12 invoice-col mb-15">
+                        <div class="invoice-details row no-margin">
+                            <div class="col-md-6 col-lg-3"><b>Invoice </b>#0154879</div>
+                            <div class="col-md-6 col-lg-3"><b>Order ID:</b> FC12548</div>
+                            <div class="col-md-6 col-lg-3"><b>Payment Due:</b> 14/08/2018</div>
+                            <div class="col-md-6 col-lg-3"><b>Account:</b> 00215487541296</div>
                         </div>
                     </div>
-                    <div class="col-xxxl-8 col-12">
-                        <div class="box">
-                            <div class="box-body">
-                                <ol class="c-progress-steps">
-                                    <li class="c-progress-steps__step  done"><span>Order Created</span></li>
-                                    <li class="c-progress-steps__step  done"><span>Payment Success</span></li>
-                                    <li class="c-progress-steps__step  current"><span>On Delivery</span></li>
-                                    <li class="c-progress-steps__step"><span>Order Delivered</span></li>
-                                </ol>
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="table-responsive-xl">
-                                    <table class="table product-overview">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th style={{ minWidth: "300px" }}>Product info</th>
-                                                <th>Price</th>
-                                                <th>Quantity</th>
-                                                <th style={{ textAlign: "center" }}>Total</th>
-                                                {/* <th style={{ textAlign: "center" }}>Action</th> */}
-
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><img src="../images/product/product-1.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td width="100" align="center" class="font-weight-900">1</td>
-                                                <td width="100" align="center" class="font-weight-900">$270</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td><img src="../images/product/product-2.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td>
-                                                    {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
-                                                <td align="center" class="font-weight-900">$270</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td><img src="../images/product/product-3.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td>
-                                                    {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
-                                                <td align="center" class="font-weight-900">$270</td>
-                                                
-                                            </tr>
-                                            <tr>
-                                                <td><img src="../images/product/product-4.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td>
-                                                    {/* <input type="number" class="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
-                                                <td align="center" class="font-weight-900">$270</td>
-                                                
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="box">
-                            <div class="box-body">
-                                <div id="chartdiv2" class="h-300"></div>
-                            </div>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 table-responsive">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Description</th>
+                                    <th>Serial #</th>
+                                    <th class="text-right">Quantity</th>
+                                    <th class="text-right">Unit Cost</th>
+                                    <th class="text-right">Subtotal</th>
+                                </tr>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Milk Powder</td>
+                                    <td>12345678912514</td>
+                                    <td class="text-right">2</td>
+                                    <td class="text-right">$26.00</td>
+                                    <td class="text-right">$52.00</td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>Air Conditioner</td>
+                                    <td>12345678912514</td>
+                                    <td class="text-right">1</td>
+                                    <td class="text-right">$1500.00</td>
+                                    <td class="text-right">$1500.00</td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>TV</td>
+                                    <td>12345678912514</td>
+                                    <td class="text-right">2</td>
+                                    <td class="text-right">$540.00</td>
+                                    <td class="text-right">$1080.00</td>
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Mobile</td>
+                                    <td>12345678912514</td>
+                                    <td class="text-right">3</td>
+                                    <td class="text-right">$320.00</td>
+                                    <td class="text-right">$960.00</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row no-print">
+                    <div class="col-12">
+                        <button type="button" class="btn btn-success pull-right"><i class="fa fa-credit-card"></i> Accept Order 
+                        </button>
+                        <button type="button" class="btn btn-warning pull-right"><i class="ti-close"></i> Back to List
+                        </button>
                     </div>
                 </div>
             </section>

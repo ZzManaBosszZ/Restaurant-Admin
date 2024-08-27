@@ -17,7 +17,7 @@ function OrderTable() {
     useEffect(() => {
         const loadMenus = async () => {
             try {
-                const response = await api.get(url.ORDER.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                const response = await api.get(url.ORDER_TABLE.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 setOrderTable(response.data.data);
                 // console.log(response.data.data);
             } catch (error) { }
@@ -93,14 +93,6 @@ function OrderTable() {
                         />
                     </div>
                 </div>
-
-                <div className=" mt-3 px-3">
-                    <div className="d-flex align-items-center justify-content-end gap-3">
-                        <Link to={config.routes.menu_create} className="btn btn-primary d-flex align-items-center justify-content-center">
-                            <i className="ti ti-plus"></i> Add New Menu
-                        </Link>
-                    </div>
-                </div>
             </div>
 
             <br />
@@ -122,191 +114,46 @@ function OrderTable() {
                                                 <th>Actions</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>17</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-success">Paid</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>12</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-warning">Pending</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>15</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-success">Paid</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>19</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-danger">Failed</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>24</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-success">Pending</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-
-                                                <td>04</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-danger">Failed</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>10</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-success">Paid</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>11</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-warning">Pending</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>13</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-success">Paid</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>34</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-warning">Pending</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>22</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-danger">Failed</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Maical Roy</td>
-                                                <td>#12485791</td>
-                                                <td>Product Title</td>
-                                                <td>12</td>
-                                                <td>24-01-2018</td>
-                                                <td><span class="badge badge-pill badge-warning">Pending</span></td>
-                                                <td><a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                    <i class="ti-marker-alt"></i>
-                                                </a>
-                                                    <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                        <i class="ti-trash"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                        {paginatedOrderTables.map((item, index) => {
+                                            return (
+                                                <tbody>
+                                                    <tr>
+                                                        <td>{item.name}</td>
+                                                        <td>{item.email}</td>
+                                                        <td>{item.phone}</td>
+                                                        <td>{item.numberOfPerson}</td>
+                                                        <td>{new Date(item.date).toLocaleDateString()}</td>
+                                                        <td>
+                                                            <span className={`badge badge-pill ${item.status === 'Paid' ? 'badge-success' : item.status === 'Pending' ? 'badge-warning' : 'badge-secondary'}`}>
+                                                                {item.status}
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
+                                                                <i class="ti-marker-alt"></i>
+                                                            </a>
+                                                            {/* <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
+                                                                <i class="ti-trash"></i>
+                                                            </a> */}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            );
+                                        })}
                                     </table>
                                 </div>
+                            </div>
+                            {/* Pagination Controls */}
+                            <div className="pagination">
+                                {Array.from({ length: totalPages }, (_, index) => (
+                                    <button
+                                        key={index + 1}
+                                        className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
+                                        onClick={() => handlePageChange(index + 1)}
+                                    >
+                                        {index + 1}
+                                    </button>
+                                ))}
                             </div>
                         </div>
                     </div>

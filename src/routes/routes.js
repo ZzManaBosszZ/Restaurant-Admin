@@ -19,6 +19,8 @@ import CategoryList from "../components/pages/Category";
 import CategoryCreate from "../components/pages/Category/CategoryCreate";
 import MenuEdit from "../components/pages/Menu/MenuEdit";
 import MenuFoodCreate from "../components/pages/Menu/MenuFood/MenuFoodCreate";
+import OrderTable from "../components/pages/Order/OrderTable";
+import OrderTableDetail from "../components/pages/Order/OrderTableDetail";
 
 const privateRoutes = [
      // Dashboard routes
@@ -42,6 +44,10 @@ const privateRoutes = [
      //Order routes
      { path: config.routes.order_list, component: OrderList },
      { path: config.routes.order_detail, component: OrderDetail },
+
+     //Order Table routes
+     { path: config.routes.order_table_list, component: OrderTable },
+     { path: config.routes.order_table_detail, component: OrderTableDetail },
  
      //Menu routes
      { path: config.routes.menu, component: MenuList },
