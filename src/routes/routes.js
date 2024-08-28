@@ -21,6 +21,7 @@ import MenuEdit from "../components/pages/Menu/MenuEdit";
 import MenuFoodCreate from "../components/pages/Menu/MenuFood/MenuFoodCreate";
 import OrderTable from "../components/pages/Order/OrderTable";
 import OrderTableDetail from "../components/pages/Order/OrderTableDetail";
+import Profile from "../components/pages/Profile/Profile";
 
 const privateRoutes = [
      // Dashboard routes
@@ -62,6 +63,7 @@ const privateRoutes = [
      { path: config.routes.food_detail, component: FoodDetail },
      { path: config.routes.food_create, component: FoodCreate, allowedRoles: ["ADMIN"]},
      { path: config.routes.food_edit, component: FoodEdit },
+     { path: config.routes.profile, component: Profile },
 ];
 
 const authenticationRoutes = [
@@ -69,6 +71,7 @@ const authenticationRoutes = [
     // { path: config.routes.register, component: Register },
     { path: config.routes.forgot_password, component: ForgotPassword },
     { path: config.routes.reset_password, component: ResetPassword },
+    // { path: config.routes.profile, component: Profile },
 ];
 
 export { privateRoutes, authenticationRoutes };
