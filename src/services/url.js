@@ -13,6 +13,13 @@ const url = {
         UPDATE_PROFILE: "user/update-profile",
     },
 
+    DASHBOARD: {
+        TOTAL_ORDER: "total-orders",
+        TOTAL_ORDER_DELIVERED: "delivered-orders",
+        TOTAL_ORDER_CANCEL: "cancelled-orders",
+        TOTAL_ORDER_REVENUE: "total-revenue",
+    },
+
     FOOD: {
         LIST: "any/food",
         DETAIL: "food/{}",
@@ -57,5 +64,7 @@ const url = {
         // EDIT: "menus",
         // DELETE: "menus",
     },
+
+
 };
 export default url;

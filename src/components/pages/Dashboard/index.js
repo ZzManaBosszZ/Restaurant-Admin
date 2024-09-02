@@ -1,6 +1,9 @@
 import Layout from "../../layouts";
-import Loading from "../../layouts/Loading";
-import { useState, useEffect } from "react";
+import TotalOrder from "../../views/Dashboard/TotalOrder";
+import TotalOrderDelivered from "../../views/Dashboard/TotalDelivered";
+import TotalOrderCancel from "../../views/Dashboard/TotalCanceled";
+import TotalOrderRevenue from "../../views/Dashboard/TotalRevenue";
+import DashboardStatistic from "../../views/Dashboard/Statistics";
 function Home() {
 
     return (
@@ -8,70 +11,11 @@ function Home() {
             <Layout title="Home Page">
                 <section class="content">
                     <div class="row">
-                        <div class="col-xxxl-3 col-lg-6 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="d-flex align-items-start">
-                                        <div>
-                                            <img src="../images/food/online-order-1.png" class="w-80 mr-20" alt="" />
-                                        </div>
-                                        <div>
-                                            <h2 class="my-0 font-weight-700">89</h2>
-                                            <p class="text-fade mb-0">Total Order</p>
-                                            <p class="font-size-12 mb-0 text-success"><span class="badge badge-pill badge-success-light mr-5"><i class="fa fa-arrow-up"></i></span>3% (15 Days)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxxl-3 col-lg-6 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="d-flex align-items-start">
-                                        <div>
-                                            <img src="../images/food/online-order-2.png" class="w-80 mr-20" alt="" />
-                                        </div>
-                                        <div>
-                                            <h2 class="my-0 font-weight-700">899</h2>
-                                            <p class="text-fade mb-0">Total Delivered</p>
-                                            <p class="font-size-12 mb-0 text-success"><span class="badge badge-pill badge-success-light mr-5"><i class="fa fa-arrow-up"></i></span>8% (15 Days)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxxl-3 col-lg-6 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="d-flex align-items-start">
-                                        <div>
-                                            <img src="../images/food/online-order-3.png" class="w-80 mr-20" alt="" />
-                                        </div>
-                                        <div>
-                                            <h2 class="my-0 font-weight-700">59</h2>
-                                            <p class="text-fade mb-0">Total Canceled</p>
-                                            <p class="font-size-12 mb-0 text-primary"><span class="badge badge-pill badge-primary-light mr-5"><i class="fa fa-arrow-down"></i></span>2% (15 Days)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxxl-3 col-lg-6 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="d-flex align-items-start">
-                                        <div>
-                                            <img src="../images/food/online-order-4.png" class="w-80 mr-20" alt="" />
-                                        </div>
-                                        <div>
-                                            <h2 class="my-0 font-weight-700">$789k</h2>
-                                            <p class="text-fade mb-0">Total Revenue</p>
-                                            <p class="font-size-12 mb-0 text-primary"><span class="badge badge-pill badge-primary-light mr-5"><i class="fa fa-arrow-down"></i></span>12% (15 Days)</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <TotalOrder />
+                        <TotalOrderDelivered />
+                        <TotalOrderCancel />
+                        <TotalOrderRevenue />
+                        <DashboardStatistic />
                         <div class="col-xxxl-7 col-xl-6 col-lg-6 col-12">
                             <div class="box">
                                 <div class="box-body">
@@ -107,7 +51,7 @@ function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
+                        {/* <div class="col-12">
                             <div class="box bg-transparent no-shadow">
                                 <div class="box-header pt-0 px-0">
                                     <h4 class="box-title">
@@ -244,7 +188,7 @@ function Home() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div class="col-xxxl-5 col-12">
                             <div class="box">
                                 <div class="box-header no-border">
