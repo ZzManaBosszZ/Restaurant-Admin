@@ -1,14 +1,46 @@
 import React from 'react';
 import Chart from 'react-apexcharts';
+import { useState, useEffect } from 'react';
+import api from '../../../services/api';
+import url from '../../../services/url';
+import { getAccessToken } from '../../../utils/auth';
 
 const DashboardStatistic = () => {
+
+    const [dailyRevenueData, setDailyRevenueData] = useState({});
+    const [customerFlowData, setCustomerFlowData] = useState({});
+
+
+    const loadData = async () => {
+        try {
+            const headerConfig = {
+                headers: {
+                    Authorization: `Bearer ${getAccessToken()}`,
+                },
+            };
+            const [dailyRevenueData, customerFlowData] = await Promise.all([
+                api.get(url.DASHBOARD.TOTAL_ORDER_REVENUE, headerConfig),
+                // api.get(url.DASHBOARD.TOTAL_ORDER_REVENUE, headerConfig),
+            ]);
+
+            setDailyRevenueData(dailyRevenueData.data.data);
+            setCustomerFlowData(customerFlowData.data.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        loadData();
+    }, []);
+
     const dailyRevenueOptions = {
         chart: {
             type: 'line',
         },
         series: [{
             name: 'Revenue',
-            data: [10, 41, 35, 51, 49, 62, 69, 91, 148] // Example data
+            data: [dailyRevenueData.totalRevenue || 0, 0], // Use fetched data
         }],
         xaxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
@@ -21,10 +53,10 @@ const DashboardStatistic = () => {
         },
         series: [{
             name: 'In Restaurant',
-            data: [44, 55, 41, 67, 22, 43, 21, 49, 36]
+            data: [dailyRevenueData.totalRevenue || 0, 0], // Use fetched data
         }, {
             name: 'Online Order',
-            data: [13, 23, 20, 8, 13, 27, 33, 12, 27]
+            data: [dailyRevenueData.totalRevenue || 0, 0], // Use fetched data
         }],
         xaxis: {
             categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
@@ -42,12 +74,12 @@ const DashboardStatistic = () => {
                                 <p className="mb-0 text-mute">Lorem ipsum dolor</p>
                             </div>
                             <div className="text-right">
-                                <h3 className="box-title mb-0 font-weight-700">$ 154K</h3>
+                                <h3 className="box-title mb-0 font-weight-700">${dailyRevenueData.totalRevenue }</h3>
                                 <p className="mb-0"><span className="text-success">+ 1.5%</span> than last week</p>
                             </div>
                         </div>
                         <div id="chart" className="mt-20">
-                            <Chart options={dailyRevenueOptions} series={dailyRevenueOptions.series} type="line" height={350} />
+                            <Chart options={dailyRevenueOptions} series={dailyRevenueOptions.series} type="line" height={352} />
                         </div>
                     </div>
                 </div>
@@ -67,7 +99,7 @@ const DashboardStatistic = () => {
                             </div>
                         </div>
                         <div id="yearly-comparison">
-                            <Chart options={customerFlowOptions} series={customerFlowOptions.series} type="bar" height={350} />
+                            <Chart options={customerFlowOptions} series={customerFlowOptions.series} type="bar" height={326} />
                         </div>
                     </div>
                 </div>

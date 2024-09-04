@@ -1586,114 +1586,114 @@ if (typeof jQuery === 'undefined') {
     });
     
     
-      $(function () {
-          'use strict';
+    //   $(function () {
+    //       'use strict';
           
-            var optionsSpark1 = {
-              series: [{
-                  name: "Sales",
-                  data: [12, 14, 9, 27, 32, 15]
-                }],
-              chart: {
-              type: 'area',
-              height: 60,
-              width:100,
-              sparkline: {
-                enabled: true
-              },
-            },
-            colors: ["#01b075"],
-            stroke: {
-              curve: 'smooth'
-            },
-            fill: {
-              opacity: 0.3
-            },
-            yaxis: {
-              min: 0
-            },
-            };
+    //         var optionsSpark1 = {
+    //           series: [{
+    //               name: "Sales",
+    //               data: [12, 14, 9, 27, 32, 15]
+    //             }],
+    //           chart: {
+    //           type: 'area',
+    //           height: 60,
+    //           width:100,
+    //           sparkline: {
+    //             enabled: true
+    //           },
+    //         },
+    //         colors: ["#01b075"],
+    //         stroke: {
+    //           curve: 'smooth'
+    //         },
+    //         fill: {
+    //           opacity: 0.3
+    //         },
+    //         yaxis: {
+    //           min: 0
+    //         },
+    //         };
     
-            var chartSpark1 = new ApexCharts(document.querySelector("#chart-spark1"), optionsSpark1);
-            chartSpark1.render();
+    //         var chartSpark1 = new ApexCharts(document.querySelector("#chart-spark1"), optionsSpark1);
+    //         chartSpark1.render();
         
         
         
               
-            var optionsSpark2 = {
-              series: [{
-                  name: "Sessions",
-                  data: [12, 14, 9, 27, 32, 15]
-                }],
-              chart: {
-              type: 'area',
-              height: 60,
-              width:100,
-              sparkline: {
-                enabled: true
-              },
-            },
-            colors: ["#fd683e"],
-            stroke: {
-              curve: 'smooth'
-            },
-            fill: {
-              opacity: 0.3
-            },
-            yaxis: {
-              min: 0
-            },
-            };
+    //         var optionsSpark2 = {
+    //           series: [{
+    //               name: "Sessions",
+    //               data: [12, 14, 9, 27, 32, 15]
+    //             }],
+    //           chart: {
+    //           type: 'area',
+    //           height: 60,
+    //           width:100,
+    //           sparkline: {
+    //             enabled: true
+    //           },
+    //         },
+    //         colors: ["#fd683e"],
+    //         stroke: {
+    //           curve: 'smooth'
+    //         },
+    //         fill: {
+    //           opacity: 0.3
+    //         },
+    //         yaxis: {
+    //           min: 0
+    //         },
+    //         };
     
-            var chartSpark2 = new ApexCharts(document.querySelector("#chart-spark2"), optionsSpark2);
-            chartSpark2.render();
+    //         var chartSpark2 = new ApexCharts(document.querySelector("#chart-spark2"), optionsSpark2);
+    //         chartSpark2.render();
         
         
             
-            var options = {
-              series: [{
-              name: 'First Time',
-              data: [31, 40, 28, 51, 42, 109, 100]
-            }, {
-              name: 'Returning',
-              data: [11, 32, 45, 32, 34, 52, 41]
-            }],
-              chart: {
-                  width: 150,
-              height: 120,
-              type: 'area',
-                 zoom: {
-                  enabled: false
-                },
-            },
-            dataLabels: {
-              enabled: false
-            },
-            colors: ["#fd683e", "#2d9bda"],
-            stroke: {
-              curve: 'smooth',
-                width: 0.5,
-            },
-            grid: {
-                show: false,
-            },
-            xaxis: {
-              categories: ["Mon","Tue","Wed","Thu","Fri","Set","Sun"],
-                labels: {
-                      show: false,
-                },
-            },
-            yaxis: {
-                labels: {
-                      show: false,
-                },
-            },
-            legend: {
-                  show: false,
-            },
-            };
+    //         var options = {
+    //           series: [{
+    //           name: 'First Time',
+    //           data: [31, 40, 28, 51, 42, 109, 100]
+    //         }, {
+    //           name: 'Returning',
+    //           data: [11, 32, 45, 32, 34, 52, 41]
+    //         }],
+    //           chart: {
+    //               width: 150,
+    //           height: 120,
+    //           type: 'area',
+    //              zoom: {
+    //               enabled: false
+    //             },
+    //         },
+    //         dataLabels: {
+    //           enabled: false
+    //         },
+    //         colors: ["#fd683e", "#2d9bda"],
+    //         stroke: {
+    //           curve: 'smooth',
+    //             width: 0.5,
+    //         },
+    //         grid: {
+    //             show: false,
+    //         },
+    //         xaxis: {
+    //           categories: ["Mon","Tue","Wed","Thu","Fri","Set","Sun"],
+    //             labels: {
+    //                   show: false,
+    //             },
+    //         },
+    //         yaxis: {
+    //             labels: {
+    //                   show: false,
+    //             },
+    //         },
+    //         legend: {
+    //               show: false,
+    //         },
+    //         };
     
-            var chart = new ApexCharts(document.querySelector("#chart3"), options);
-            chart.render();
+    //         var chart = new ApexCharts(document.querySelector("#chart3"), options);
+    //         chart.render();
     
-    }); // End of use strict
+    // }); // End of use strict

@@ -16,42 +16,7 @@ function Home() {
                         <TotalOrderCancel />
                         <TotalOrderRevenue />
                         <DashboardStatistic />
-                        <div class="col-xxxl-7 col-xl-6 col-lg-6 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <div class="d-flex justify-content-between">
-                                        <div>
-                                            <h4 class="box-title mb-0">Daily Revenue</h4>
-                                            <p class="mb-0 text-mute">Lorem ipsum dolor</p>
-                                        </div>
-                                        <div class="text-right">
-                                            <h3 class="box-title mb-0 font-weight-700">$ 154K</h3>
-                                            <p class="mb-0"><span class="text-success">+ 1.5%</span> than last week</p>
-                                        </div>
-                                    </div>
-                                    <div id="chart" class="mt-20"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxxl-5 col-xl-6 col-lg-6 col-12">
-                            <div class="box">
-                                <div class="box-body">
-                                    <h4 class="box-title">Customer Flow</h4>
-                                    <div class="d-md-flex d-block justify-content-between">
-                                        <div>
-                                            <h3 class="mb-0 font-weight-700">$2,780k</h3>
-                                            <p class="mb-0 text-primary"><small>In Restaurant</small></p>
-                                        </div>
-                                        <div>
-                                            <h3 class="mb-0 font-weight-700">$1,410k</h3>
-                                            <p class="mb-0 text-danger"><small>Online Order</small></p>
-                                        </div>
-                                    </div>
-                                    <div id="yearly-comparison"></div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* <div class="col-12">
+                        <div class="col-12">
                             <div class="box bg-transparent no-shadow">
                                 <div class="box-header pt-0 px-0">
                                     <h4 class="box-title">
@@ -188,7 +153,7 @@ function Home() {
                                     </div>
                                 </div>
                             </div>
-                        </div> */}
+                        </div>
                         <div class="col-xxxl-5 col-12">
                             <div class="box">
                                 <div class="box-header no-border">
@@ -266,7 +231,7 @@ function Home() {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xxxl-7 col-12">
+                        {/* <div class="col-xxxl-7 col-12">
                             <div class="box">
                                 <div class="box-header no-border pb-0">
                                     <h4 class="box-title">Delivery Map</h4>
@@ -323,7 +288,7 @@ function Home() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
 

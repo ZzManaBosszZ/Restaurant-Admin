@@ -1,6 +1,7 @@
 
 function NotFound() {
 	return (
+		<>
 		<body class="hold-transition theme-primary bg-img" style={{ backgroundImage: "url(../images/auth-bg/bg-4.jpg)" }}>
 			<section class="error-page h-p100">
 				<div class="container h-p100">
@@ -28,6 +29,7 @@ function NotFound() {
 				</div>
 			</section>
 		</body>
+		</>
 	)
 }
 export default NotFound;
