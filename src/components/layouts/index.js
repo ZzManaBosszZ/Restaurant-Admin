@@ -10,8 +10,8 @@ function Layout({ children }) {
             <Loading /> 
             <Header />
             <SideBar />
-            <div class="content-wrapper">
-                <div class="container-full">
+            <div className="content-wrapper">
+                <div className="container-full">
                     {children}
                 </div>
             </div>

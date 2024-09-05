@@ -1,13 +1,13 @@
 function Footer() {
     return (
-        <footer class="main-footer">
-            <div class="pull-right d-none d-sm-inline-block">
-                {/* <ul class="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
-                    <li class="nav-item">
-                        <a class="nav-link" >FAQ</a>
+        <footer className="main-footer">
+            <div className="pull-right d-none d-sm-inline-block">
+                {/* <ul className="nav nav-primary nav-dotted nav-dot-separated justify-content-center justify-content-md-end">
+                    <li className="nav-item">
+                        <a className="nav-link" >FAQ</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link">Purchase Now</a>
+                    <li className="nav-item">
+                        <a className="nav-link">Purchase Now</a>
                     </li>
                 </ul> */}
             </div>

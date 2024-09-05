@@ -3,16 +3,16 @@ import { Link } from "react-router-dom";
 
 const BreadCrumb = ({ title, path }) =>  {
     return (
-        <div class="content-header">
-			<div class="d-flex align-items-center">
-				<div class="mr-auto">
-					<h3 class="page-title">{title}</h3>
-					<div class="d-inline-block align-items-center">
+        <div className="content-header">
+			<div className="d-flex align-items-center">
+				<div className="mr-auto">
+					<h3 className="page-title">{title}</h3>
+					<div className="d-inline-block align-items-center">
 						<nav>
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><Link to={path}><i class="icon-Home"></i></Link></li>
-								<li class="breadcrumb-item" aria-current="page"> <Link to={path}>Home</Link></li>
-								<li class="breadcrumb-item active" aria-current="page">{title}</li>
+							<ol className="breadcrumb">
+								<li className="breadcrumb-item"><Link to={path}><i className="icon-Home"></i></Link></li>
+								<li className="breadcrumb-item" aria-current="page"> <Link to={path}>Home</Link></li>
+								<li className="breadcrumb-item active" aria-current="page">{title}</li>
 							</ol>
 						</nav>
 					</div>
