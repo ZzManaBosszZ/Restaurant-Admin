@@ -1,13 +1,22 @@
-// import { Link, NavLink } from "react-router-dom";
-// import config from "../../config/index";
-// import { isLoggedIn, getDecodedToken, removeAccessToken } from "../../utils/auth";
-
+import { useState, useEffect } from "react";
+import api from "../../services/api";
+import url from "../../services/url";
+import { getAccessToken } from "../../utils/auth";
+import config from "../../config";
 function Header() {
-    // const decodedToken = getDecodedToken();
+    const [profile, setProfile] = useState([]);
 
-    // const handleLogout = () => {
-    //     removeAccessToken();
-    // };
+    //show list data
+    useEffect(() => {
+        const loadProfile = async () => {
+            try {
+                const response = await api.get(url.AUTH.PROFILE, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                setProfile(response.data.data);
+                // console.log(response.data.data);
+            } catch (error) { }
+        };
+        loadProfile();
+    }, []);
     return (
         <header className="main-header">
             <div className="d-flex align-items-center logo-box justify-content-start">
@@ -215,12 +224,12 @@ function Header() {
                                 </li>
                             </ul>
                         </li>
-                        <li className="btn-group nav-item">
+                        {/* <li className="btn-group nav-item">
                             <span className="label label-primary">5</span>
                             <a href="#" data-toggle="control-sidebar" title="Setting" className="waves-effect waves-light nav-link full-screen btn-primary-light">
                                 <i className="icon-Settings-2"></i>
                             </a>
-                        </li>
+                        </li> */}
                         <li className="btn-group nav-item d-xl-none d-inline-flex">
                             <a href="#" className="push-btn right-bar-btn waves-effect waves-light nav-link full-screen btn-info-light">
                                 <span className="icon-Layout-left-panel-1"><span className="path1"></span><span className="path2"></span></span>
@@ -228,13 +237,12 @@ function Header() {
                         </li>
                         <li className="dropdown user user-menu">
                             <a href="#" className="dropdown-toggle p-0 text-dark hover-primary ml-md-30 ml-10" data-toggle="dropdown" title="User">
-                                <span className="pl-30 d-md-inline-block d-none">Hello,</span> <strong className="d-md-inline-block d-none">Alia</strong><img src="../images/avatar/avatar-11.png" className="user-image rounded-circle avatar bg-white mx-10" alt="User Image" />
+                                <span className="pl-30 d-md-inline-block d-none">Hello,</span> <strong className="d-md-inline-block d-none">{profile.fullName}</strong><img src="../images/avatar/avatar-15.png" className="user-image rounded-circle avatar bg-white mx-10" alt="User Image" />
                             </a>
                             <ul className="dropdown-menu animated flipInX">
                                 <li className="user-body">
-                                    <a className="dropdown-item" href="#"><i className="ti-user text-muted mr-2"></i> Profile</a>
                                     <a className="dropdown-item" href="#"><i className="ti-wallet text-muted mr-2"></i> My Wallet</a>
-                                    <a className="dropdown-item" href="#"><i className="ti-settings text-muted mr-2"></i> Settings</a>
+                                    <a className="dropdown-item" href={config.routes.profile}><i className="ti-settings text-muted mr-2"></i> Settings</a>
                                     <div className="dropdown-divider"></div>
                                     <a className="dropdown-item" href="#"><i className="ti-lock text-muted mr-2"></i> Logout</a>
                                 </li>

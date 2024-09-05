@@ -15,7 +15,7 @@
  * @todo Test Zepto
  * @todo stagePadding calculate wrong active classes
  */
-; (function ($, window, document, undefined) {
+(function ($, window, document, undefined) {
 
 	/**
 	 * Creates a carousel.
@@ -248,12 +248,18 @@
 
 
     $(document).ready(function(){
-        $(".review-slider").owlCarousel({
-            loop: true, // Lặp lại carousel
-            nav: true, // Hiển thị nút điều hướng
-            dots: false, // Hiển thị nút chấm
-        });
-    });
+		$(".review-slider").css("display", "none"); // Ẩn carousel ban đầu
+		$(".review-slider").owlCarousel({
+			loop: true, // Lặp lại carousel
+			nav: true, // Hiển thị nút điều hướng
+			dots: false, // Hiển thị nút chấm
+			autoplay: true, // Tự động phát
+			onInitialized: function() {
+				$(".review-slider").css("display", "block"); // Hiển thị sau khi khởi tạo xong
+			}
+		});
+	});
+	
 
 	/**
 	 * Enumeration for types.

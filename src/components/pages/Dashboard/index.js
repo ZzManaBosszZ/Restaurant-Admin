@@ -24,7 +24,7 @@ function Home() {
                                     </h4>
                                 </div>
                                 <div className="box-body px-0">
-                                    <div className="review-slider owl-carousel">
+                                    <div class="review-slider owl-carousel">
                                         <div className="box p-0">
                                             <div className="box-body">
                                                 <div className="d-flex align-items-center">
@@ -155,7 +155,7 @@ function Home() {
                             </div>
                         </div>
                         <div className="col-xxxl-5 col-12">
-                            <div className="box">
+                            {/* <div className="box">
                                 <div className="box-header no-border">
                                     <h4 className="box-title">
                                         Trending Keyword
@@ -207,7 +207,7 @@ function Home() {
                                         <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">20+</a>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="box">
                                 <div className="box-header no-border">
                                     <h4 className="box-title">

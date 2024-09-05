@@ -24043,6 +24043,7 @@ button.btn.dropdown-toggle:after {
         background-color: rgba(253, 104, 62, 0.09); }
       .c-progress-steps li.done:before {
         color: #fd683e;
+        font-family: 'FontAwesome';
         content: "\f058";
         width: 30px;
         height: 30px;
@@ -24055,6 +24056,7 @@ button.btn.dropdown-toggle:after {
       font-weight: 500; }
       .c-progress-steps li.current:before {
         color: #2d9bda;
+        font-family: 'FontAwesome';
         content: "\f192";
         width: 30px;
         height: 30px;
@@ -24065,7 +24067,7 @@ button.btn.dropdown-toggle:after {
     .c-progress-steps li:before {
       position: absolute;
       left: 0;
-      font-family: 'Font Awesome 5 Free' !important;
+      font-family: 'FontAwesome' !important;
       font-weight: 600;
       font-size: 18px;
       background-color: #ffffff;

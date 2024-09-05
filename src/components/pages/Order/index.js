@@ -155,7 +155,7 @@ function OrderList() {
                                                             </span>
                                                         </td>
                                                         <td>
-                                                            <Link to={`/order-detail/${item.orderDetails[0].id}`}>
+                                                            <Link to={`/order-detail/${item.id}`}>
                                                             <a class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
                                                                 <i class="ti-marker-alt"></i>
                                                             </a>

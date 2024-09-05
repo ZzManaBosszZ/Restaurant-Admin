@@ -11,14 +11,14 @@ function Profile() {
 
     //show list data
     useEffect(() => {
-        const loadMenus = async () => {
+        const loadProfile = async () => {
             try {
                 const response = await api.get(url.AUTH.PROFILE, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
                 setProfile(response.data.data);
                 // console.log(response.data.data);
             } catch (error) { }
         };
-        loadMenus();
+        loadProfile();
     }, []);
 
 

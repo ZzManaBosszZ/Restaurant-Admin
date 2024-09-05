@@ -7,7 +7,8 @@ import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 function OrderDetail() {
 
-    const { id } = useParams();
+    const { orderId } = useParams();
+    console.log("Order ID:", orderId);
 
     const hashCode = (str) => {
         let hash = 0;
@@ -32,12 +33,12 @@ function OrderDetail() {
 
     const loadData = useCallback(async () => {
         try {
-            const orderDetailRequest = await api.get(url.ORDER.DETAIL.replace("{}", id), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+            const orderDetailRequest = await api.get(url.ORDER.DETAIL.replace("{}", orderId), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
             setOrderDetail(orderDetailRequest.data.data);
         } catch (error) {
             console.log(error);
         }
-    }, [id]);
+    }, [orderId]);
 
     useEffect(() => {
         loadData();
