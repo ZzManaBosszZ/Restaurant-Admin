@@ -129,9 +129,11 @@ function OrderTable() {
                                                             </span>
                                                         </td>
                                                         <td>
+                                                        <Link to={`/ordertable-detail/${item.id}`}>
                                                             <a href="javascript:void(0)" class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
                                                                 <i class="ti-marker-alt"></i>
                                                             </a>
+                                                            </Link>
                                                             {/* <a href="javascript:void(0)" class="text-danger" data-original-title="Delete" data-toggle="tooltip">
                                                                 <i class="ti-trash"></i>
                                                             </a> */}

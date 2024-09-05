@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import api from "../../../services/api";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
-import Swal from "sweetalert2";
 import config from "../../../config";
 import { Link } from "react-router-dom";
 function OrderList() {

@@ -20,17 +20,17 @@ function TotalOrderDelivered() {
     }, []);
 
     return (
-        <div class="col-xxxl-3 col-lg-6 col-12">
-            <div class="box">
-                <div class="box-body">
-                    <div class="d-flex align-items-start">
+        <div className="col-xxxl-3 col-lg-6 col-12">
+            <div className="box">
+                <div className="box-body">
+                    <div className="d-flex align-items-start">
                         <div>
-                            <img src="../images/food/online-order-2.png" class="w-80 mr-20" alt="" />
+                            <img src="../images/food/online-order-2.png" className="w-80 mr-20" alt="" />
                         </div>
                         <div>
-                            <h2 class="my-0 font-weight-700">{orders.deliveredOrders}</h2>
-                            <p class="text-fade mb-0">Total Delivered</p>
-                            <p class="font-size-12 mb-0 text-success"><span class="badge badge-pill badge-success-light mr-5"><i class="fa fa-arrow-up"></i></span>8% (15 Days)</p>
+                            <h2 className="my-0 font-weight-700">{orders.deliveredOrders}</h2>
+                            <p className="text-fade mb-0">Total Delivered</p>
+                            <p className="font-size-12 mb-0 text-success"><span className="badge badge-pill badge-success-light mr-5"><i className="fa fa-arrow-up"></i></span>8% (15 Days)</p>
                         </div>
                     </div>
                 </div>

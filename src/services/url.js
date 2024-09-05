@@ -53,16 +53,12 @@ const url = {
         LIST: "orders",
         DETAIL: "order-details/detail/{}",
         CREATE: "orders",
-        // EDIT: "menus",
-        // DELETE: "menus",
     },
 
     ORDER_TABLE: {
         LIST: "any/ordertables",
         DETAIL: "any/ordertables/{}",
-        // CREATE: "ordertables",
-        // EDIT: "menus",
-        // DELETE: "menus",
+        EDIT: "any/ordertables/{}",
     },
 
 

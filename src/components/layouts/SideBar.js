@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import config from "../../config";
 function SideBar() {
 	return (
 		<aside class="main-sidebar">
@@ -6,7 +8,7 @@ function SideBar() {
 					<div class="multinav-scroll" style={{ height: "100%" }}>
 						<ul class="sidebar-menu" data-widget="tree">
 							<li>
-								<a href="index.html">
+								<a href={config.routes.home}>
 									<i class="icon-Home"></i>
 									<span>Dashboard</span>
 								</a>
@@ -21,8 +23,7 @@ function SideBar() {
 									</span>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="order.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order List</a></li>
-									<li><a href="order_details.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order Details</a></li>
+									<li><a href={config.routes.order_list}><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Order List</a></li>
 								</ul>
 							</li>
 							<li class="treeview">
@@ -34,26 +35,25 @@ function SideBar() {
 									</span>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="add_new_menu.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Add New Menu</a></li>
-									<li><a href="menu_list.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Menu List</a></li>
+									<li><a href={config.routes.menu}><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Menu List</a></li>
 									<li><a href="menu_categories.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Categories</a></li>
 								</ul>
 							</li>
 							<li class="treeview">
 								<a href="#">
 									<i class="icon-Group"><span class="path1"></span><span class="path2"></span></i>
-									<span>Customer</span>
+									<span>User</span>
 									<span class="pull-right-container">
 										<i class="fa fa-angle-right pull-right"></i>
 									</span>
 								</a>
 								<ul class="treeview-menu">
-									<li><a href="add_new_menu.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Customer</a></li>
-									<li><a href="members.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Members</a></li>
+									<li><a href={config.routes.profile}><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Profile</a></li>
+									{/* <li><a href="members.html"><i class="icon-Commit"><span class="path1"></span><span class="path2"></span></i>Members</a></li> */}
 								</ul>
 							</li>
 							<li>
-								<a href="analysis.html">
+								<a href={config.routes.food_list}>
 									<i class="icon-Dinner"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
 									<span>Food</span>
 								</a>

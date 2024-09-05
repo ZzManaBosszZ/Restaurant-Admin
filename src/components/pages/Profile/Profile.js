@@ -1,7 +1,27 @@
 import Layout from "../../layouts";
 import BreadCrumb from "../../layouts/BreadCrumb";
+import { useState, useEffect } from "react";
+import api from "../../../services/api";
+import url from "../../../services/url";
+import { getAccessToken } from "../../../utils/auth";
 
 function Profile() {
+
+    const [profile, setProfile] = useState([]);
+
+    //show list data
+    useEffect(() => {
+        const loadMenus = async () => {
+            try {
+                const response = await api.get(url.AUTH.PROFILE, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                setProfile(response.data.data);
+                // console.log(response.data.data);
+            } catch (error) { }
+        };
+        loadMenus();
+    }, []);
+
+
     return (
         <Layout>
             <BreadCrumb title="Profile" />
@@ -60,8 +80,8 @@ function Profile() {
                     <div className="col-12 col-lg-5 col-xl-4">
                         <div className="box box-widget widget-user">
                             <div className="widget-user-header bg-black" style={{ background: "url('../images/gallery/full/10.jpg') center center" }}>
-                                <h3 className="widget-user-username">Michael Jorden</h3>
-                                <h6 className="widget-user-desc">Designer</h6>
+                                <h3 className="widget-user-username">{profile.fullName}</h3>
+                                {/* <h6 className="widget-user-desc">Designer</h6> */}
                             </div>
                             <div className="widget-user-image">
                                 <img className="rounded-circle" src="../images/user3-128x128.jpg" alt="User Avatar" />
@@ -72,9 +92,9 @@ function Profile() {
                                 <div className="row">
                                     <div className="col-12">
                                         <div>
-                                            <p>Email :<span className="text-gray pl-10">David@yahoo.com</span></p>
-                                            <p>Phone :<span className="text-gray pl-10">+11 123 456 7890</span></p>
-                                            <p>Address :<span className="text-gray pl-10">123, Lorem Ipsum, Florida, USA</span></p>
+                                            <p>Email :<span className="text-gray pl-10">{profile.email}</span></p>
+                                            <p>Phone :<span className="text-gray pl-10">{profile.phone}</span></p>
+                                            <p>Address :<span className="text-gray pl-10">{profile.address}</span></p>
                                         </div>
                                     </div>
                                     <div className="col-12">

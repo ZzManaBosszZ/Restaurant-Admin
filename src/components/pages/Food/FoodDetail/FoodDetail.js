@@ -64,62 +64,62 @@ function FoodDetail() {
     return (
         <Layout>
             <BreadCrumb title="Food Detail" />
-            <section class="content">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="row">
-                                    <div class="col-md-4 col-sm-6">
-                                        <div class="box box-body b-1 text-center no-shadow">
-                                            <img src={foodDetail.image} id="product-image" class="img-fluid" alt="" />
+            <section className="content">
+                <div className="row">
+                    <div className="col-lg-12">
+                        <div className="box">
+                            <div className="box-body">
+                                <div className="row">
+                                    <div className="col-md-4 col-sm-6">
+                                        <div className="box box-body b-1 text-center no-shadow">
+                                            <img src={foodDetail.image} id="product-image" className="img-fluid" alt="" />
                                         </div>
-                                        <div class="pro-photos">
-                                            <div class="photos-item item-active">
+                                        <div className="pro-photos">
+                                            <div className="photos-item item-active">
                                                 <img src={foodDetail.image} alt="" />
                                             </div>
-                                            <div class="photos-item">
+                                            <div className="photos-item">
                                                 <img src="../images/product/product-7.png" alt="" />
                                             </div>
-                                            <div class="photos-item">
+                                            <div className="photos-item">
                                                 <img src="../images/product/product-8.png" alt="" />
                                             </div>
-                                            <div class="photos-item">
+                                            <div className="photos-item">
                                                 <img src="../images/product/product-9.png" alt="" />
                                             </div>
                                         </div>
-                                        <div class="clear"></div>
+                                        <div className="clear"></div>
                                     </div>
-                                    <div class="col-md-8 col-sm-6">
-                                        <h2 class="box-title mt-0">{foodDetail.name}</h2>
-                                        <div class="list-inline">
+                                    <div className="col-md-8 col-sm-6">
+                                        <h2 className="box-title mt-0">{foodDetail.name}</h2>
+                                        <div className="list-inline">
                                             {stars}
                                         </div>
-                                        <h1 class="pro-price mb-0 mt-20">&#36;{foodDetail.price}
-                                            <span class="old-price">&#36;540</span>
-                                            <span class="text-danger">50% off</span>
+                                        <h1 className="pro-price mb-0 mt-20">&#36;{foodDetail.price}
+                                            <span className="old-price">&#36;540</span>
+                                            <span className="text-danger">50% off</span>
                                         </h1>
                                         <hr />
                                         <p>{foodDetail.description}</p>
 
                                         <hr />
-                                        {/* <div class="gap-items">
-                                            <button class="btn btn-success"><i class="mdi mdi-shopping"></i> Buy Now!</button>
-                                            <button class="btn btn-primary"><i class="mdi mdi-cart-plus"></i> Add To Cart</button>
-                                            <button class="btn btn-info"><i class="mdi mdi-compare"></i> Compare</button>
-                                            <button class="btn btn-danger"><i class="mdi mdi-heart"></i> Wishlist</button>
+                                        {/* <div className="gap-items">
+                                            <button className="btn btn-success"><i className="mdi mdi-shopping"></i> Buy Now!</button>
+                                            <button className="btn btn-primary"><i className="mdi mdi-cart-plus"></i> Add To Cart</button>
+                                            <button className="btn btn-info"><i className="mdi mdi-compare"></i> Compare</button>
+                                            <button className="btn btn-danger"><i className="mdi mdi-heart"></i> Wishlist</button>
                                         </div> */}
-                                        <h4 class="box-title mt-20">Key Highlights</h4>
-                                        <ul class="list-icons list-unstyled">
-                                            <li><i class="fa fa-check text-danger float-none"></i> Party Wear</li>
-                                            <li><i class="fa fa-check text-danger float-none"></i> Nam libero tempore, cum soluta nobis est</li>
-                                            <li><i class="fa fa-check text-danger float-none"></i> Omnis voluptas as placeat facere possimus omnis voluptas.</li>
+                                        <h4 className="box-title mt-20">Key Highlights</h4>
+                                        <ul className="list-icons list-unstyled">
+                                            <li><i className="fa fa-check text-danger float-none"></i> Party Wear</li>
+                                            <li><i className="fa fa-check text-danger float-none"></i> Nam libero tempore, cum soluta nobis est</li>
+                                            <li><i className="fa fa-check text-danger float-none"></i> Omnis voluptas as placeat facere possimus omnis voluptas.</li>
                                         </ul>
                                     </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12">
-                                        <h4 class="box-title mt-40">General Info</h4>
-                                        <div class="table-responsive">
-                                            <table class="table">
+                                    <div className="col-lg-12 col-md-12 col-sm-12">
+                                        <h4 className="box-title mt-40">General Info</h4>
+                                        <div className="table-responsive">
+                                            <table className="table">
                                                 <tbody>
                                                     <tr>
                                                         <td width="390">Brand</td>
