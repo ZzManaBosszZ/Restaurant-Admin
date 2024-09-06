@@ -54,12 +54,11 @@ function FoodDetail() {
         stars.push(<i key={i} className="fa fa-star"></i>);
     }
     if (halfStar) {
-        stars.push(<i key="half" className="fas fa-star-half-alt"></i>);
+        stars.push(<i key="half" className="fa fa-star-half-o"></i>); // Font Awesome 4.7.0 half-star icon
     }
     for (let i = 0; i < emptyStars; i++) {
-        stars.push(<i key={`empty-${i}`} className="far fa-star"></i>);
+        stars.push(<i key={`empty-${i}`} className="fa fa-star-o"></i>); // Font Awesome 4.7.0 empty-star icon
     }
-
 
     return (
         <Layout>

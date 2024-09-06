@@ -29,7 +29,7 @@ function OrderDetail() {
 
 
 
-    const [orderDetail, setOrderDetail] = useState({});
+    const [orderDetail, setOrderDetail] = useState([]);
 
     const loadData = useCallback(async () => {
         try {
@@ -56,6 +56,7 @@ function OrderDetail() {
                                     <img className="mr-10 rounded-circle avatar avatar-xl b-2 border-primary" src="../images/avatar/1.jpg" alt="" />
                                     <div>
                                         {/* <h4 className="mb-0">Johen doe- {generateOrderCode(orderDetail.orderId[0].orderCode)}</h4> */}
+                                        {/* <h4 className="mb-0">{orderDetail.food[0].name}</h4> */}
                                         <span className="font-size-14 text-info">Customer</span>
                                     </div>
                                 </div>
