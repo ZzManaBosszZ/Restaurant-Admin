@@ -150,7 +150,7 @@ function OrderList() {
                                                         <td>{item.total}</td>
                                                         <td>{new Date(item.createdDate).toLocaleDateString()}</td>
                                                         <td>
-                                                            <span className={`badge badge-pill ${item.status === 'Paid' ? 'badge-success' : item.status === 'Pending' ? 'badge-warning' : 'badge-secondary'}`}>
+                                                            <span className={`badge badge-pill ${item.status === 'paid' ? 'badge-success' : item.status === 'pending' ? 'badge-warning' : 'badge-secondary'}`}>
                                                                 {item.status}
                                                             </span>
                                                         </td>

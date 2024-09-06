@@ -29,12 +29,12 @@ function OrderDetail() {
 
 
 
-    const [orderDetail, setOrderDetail] = useState([]);
+    const [orderDetail, setOrderDetail] = useState({ foodOrderDetails: [], user: [] });
 
     const loadData = useCallback(async () => {
         try {
             const orderDetailRequest = await api.get(url.ORDER.DETAIL.replace("{}", orderId), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
-            setOrderDetail(orderDetailRequest.data.data);
+            setOrderDetail(orderDetailRequest.data);
         } catch (error) {
             console.log(error);
         }
@@ -56,7 +56,7 @@ function OrderDetail() {
                                     <img className="mr-10 rounded-circle avatar avatar-xl b-2 border-primary" src="../images/avatar/1.jpg" alt="" />
                                     <div>
                                         {/* <h4 className="mb-0">Johen doe- {generateOrderCode(orderDetail.orderId[0].orderCode)}</h4> */}
-                                        {/* <h4 className="mb-0">{orderDetail.food[0].name}</h4> */}
+                                        <h4 className="mb-0">{orderDetail.createdBy}</h4>
                                         <span className="font-size-14 text-info">Customer</span>
                                     </div>
                                 </div>
@@ -64,18 +64,20 @@ function OrderDetail() {
                             <div className="box-body border-bottom">
                                 <div className="d-flex align-items-center">
                                     <i className="fa fa-phone mr-10 font-size-24"></i>
-                                    <h4 className="mb-0">+1 123 456 7890</h4>
+                                    <h4 className="mb-0">+84 {orderDetail.user.phone}</h4>
                                 </div>
                             </div>
                             <div className="box-body border-bottom">
                                 <div className="d-flex align-items-center">
                                     <i className="fa fa-map-marker mr-10 font-size-24"></i>
-                                    <h4 className="mb-0 text-black">1623 E Updahl Ct, Harrison, ID, 83833</h4>
+                                    <h4 className="mb-0 text-black">{orderDetail.user.address}</h4>
                                 </div>
                             </div>
-                            <div className="box-body">
-                                <h4 className="mb-10">Order Nots</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                            <div className="box-body border-bottom">
+                                <div className="d-flex align-items-center">
+                                    <i className="fa fa-envelope mr-10 font-size-24"></i>
+                                    <h4 className="mb-0 text-black">{orderDetail.user.email}</h4>
+                                </div>
                             </div>
                         </div>
                         <div className="row">
@@ -209,7 +211,7 @@ function OrderDetail() {
                                 </div>
 
                             </div>
-                        </div>                     
+                        </div>
                     </div>
                 </div>
             </section>
