@@ -156,56 +156,18 @@ function OrderDetail() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td><img src="../images/product/product-1.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td width="100" align="center" className="font-weight-900">1</td>
-                                                <td width="100" align="center" className="font-weight-900">$270</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><img src="../images/product/product-2.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td>
-                                                    {/* <input type="number" className="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
-                                                <td align="center" className="font-weight-900">$270</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><img src="../images/product/product-3.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td>
-                                                    {/* <input type="number" className="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
-                                                <td align="center" className="font-weight-900">$270</td>
-
-                                            </tr>
-                                            <tr>
-                                                <td><img src="../images/product/product-4.png" alt="" width="80" /></td>
-                                                <td>
-                                                    <h6>MAIN COURSE</h6>
-                                                    <h4>Instant Pot Pad Thai</h4>
-                                                </td>
-                                                <td>$270</td>
-                                                <td>
-                                                    {/* <input type="number" className="form-control" placeholder="1" min="0" max="5" /> */}
-                                                </td>
-                                                <td align="center" className="font-weight-900">$270</td>
-
-                                            </tr>
+                                            {orderDetail.foodOrderDetails.map((foodItem, index) => (
+                                                <tr key={index}>
+                                                    <td><img src={foodItem.food.image} alt={foodItem.food.name} width="80" /></td>
+                                                    <td>
+                                                        {/* <h6>{foodItem.category}</h6> */}
+                                                        <h4>{foodItem.food.name}</h4>
+                                                    </td>
+                                                    <td>${foodItem.unitPrice}</td>
+                                                    <td width="100" align="center" className="font-weight-900">{foodItem.quantity}</td>
+                                                    <td width="100" align="center" className="font-weight-900">${foodItem.unitPrice * foodItem.quantity}</td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
