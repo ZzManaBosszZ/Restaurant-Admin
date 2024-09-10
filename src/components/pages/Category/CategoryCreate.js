@@ -1,17 +1,15 @@
-import React from 'react'
+import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import Layout from '../../layouts';
 import BreadCrumb from '../../layouts/BreadCrumb';
-import { useState } from 'react';
-import Swal from 'sweetalert2';
 import api from '../../../services/api';
 import url from '../../../services/url';
 import { getAccessToken } from '../../../utils/auth';
-import { Link, useNavigate } from 'react-router-dom';
 import config from '../../../config';
+import { ToastContainer, toast } from 'react-toastify'; // Import React-Toastify components
+import 'react-toastify/dist/ReactToastify.css'; // Import React-Toastify styles
 
 export default function CategoryCreate() {
-
-
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
@@ -54,47 +52,52 @@ export default function CategoryCreate() {
             try {
                 const headers = {
                     Authorization: `Bearer ${getAccessToken()}`,
-                    // "Content-Type": "multipart/form-data",
                 };
                 const response = await api.post(url.CATEGORY.CREATE, formData, { headers });
 
                 if (response && response.data) {
-                    Swal.fire({
-                        text: "Create Category Successfully.",
-                        icon: "success",
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Done",
+                    toast.success("Create Category Successfully.", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
                     });
                     setTimeout(() => {
-                        navigate(config.routes.category_list); //chuyển đến trang food-list
+                        navigate(config.routes.category_list);
                     }, 3000);
-
                 }
             } catch (error) {
-                if (error.response.data === 400 && error.response.data.message === "Category already exists") {
-                    Swal.fire({
-                        text: "The name of this Category already exists",
-                        icon: "warning",
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Done",
+                if (error.response && error.response.data === 400 && error.response.data.message === "Category already exists") {
+                    toast.warning("The name of this Category already exists", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
                     });
                 } else {
-                    Swal.fire({
-                        text: "Create Category Failed",
-                        icon: "warning",
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Done",
+                    toast.error("Create Category Failed", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
                     });
-
                 }
-                // console.error("Error creating test:", error);
-                // console.error("Response data:", error.response.data);
             }
         }
     };
 
     return (
         <Layout>
+            <ToastContainer /> {/* Add ToastContainer here */}
             <BreadCrumb title="Category Create" />
             <section className="content">
                 <div className="row">
@@ -114,15 +117,15 @@ export default function CategoryCreate() {
                                                         placeholder="Category Name"
                                                         value={formData.name}
                                                         onChange={handleChange}
-                                                        autoFocus />
+                                                        autoFocus
+                                                    />
                                                     {formErrors.name && <div className="invalid-feedback">{formErrors.name}</div>}
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div className="form-actions mt-10">
-                                        <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i>Add</button>
+                                        <button type="submit" className="btn btn-primary"><i className="fa fa-check"></i>Add</button>
                                         <Link to={config.routes.category_list}><button type="button" className="btn btn-danger">Cancel</button></Link>
                                     </div>
                                 </form>
@@ -130,8 +133,7 @@ export default function CategoryCreate() {
                         </div>
                     </div>
                 </div>
-
             </section>
         </Layout>
-    )
+    );
 }

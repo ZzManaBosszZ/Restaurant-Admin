@@ -6,9 +6,10 @@ import api from "../../../../services/api";
 import { getAccessToken } from "../../../../utils/auth";
 import { useNavigate } from "react-router-dom";
 import config from "../../../../config";
-import Swal from "sweetalert2";
 import BreadCrumb from "../../../layouts/BreadCrumb";
 import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify'; // Import React-Toastify components
+import 'react-toastify/dist/ReactToastify.css'; // Import React-Toastify styles
 
 function MenuFoodCreate() {
     const navigate = useNavigate();
@@ -107,27 +108,32 @@ function MenuFoodCreate() {
                 const response = await api.post(url.MENU_FOOD.CREATE, transformedData, { headers });
 
                 if (response && response.data) {
-                    Swal.fire({
-                        text: "Create Menu Food Successfully.",
-                        icon: "success",
-                        confirmButtonColor: "#3085d6",
-                        confirmButtonText: "Done",
+                    toast.success("Create Menu Food Successfully.", {
+                        position: "top-right",
+                        autoClose: 3000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
                     });
                     setTimeout(() => {
                         navigate(config.routes.menu); // Navigate to the menu list page
                     }, 3000);
                 }
             } catch (error) {
-                Swal.fire({
-                    text: "Create Menu Food error",
-                    icon: "warning",
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "Done",
+                toast.error("Create Menu Food error", {
+                    position: "top-right",
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
                 });
             }
         }
     };
-
 
     // Convert menu and food data for React Select
     const menuOptions = menus.map(menu => ({ value: menu.id, label: menu.name }));
@@ -135,6 +141,7 @@ function MenuFoodCreate() {
 
     return (
         <Layout>
+            <ToastContainer /> {/* Add ToastContainer here */}
             <BreadCrumb title="Menu-Food Create" />
             <br />
             <section className="content">
