@@ -19,7 +19,7 @@ const DashboardStatistic = () => {
                 },
             };
             const [dailyRevenueData, customerFlowData] = await Promise.all([
-                api.get(url.DASHBOARD.TOTAL_ORDER_REVENUE, headerConfig),
+                api.get(url.DASHBOARD.DAILY_REVENUE, headerConfig),
                 // api.get(url.DASHBOARD.TOTAL_ORDER_REVENUE, headerConfig),
             ]);
 

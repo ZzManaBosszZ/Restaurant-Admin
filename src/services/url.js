@@ -18,6 +18,7 @@ const url = {
         TOTAL_ORDER_DELIVERED: "delivered-orders",
         TOTAL_ORDER_CANCEL: "cancelled-orders",
         TOTAL_ORDER_REVENUE: "total-revenue",
+        DAILY_REVENUE: "daily-revenue",
     },
 
     FOOD: {
