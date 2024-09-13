@@ -20,10 +20,10 @@ function Header() {
     return (
         <header className="main-header">
             <div className="d-flex align-items-center logo-box justify-content-start">
-                <a href="#" className="waves-effect waves-light nav-link d-none d-md-inline-block mx-10 push-btn bg-transparent hover-primary" data-toggle="push-menu" role="button">
+                <a href="" className="waves-effect waves-light nav-link d-none d-md-inline-block mx-10 push-btn bg-transparent hover-primary" data-toggle="push-menu" role="button">
                     <span className="icon-Align-left"><span className="path1"></span><span className="path2"></span><span className="path3"></span></span>
                 </a>
-                <a href="index.html" className="logo">
+                <a href="" className="logo">
                     <div className="logo-lg">
                         <span className="light-logo"><img src="../images/logo-dark-text.png" alt="logo" /></span>
                         <span className="dark-logo"><img src="../images/logo-light-text.png" alt="logo" /></span>

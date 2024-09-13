@@ -6,12 +6,13 @@ import api from "../../../services/api";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 import config from "../../../config";
-import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function OrderTableDetail() {
-
     const { id } = useParams();
     const navigate = useNavigate();
+
     const hashCode = (str) => {
         let hash = 0;
         for (let i = 0; i < str.length; i++) {
@@ -38,7 +39,7 @@ function OrderTableDetail() {
             const orderDetailRequest = await api.get(url.ORDER_TABLE.DETAIL.replace("{}", id), { headers: { Authorization: `Bearer ${getAccessToken()}` } });
             setOrderTableDetail(orderDetailRequest.data.data);
         } catch (error) {
-            console.log(error);
+            toast.error("Failed to load order details. Please try again later.");
         }
     }, [id]);
 
@@ -47,6 +48,11 @@ function OrderTableDetail() {
     }, [loadData]);
 
     const handleAcceptOrder = async () => {
+        if (orderTableDetail.status === 'accepted') {
+            toast.info("This order has already been accepted.");
+            return;
+        }
+
         try {
             const headers = {
                 Authorization: `Bearer ${getAccessToken()}`,
@@ -55,25 +61,46 @@ function OrderTableDetail() {
             const response = await api.put(url.ORDER_TABLE.EDIT.replace("{}", id), {}, { headers });
 
             if (response.status === 200) {
-                Swal.fire({
-                    text: "Order Accepted Successfully.",
-                    icon: "success",
-                    confirmButtonColor: "#3085d6",
-                    confirmButtonText: "Done",
-                });
-                setOrderTableDetail(response.data.data); 
+                toast.success("Order Accepted Successfully. Redirecting...");
+                setOrderTableDetail(response.data.data);
                 setTimeout(() => {
-                    navigate(config.routes.order_table_list); //chuyển đến trang menu-list
-                }, 3000);// Update the state with the new status
+                    navigate(config.routes.order_table_list); // Navigate to the order table list
+                }, 3000); // Delay before redirecting
             }
         } catch (error) {
-            Swal.fire({
-                text: "Error! An error occurred. Please try again later!",
-                icon: "error",
-                confirmButtonColor: "#3085d6",
-                confirmButtonText: "Done",
-            });
+            toast.error("An error occurred while accepting the order. Please try again later.");
         }
+    };
+
+    const confirmOrderAccept = () => {
+        toast.info(
+            <div>
+                <p>Do you want to accept this order?</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                    <button
+                        onClick={async () => {
+                            handleAcceptOrder();
+                            toast.dismiss(); // Dismiss the confirmation toast
+                        }}
+                        style={{ backgroundColor: '#3085d6', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer' }}
+                    >
+                        Yes
+                    </button>
+                    <button
+                        onClick={() => toast.dismiss()} // Dismiss the confirmation toast
+                        style={{ backgroundColor: '#f44336', color: 'white', border: 'none', padding: '5px 10px', cursor: 'pointer' }}
+                    >
+                        No
+                    </button>
+                </div>
+            </div>,
+            {
+                position: "top-center",
+                autoClose: false,
+                closeButton: false,
+                className: 'confirmation-toast'
+            }
+        );
     };
 
     return (
@@ -119,7 +146,7 @@ function OrderTableDetail() {
                                     <td className="text-right">{orderTableDetail.numberOfPerson}</td>
                                     <td className="text-right">{orderTableDetail.time}</td>
                                     <td style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                        <span className={`badge badge-pill ${orderTableDetail.status === 'Paid' ? 'badge-success' : orderTableDetail.status === 'Pending' ? 'badge-warning' : 'badge-secondary'}`}>
+                                        <span className={`badge badge-pill ${orderTableDetail.status === 'accepted' ? 'badge-success' : orderTableDetail.status === 'pending' ? 'badge-warning' : 'badge-secondary'}`}>
                                             {orderTableDetail.status}
                                         </span>
                                     </td>
@@ -130,7 +157,12 @@ function OrderTableDetail() {
                 </div>
                 <div className="row no-print">
                     <div className="col-12">
-                        <button type="button" className="btn btn-success pull-right" onClick={handleAcceptOrder}>
+                        <button
+                            type="button"
+                            className="btn btn-success pull-right"
+                            onClick={confirmOrderAccept}
+                            disabled={orderTableDetail.status === 'accepted'}
+                        >
                             <i className="fa fa-credit-card"></i> Accept Order
                         </button>
                         <Link to={config.routes.order_table_list}>
@@ -141,8 +173,9 @@ function OrderTableDetail() {
                     </div>
                 </div>
             </section>
+            <ToastContainer />
         </Layout>
-    )
+    );
 }
 
 export default OrderTableDetail;

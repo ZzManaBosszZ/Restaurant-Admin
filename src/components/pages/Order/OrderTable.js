@@ -124,7 +124,7 @@ function OrderTable() {
                                                         <td>{item.numberOfPerson}</td>
                                                         <td>{new Date(item.date).toLocaleDateString()}</td>
                                                         <td>
-                                                            <span className={`badge badge-pill ${item.status === 'Paid' ? 'badge-success' : item.status === 'Pending' ? 'badge-warning' : 'badge-secondary'}`}>
+                                                            <span className={`badge badge-pill ${item.status === 'accepted' ? 'badge-success' : item.status === 'pending' ? 'badge-warning' : 'badge-secondary'}`}>
                                                                 {item.status}
                                                             </span>
                                                         </td>
