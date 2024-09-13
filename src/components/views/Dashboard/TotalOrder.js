@@ -4,20 +4,38 @@ import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
 
 function TotalOrder() {
-    const [orders, setOrders] = useState([]);
+    const [currentYear, setCurrentYear] = useState("");
+    const [currentMonth, setCurrentMonth] = useState("");
+    const [currentOrderData, setCurrentOrderData] = useState({ totalOrders: 0, percentageGrowth: 0 });
+
+    // Function to get the current year and month
+    const getCurrentDate = () => {
+        const date = new Date();
+        setCurrentYear(date.getFullYear());
+        setCurrentMonth(date.getMonth() + 1); // Months are 0-indexed, so add 1
+    };
 
     const loadData = async () => {
         try {
             const orderResponse = await api.get(url.DASHBOARD.TOTAL_ORDER, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
-            setOrders(orderResponse.data.data);
+            const data = orderResponse.data.data;
+
+            // Filter data for the current year and month
+            const currentData = data.find(item => item.year === currentYear && item.month === currentMonth);
+            setCurrentOrderData(currentData || { totalOrders: 0, percentageGrowth: 0 });
         } catch (error) {
             console.log(error);
         }
     };
 
     useEffect(() => {
+        getCurrentDate();
         loadData();
-    }, []);
+    }, [currentYear, currentMonth]);
+
+    // Convert numeric month to full month name
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const monthName = monthNames[currentMonth - 1]; // Adjust for 0-based index
 
     return (
         <div className="col-xxxl-3 col-lg-6 col-12">
@@ -28,9 +46,14 @@ function TotalOrder() {
                             <img src="../images/food/online-order-1.png" className="w-80 mr-20" alt="" />
                         </div>
                         <div>
-                            <h2 className="my-0 font-weight-700">{orders.totalOrders}</h2>
-                            <p className="text-fade mb-0">Total Order</p>
-                            <p className="font-size-12 mb-0 text-success"><span className="badge badge-pill s-light mr-5"><i className="fa fa-arrow-up"></i></span>{orders.percentageGrowth}% (15 Days)</p>
+                            <h2 className="my-0 font-weight-700">{currentOrderData.totalOrders}</h2>
+                            <p className="text-fade mb-0">Total Orders</p>
+                            <p className="font-size-12 mb-0 text-success">
+                                <span className="badge badge-pill s-light mr-5">
+                                    <i className="fa fa-arrow-up"></i>
+                                </span>
+                                {currentOrderData.percentageGrowth}% ({monthName} {currentYear})
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -40,3 +63,4 @@ function TotalOrder() {
 }
 
 export default TotalOrder;
+    
