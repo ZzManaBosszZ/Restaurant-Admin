@@ -3,7 +3,7 @@ import { decodeToken } from "react-jwt";
 
 // Store tokens in cookie after logging in
 export const setAccessToken = (token, expiresIn) => {
-    const expirationTime = new Date(Date.now() + expiresIn * 1000);
+    const expirationTime = new Date(Date.now() + expiresIn * 100000);
     Cookies.set("access_tokens", token, { expires: expirationTime });
 };
 
