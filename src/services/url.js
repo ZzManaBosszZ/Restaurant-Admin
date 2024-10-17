@@ -9,8 +9,6 @@ const url = {
         CHANGE_PASSWORD: "user/change-password",
         FORGOT_PASSWORD: "auth/user/forgot-password",
         RESET_PASSWORD: "auth/user/reset-password",
-        PROFILE: "user/profile",
-        UPDATE_PROFILE: "user/update-profile",
     },
 
     DASHBOARD: {
@@ -61,6 +59,11 @@ const url = {
         DETAIL: "any/ordertables/{}",
         EDIT: "any/ordertables/{}",
     },
+
+    USER: {
+        LIST: "all-user",
+        DETAIL: "user-orders/{}",
+    }
 
 
 };

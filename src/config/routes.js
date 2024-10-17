@@ -39,6 +39,8 @@ const routes = {
 
     //Blog routes
 
-    //Profile routes
+    //User routes
+    user_management: "/user-management",
+    user_detail: "/user-detail/:userId",
 };
 export default routes;

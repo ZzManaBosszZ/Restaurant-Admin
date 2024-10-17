@@ -112,12 +112,12 @@ function SideBar() {
 								</a>
 								<ul className="treeview-menu">
 									<li>
-										<a href={config.routes.profile}>
+										<a href={config.routes.user_management}>
 											<i className="icon-Commit">
 												<span className="path1"></span>
 												<span className="path2"></span>
 											</i>
-											Profile
+											User Management
 										</a>
 									</li>
 								</ul>
