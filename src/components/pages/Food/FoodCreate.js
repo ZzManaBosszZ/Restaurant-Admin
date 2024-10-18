@@ -42,8 +42,8 @@ function FoodCreate() {
     const [formData, setFormData] = useState({
         name: "",
         image: null,
-        price: 0,
-        quantity: 0,
+        price: "",
+        quantity: "",
         description: "",
         categoryId: [],
     });
@@ -51,8 +51,8 @@ function FoodCreate() {
     const [formErrors, setFormErrors] = useState({
         name: "",
         image: null,
-        price: 0,
-        quantity: 0,
+        price: "",
+        quantity: "",
         description: "",
         categoryId: [],
     });
