@@ -21,7 +21,6 @@ function UserManagementDetail() {
             });
             setUserData(userDetailRequest.data.data.user);
             setOrders(userDetailRequest.data.data.orders);
-            // console.log(userDetailRequest.data.data.user);
         } catch (error) {
             console.error("Failed to fetch user detail:", error);
         }
@@ -81,12 +80,15 @@ function UserManagementDetail() {
 
                         {/* Order History Section */}
                         <div className="box mt-3">
-                            <div className="box-header no-border">
+                            <div className="box-header no-border d-flex justify-content-between align-items-center">
                                 <h4 className="box-title">Order History</h4>
+                                <span className="badge badge-primary" style={{ fontSize: "16px", padding: "10px 20px" }}>
+                                    Total Orders: {orders.length}
+                                </span>
                             </div>
                             <div className="box-body">
-                                <table className="table">
-                                    <thead>
+                                <table className="table table-bordered">
+                                    <thead className="thead-light">
                                         <tr>
                                             <th>Order ID</th>
                                             <th>Date</th>
@@ -105,11 +107,12 @@ function UserManagementDetail() {
                                         ))}
                                     </tbody>
                                 </table>
-                                <div className="pagination">
+
+                                <div className="pagination d-flex justify-content-center mt-3">
                                     {Array.from({ length: totalPages }, (_, index) => (
                                         <button
                                             key={index + 1}
-                                            className={`page-item ${currentPage === index + 1 ? 'active' : ''}`}
+                                            className={`page-item btn ${currentPage === index + 1 ? 'btn-primary' : 'btn-outline-primary'} mx-1`}
                                             onClick={() => handlePageChange(index + 1)}
                                         >
                                             {index + 1}

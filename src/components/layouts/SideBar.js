@@ -75,7 +75,7 @@ function SideBar() {
 							</li>
 							<li className="treeview">
 								<a href="#">
-									<i className="icon-Dinner">
+									<i className="icon-Compilation">
 										<span className="path1"></span>
 										<span className="path2"></span>
 										<span className="path3"></span>
@@ -124,7 +124,7 @@ function SideBar() {
 							</li>
 							<li>
 								<a href={config.routes.food_list}>
-									<i className="icon-Dinner">
+									<i className="icon-Sushi">
 										<span className="path1"></span>
 										<span className="path2"></span>
 										<span className="path3"></span>
