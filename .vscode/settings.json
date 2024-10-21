@@ -4,6 +4,7 @@
         "ordertable",
         "Restran",
         "Swal",
-        "sweetalert"
+        "sweetalert",
+        "toastify"
     ]
 }

@@ -182,7 +182,7 @@ function FoodCreate() {
         return valid;
     };
 
-    console.log(getAccessToken());
+    // console.log(getAccessToken());
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -193,7 +193,9 @@ function FoodCreate() {
                     Authorization: `Bearer ${getAccessToken()}`,
                     "Content-Type": "multipart/form-data",
                 };
-                const response = await api.post(url.FOOD.CREATE, formData, { headers });
+                const response = await api.post(url.FOOD.CREATE, formData, { headers },
+                    console.log(formData)
+                );
 
                 if (response && response.data) {
                     toast.success("Create Food Successfully.", {
