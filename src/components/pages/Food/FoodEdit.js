@@ -57,8 +57,8 @@ function FoodEdit() {
         id: foodDetail.id,
         name: "",
         image: null,
-        price: 0,
-        quantity: 0,
+        price: "",
+        quantity: "",
         description: "",
         categoryId: [],
     });
@@ -66,8 +66,8 @@ function FoodEdit() {
     const [formErrors, setFormErrors] = useState({
         name: "",
         image: null,
-        price: 0,
-        quantity: 0,
+        price: "",
+        quantity: "",
         description: "",
         categoryId: [],
     });
@@ -213,7 +213,7 @@ function FoodEdit() {
                                                     <div className="col-md-6">
                                                         <div className="form-group">
                                                             <label className="font-weight-700 font-size-16">Category</label>
-                                                            <select name="categoryId" className={`form-control ${formErrors.categoryId ? "is-invalid" : ""}`} value={formData.categoryId || ""} onChange={handleChange}>
+                                                            <select name="categoryId" className={`form-control ${formErrors.categoryId}`} value={formData.categoryId || ""} onChange={handleChange}>
                                                                 <option value="">Please choose category</option>
                                                                 {categories.map((category) => (
                                                                     <option value={category.id} key={category.id}>
