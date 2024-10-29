@@ -5,6 +5,8 @@ import { getAccessToken } from "../../utils/auth";
 import config from "../../config";
 function Header() {
     const [profile, setProfile] = useState([]);
+    const [notifications, setNotifications] = useState([]);
+    const [unreadCount, setUnreadCount] = useState(0);
 
     //show list data
     useEffect(() => {
@@ -17,6 +19,37 @@ function Header() {
         };
         loadProfile();
     }, []);
+
+    useEffect(() => {
+        const loadNotifications = async () => {
+            try {
+                const response = await api.get(url.NOTIFICATION.LIST, { headers: { Authorization: `Bearer ${getAccessToken()}` } });
+                setNotifications(response.data.data); // Giả sử dữ liệu trả về đúng cấu trúc
+                setUnreadCount(notifications.filter(notification => !notification.isRead).length); // Đếm số lượng chưa đọc
+            } catch (error) {
+                console.error("Error loading notifications:", error);
+            }
+        };
+        loadNotifications();
+    }, []);
+
+    // Xử lý khi người dùng nhấn vào thông báo
+    const handleNotificationClick = (id) => {
+        setNotifications(prevNotifications =>
+            prevNotifications.map(notification =>
+                notification.id === id ? { ...notification, isRead: true } : notification
+            )
+        );
+        setUnreadCount(prevCount => (prevCount > 0 ? prevCount - 1 : 0)); // Giảm số lượng chưa đọc nếu lớn hơn 0
+
+        // Gọi API để cập nhật trạng thái "đã đọc" trên backend
+        api.post(url.NOTIFICATION.MARK_AS_READ.replace("{}", id), { id }, {
+            headers: { Authorization: `Bearer ${getAccessToken()}` }
+        })
+            .catch(error => console.error("Error updating notification status", error));
+    };
+
+
     return (
         <header className="main-header">
             <div className="d-flex align-items-center logo-box justify-content-start">
@@ -58,17 +91,14 @@ function Header() {
                 <div className="navbar-custom-menu r-side">
                     <ul className="nav navbar-nav">
                         <li className="btn-group nav-item d-lg-inline-flex d-none">
-                            <a href="#" data-provide="fullscreen" className="waves-effect waves-light nav-link full-screen btn-info-light" title="Full Screen">
-                                <i className="icon-Expand-arrows"><span className="path1"></span><span className="path2"></span></i>
-                            </a>
+
                         </li>
                         <li className="dropdown notifications-menu">
-                            <span className="label label-danger">5</span>
+                            <span className="label label-danger">{unreadCount}</span>
                             <a href="#" className="waves-effect waves-light dropdown-toggle btn-danger-light" data-toggle="dropdown" title="Notifications">
                                 <i className="icon-Notifications"><span className="path1"></span><span className="path2"></span></i>
                             </a>
                             <ul className="dropdown-menu animated bounceIn">
-
                                 <li className="header">
                                     <div className="p-20">
                                         <div className="flexbox">
@@ -81,44 +111,15 @@ function Header() {
                                         </div>
                                     </div>
                                 </li>
-
                                 <li>
                                     <ul className="menu sm-scrol">
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-users text-info"></i> Curabitur id eros quis nunc suscipit blandit.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-warning text-warning"></i> Duis malesuada justo eu sapien elementum, in semper diam posuere.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-users text-danger"></i> Donec at nisi sit amet tortor commodo porttitor pretium a erat.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-shopping-cart text-success"></i> In gravida mauris et nisi
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-user text-danger"></i> Praesent eu lacus in libero dictum fermentum.
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-user text-primary"></i> Nunc fringilla lorem
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i className="fa fa-user text-success"></i> Nullam euismod dolor ut quam interdum, at scelerisque ipsum imperdiet.
-                                            </a>
-                                        </li>
+                                        {notifications.map(notification => (
+                                            <li key={notification.id}>
+                                                <a href="#" onClick={() => handleNotificationClick(notification.id)}>
+                                                    <i className={`fa ${notification.isRead ? 'fa-check text-muted' : 'fa-bell text-info'}`}></i> {notification.message}
+                                                </a>
+                                            </li>
+                                        ))}
                                     </ul>
                                 </li>
                                 <li className="footer">

@@ -12,6 +12,11 @@ const url = {
         PROFILE: "user/profile",
     },
 
+    NOTIFICATION: {
+        LIST: "notifications",
+        MARK_AS_READ: "notifications/markAsRead/{}",
+    },
+
     DASHBOARD: {
         TOTAL_ORDER: "total-orders",
         TOTAL_ORDER_DELIVERED: "delivered-orders",

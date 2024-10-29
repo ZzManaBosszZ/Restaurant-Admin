@@ -24,7 +24,7 @@ function Home() {
                                     </h4>
                                 </div>
                                 <div className="box-body px-0">
-                                    <div class="review-slider owl-carousel">
+                                    <div className="review-slider owl-carousel">
                                         <div className="box p-0">
                                             <div className="box-body">
                                                 <div className="d-flex align-items-center">
@@ -230,65 +230,7 @@ function Home() {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        {/* <div className="col-xxxl-7 col-12">
-                            <div className="box">
-                                <div className="box-header no-border pb-0">
-                                    <h4 className="box-title">Delivery Map</h4>
-                                </div>
-                                <div className="box-body">
-                                    <div id="chartdiv" className="h-400"></div>
-                                    <div className="pt-30">
-                                        <h4 className="box-title mb-20">Upcoming Shipping Schedule</h4>
-                                        <div className="bb-1 pb-10 mb-20 d-lg-flex d-block justify-content-between">
-                                            <div className="d-flex">
-                                                <img src="../images/avatar/4.jpg" className="w-40 h-40 mr-10 rounded100" alt="" />
-                                                <div>
-                                                    <p className="mb-0">Stepni Doe <span className="text-primary ml-10">(3 items)</span></p>
-                                                    <p className="mb-0"><small className="text-mute">will be shipping on 10:12 am</small></p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex align-items-center">
-                                                <p className="mb-0 mr-10">8817 Sand Pine Dr, Navarre, FL, 32566</p>
-                                                <div className="bg-info rounded-circle w-30 h-30 l-h-30 text-center">
-                                                    <i className="fa fa-location-arrow"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="bb-1 pb-10 mb-20  d-lg-flex d-block justify-content-between">
-                                            <div className="d-flex">
-                                                <img src="../images/avatar/5.jpg" className="w-40 h-40 mr-10 rounded100" alt="" />
-                                                <div>
-                                                    <p className="mb-0">Mical clark <span className="text-primary ml-10">(2 items)</span></p>
-                                                    <p className="mb-0"><small className="text-mute">will be shipping on 12:12 am</small></p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex align-items-center">
-                                                <p className="mb-0 mr-10">8817 Sand Pine Dr, Navarre, FL, 32566</p>
-                                                <div className="bg-info rounded-circle w-30 h-30 l-h-30 text-center">
-                                                    <i className="fa fa-location-arrow"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="bb-1 pb-10  d-lg-flex d-block justify-content-between">
-                                            <div className="d-flex">
-                                                <img src="../images/avatar/7.jpg" className="w-40 h-40 mr-10 rounded100" alt="" />
-                                                <div>
-                                                    <p className="mb-0">Steponi mohan <span className="text-primary ml-10">(7 items)</span></p>
-                                                    <p className="mb-0"><small className="text-mute">will be shipping on 11:12 am</small></p>
-                                                </div>
-                                            </div>
-                                            <div className="d-flex align-items-center">
-                                                <p className="mb-0 mr-10">8817 Sand Pine Dr, Navarre, FL, 32566</p>
-                                                <div className="bg-info rounded-circle w-30 h-30 l-h-30 text-center">
-                                                    <i className="fa fa-location-arrow"></i>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                        </div>                      
                     </div>
                 </section>
 
