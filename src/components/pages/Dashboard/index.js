@@ -155,59 +155,7 @@ function Home() {
                             </div>
                         </div>
                         <div className="col-xxxl-5 col-12">
-                            {/* <div className="box">
-                                <div className="box-header no-border">
-                                    <h4 className="box-title">
-                                        Trending Keyword
-                                        <small className="subtitle">Lorem ipsum dolor sit amet, consectetur adipisicing elit</small>
-                                    </h4>
-                                </div>
-                                <div className="box-body pt-0">
-                                    <div>
-                                        <div className="progress mb-5">
-                                            <div className="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style={{ width: "80%" }}>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between">
-                                            <p className="text-primary">#paneer</p>
-                                            <p className="text-mute">420 times</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="progress mb-5">
-                                            <div className="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style={{ width: "50%" }}>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between">
-                                            <p className="text-primary">#breakfast</p>
-                                            <p className="text-mute">150 times</p>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div className="progress mb-5">
-                                            <div className="progress-bar progress-bar-primary progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style={{ width: "40%" }}>
-                                            </div>
-                                        </div>
-                                        <div className="d-flex justify-content-between">
-                                            <p className="text-primary">#tea</p>
-                                            <p className="text-mute">120 times</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="box-body pt-0">
-                                    <h4 className="box-title d-block">
-                                        Others Tag
-                                    </h4>
-                                    <div className="d-inline-block">
-                                        <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">#panjabifood</a>
-                                        <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">#chainissfood</a>
-                                        <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">#pizza</a>
-                                        <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">#burgar</a>
-                                        <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">#coffee</a>
-                                        <a href="#" className="waves-effect waves-light btn btn-outline btn-rounded btn-primary mb-5">20+</a>
-                                    </div>
-                                </div>
-                            </div> */}
+                            
                             <div className="box">
                                 <div className="box-header no-border">
                                     <h4 className="box-title">
