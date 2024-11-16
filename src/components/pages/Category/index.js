@@ -14,7 +14,7 @@ function CategoryList() {
     const [sortField, setSortField] = useState("id");
     const [sortDirection, setSortDirection] = useState("asc");
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Number of items per page
+    const itemsPerPage = 5; // Number of items per page
 
     useEffect(() => {
         const loadFoods = async () => {
@@ -108,7 +108,7 @@ function CategoryList() {
                                 <th onClick={() => handleSort("id")}>ID {sortField === "id" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
                                 <th onClick={() => handleSort("name")}>Name {sortField === "name" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
                                 <th onClick={() => handleSort("createdBy")}>Created By {sortField === "createdBy" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
-                                <th>Action</th>
+                                {/* <th>Action</th> */}
                             </tr>
                         </thead>
                         <tbody>
@@ -117,7 +117,11 @@ function CategoryList() {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.createdBy}</td>
-                                    <td>New York</td>
+                                    {/* <Link to={`/order-detail/${item.id}`}>
+                                        <a class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
+                                            <i class="ti-marker-alt"></i>
+                                        </a>
+                                    </Link> */}
                                 </tr>
                             ))}
                         </tbody>

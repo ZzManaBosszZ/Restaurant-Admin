@@ -95,7 +95,7 @@ function MenuList() {
 
     //paginate
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Number of items per page
+    const itemsPerPage = 6; // Number of items per page
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };

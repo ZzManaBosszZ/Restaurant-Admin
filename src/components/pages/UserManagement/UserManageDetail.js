@@ -11,7 +11,7 @@ function UserManagementDetail() {
     const [userData, setUserData] = useState({});
     const [orders, setOrders] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 2; // Number of orders per page
+    const itemsPerPage = 5; // Number of orders per page
 
     // Fetch User Detail and Order History
     const loadData = useCallback(async () => {

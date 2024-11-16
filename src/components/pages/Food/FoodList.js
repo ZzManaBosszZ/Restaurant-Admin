@@ -95,7 +95,7 @@ function FoodList() {
 
     //paginate
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Number of items per page
+    const itemsPerPage = 6; // Number of items per page
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -174,6 +174,7 @@ function FoodList() {
                                             <div class="product-text">
                                                 <h2 class="pro-price text-blue">${item.price}</h2>
                                                 <h4 class="box-title mb-0">{item.name}</h4>
+                                                <br/>
                                                 <small class="text-muted db">{item.description}</small>
                                             </div>
                                         </div>

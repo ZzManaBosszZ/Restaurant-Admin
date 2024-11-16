@@ -54,7 +54,7 @@ function OrderTable() {
 
     //paginate
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Number of items per page
+    const itemsPerPage = 6; // Number of items per page
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -83,6 +83,7 @@ function OrderTable() {
                             style={{ fontSize: '15px', padding: '12px' }}
                         />
                     </div>
+                    <br />
                     <div className="col-lg-6">
                         <input
                             type="date" // use type "datetime-local" for date and time
@@ -145,6 +146,7 @@ function OrderTable() {
                                     </table>
                                 </div>
                             </div>
+                            <br />
                             {/* Pagination Controls */}
                             <div className="pagination">
                                 {Array.from({ length: totalPages }, (_, index) => (
@@ -161,6 +163,7 @@ function OrderTable() {
                     </div>
                 </div>
             </section>
+            <div style={{ marginTop: '98px' }}></div>
         </Layout>
     )
 }

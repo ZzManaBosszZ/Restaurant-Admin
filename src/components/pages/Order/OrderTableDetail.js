@@ -106,7 +106,7 @@ function OrderTableDetail() {
     return (
         <Layout>
             <BreadCrumb title="Order Table Detail" />
-            <section className="invoice printableArea">
+            <section className="invoice printableArea" style={{ marginTop: '84px' }}>
                 <div className="row invoice-info">
                     <div className="col-md-6 invoice-col">
                         <strong>From</strong>
@@ -174,6 +174,7 @@ function OrderTableDetail() {
                 </div>
             </section>
             <ToastContainer />
+            <div style={{ marginTop: '50px' }}></div>
         </Layout>
     );
 }

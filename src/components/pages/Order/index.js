@@ -74,7 +74,7 @@ function OrderList() {
 
     //paginate
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 1; // Number of items per page
+    const itemsPerPage = 6; // Number of items per page
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
     };
@@ -147,7 +147,7 @@ function OrderList() {
                                                     <tr>
                                                         <td>{item.createdBy}</td>
                                                         <td>{generateOrderCode(item.orderCode)}</td> {/* Sử dụng mã đơn hàng đã được hash từ orderCode */}
-                                                        <td>{item.total}</td>
+                                                        <td>{item.total}$</td>
                                                         <td>{new Date(item.createdDate).toLocaleDateString()}</td>
                                                         <td>
                                                             <span className={`badge badge-pill ${item.status === 'paid' ? 'badge-success' : item.status === 'pending' ? 'badge-warning' : 'badge-secondary'}`}>
