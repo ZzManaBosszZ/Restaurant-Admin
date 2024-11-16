@@ -48,7 +48,7 @@ function RightSideBar() {
 						  </div>
 					  </div>
 				  </div>
-				  <div className="box no-shadow box-bordered border-light">
+				  {/* <div className="box no-shadow box-bordered border-light">
 				  	  <div className="box-body">
 					  	  <div className="d-flex justify-content-between align-items-center">
 							  <div>
@@ -66,7 +66,7 @@ function RightSideBar() {
 							  <h5 className="my-0"><span className="badge badge-xl badge-dot badge-danger mr-10"></span>Returning</h5>						  	  		
 						  </div>
 					  </div>
-				  </div>
+				  </div> */}
 				  {/* <div className="box no-shadow box-bordered border-light">
 					  <div className="box-header">
 					  	<h4 className="box-title">Resent Activity</h4>
