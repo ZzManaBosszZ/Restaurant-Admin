@@ -6,6 +6,7 @@ import config from "../../../config";
 import api from "../../../services/api";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
+import Swal from "sweetalert2";
 
 function CategoryList() {
     const [categories, setCategories] = useState([]);
@@ -65,6 +66,55 @@ function CategoryList() {
 
     const totalPages = Math.ceil(sortedCategories.length / itemsPerPage);
 
+
+    const handleDeleteData = async (id) => {
+        const selectedDataIds = [id];
+
+        const isConfirmed = await Swal.fire({
+            title: "Are you sure?",
+            text: "You want to delete this Category?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "I'm sure",
+        });
+        if (isConfirmed.isConfirmed) {
+            try {
+                const deleteResponse = await api.delete(url.CATEGORY.DELETE, {
+                    headers: { Authorization: `Bearer ${getAccessToken()}` },
+                    "Content-Type": "application/json",
+                    data: selectedDataIds,
+                });
+                if (deleteResponse.status === 200) {
+                    setCategories((prevData) => prevData.filter((data) => !selectedDataIds.includes(data.id)));
+                    Swal.fire({
+                        text: "Delete Category Successfully.",
+                        icon: "success",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
+                    });
+                }
+            } catch (error) {
+                if (error.response.status === 400) {
+                    Swal.fire({
+                        text: "This Category can't delete",
+                        icon: "warning",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
+                    });
+                } else {
+                    Swal.fire({
+                        text: "An error occurred while deleting Category",
+                        icon: "error",
+                        confirmButtonColor: "#3085d6",
+                        confirmButtonText: "Done",
+                    });
+                }
+            }
+        }
+    };
+
     return (
         <Layout>
             <BreadCrumb title="Category List" />
@@ -108,7 +158,7 @@ function CategoryList() {
                                 <th onClick={() => handleSort("id")}>ID {sortField === "id" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
                                 <th onClick={() => handleSort("name")}>Name {sortField === "name" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
                                 <th onClick={() => handleSort("createdBy")}>Created By {sortField === "createdBy" && (sortDirection === "asc" ? "🔼" : "🔽")}</th>
-                                {/* <th>Action</th> */}
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -117,11 +167,11 @@ function CategoryList() {
                                     <td>{item.id}</td>
                                     <td>{item.name}</td>
                                     <td>{item.createdBy}</td>
-                                    {/* <Link to={`/order-detail/${item.id}`}>
-                                        <a class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                            <i class="ti-marker-alt"></i>
+                                    <td>
+                                        <a className="text-info mr-10" data-toggle="tooltip" data-original-title="Edit" onClick={() => handleDeleteData(item.id)}>
+                                            <i className="ti-trash"></i>
                                         </a>
-                                    </Link> */}
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>
