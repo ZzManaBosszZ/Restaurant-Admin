@@ -65,8 +65,10 @@ function OrderList() {
         .filter((item) => {
             const orderMatch = item.createdBy.toLowerCase().includes(searchOrder.toLowerCase());
             const statusMatch = searchStatus ? item.status.toLowerCase() === searchStatus.toLowerCase() : true; // Kiểm tra trạng thái chính xác
-            const createdDateMatch = createdDate ? new Date(item.createdDate) >= new Date(createdDate) : true;
-            return orderMatch && createdDateMatch && statusMatch ;
+            const createdDateMatch = createdDate
+                ? new Date(item.createdDate).toISOString().split('T')[0] === createdDate
+                : true;
+            return orderMatch && createdDateMatch && statusMatch;
         })
         .sort((a, b) => {
             if (a[sortField] < b[sortField]) return sortDirection === "asc" ? -1 : 1;
