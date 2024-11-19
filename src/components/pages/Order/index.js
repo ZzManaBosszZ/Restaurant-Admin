@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import api from "../../../services/api";
 import url from "../../../services/url";
 import { getAccessToken } from "../../../utils/auth";
-import config from "../../../config";
 import { Link } from "react-router-dom";
 function OrderList() {
 
@@ -43,14 +42,16 @@ function OrderList() {
 
     //search, filter
     const [searchOrder, setSearchOrder] = useState("");
-    // const [searchDescription, setSearchDescription] = useState("");
+    const [searchStatus, setSearchStatus] = useState("");
     const [createdDate, setCreatedDate] = useState("");
     const handleSearchOrderChange = (e) => {
         setSearchOrder(e.target.value);
     };
-    // const handleSearchDescriptionChange = (e) => {
-    //     setSearchDescription(e.target.value);
-    // };
+
+    const handleSearchStatusChange = (e) => {
+        setSearchStatus(e.target.value);
+    };
+
     const handleCreatedDateChange = (e) => {
         setCreatedDate(e.target.value);
     };
@@ -63,8 +64,9 @@ function OrderList() {
     const sortedOrders = [...order]
         .filter((item) => {
             const orderMatch = item.createdBy.toLowerCase().includes(searchOrder.toLowerCase());
+            const statusMatch = searchStatus ? item.status.toLowerCase() === searchStatus.toLowerCase() : true; // Kiểm tra trạng thái chính xác
             const createdDateMatch = createdDate ? new Date(item.createdDate) >= new Date(createdDate) : true;
-            return orderMatch && createdDateMatch;
+            return orderMatch && createdDateMatch && statusMatch ;
         })
         .sort((a, b) => {
             if (a[sortField] < b[sortField]) return sortDirection === "asc" ? -1 : 1;
@@ -93,7 +95,7 @@ function OrderList() {
 
             <div className="card-header">
                 <div className="row page-titles">
-                    <div className="col-lg-6">
+                    <div className="col-lg-4">
                         <input
                             type="text"
                             className="form-control input-rounded"
@@ -103,7 +105,7 @@ function OrderList() {
                             style={{ fontSize: '15px', padding: '12px' }}
                         />
                     </div>
-                    <div className="col-lg-6">
+                    <div className="col-lg-4">
                         <input
                             type="date" // use type "datetime-local" for date and time
                             className="form-control input-rounded"
@@ -112,15 +114,23 @@ function OrderList() {
                             style={{ fontSize: '15px', padding: '12px' }}
                         />
                     </div>
+                    <div className="col-lg-4">
+                        <select
+                            className="form-control input-rounded"
+                            value={searchStatus}
+                            onChange={handleSearchStatusChange}
+                            style={{ fontSize: '15px', padding: '12px' }}
+                        >
+                            <option value="">All</option>
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div className=" mt-3 px-3">
-                    <div className="d-flex align-items-center justify-content-end gap-3">
-                        <Link to={config.routes.menu_create} className="btn btn-primary d-flex align-items-center justify-content-center">
-                            <i className="ti ti-plus"></i> Add New Menu
-                        </Link>
-                    </div>
-                </div>
+
             </div>
 
             <br />
@@ -156,13 +166,10 @@ function OrderList() {
                                                         </td>
                                                         <td>
                                                             <Link to={`/order-detail/${item.id}`}>
-                                                            <a class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
-                                                                <i class="ti-marker-alt"></i>
-                                                            </a>
+                                                                <a class="text-info mr-10" data-toggle="tooltip" data-original-title="Edit">
+                                                                    <i class="ti-marker-alt"></i>
+                                                                </a>
                                                             </Link>
-                                                            {/* <a class="text-danger" data-original-title="Delete" data-toggle="tooltip">
-                                                                <i class="ti-trash"></i>
-                                                            </a> */}
                                                         </td>
                                                     </tr>
                                                 </tbody>
@@ -187,6 +194,7 @@ function OrderList() {
                     </div>
                 </div>
             </section>
+            <div style={{ marginTop: "50px" }}></div>
         </Layout>
     )
 }
